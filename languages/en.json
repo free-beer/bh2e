@@ -1,0 +1,127 @@
+{
+	"bh2e": {
+		"dice": {
+			"one": "1",
+			"d4": "1d4",
+			"d6": "1d6",
+			"d8": "1d8",
+			"d10": "1d10",
+			"d12": "1d12",
+			"d20": "1d20",
+			"special": "Other (Consult Abilities)"
+		},
+		"fields": {
+			"headers": {
+				"abilities": "Abilities",
+				"armour": "Armour",
+				"background": "Description/Background",
+				"equipment": "Equipment",
+				"weapons": "Weapons"
+			},
+			"labels": {
+				"armedDamage": "Damage Die (Armed)",
+				"armourValue": "Armour Value",
+				"attribute": "Attribute",
+				"attributes": {
+					"charisma": {
+						"long": "Charisma",
+						"short": "CHA"
+					},
+					"constitution": {
+						"long": "Constitution",
+						"short": "CON"
+					},
+					"dexterity": {
+						"long": "Dexterity",
+						"short": "DEX"
+					},
+					"intelligence": {
+						"long": "Intelligence",
+						"short": "INT"
+					},
+					"strength": {
+						"long": "Strength",
+						"short": "STR"
+					},
+					"wisdom": {
+						"long": "Wisdom",
+						"short": "WIS"
+					}
+				},
+				"baseUsageDie": "Usage Die",
+				"brokenDice": "Broken Dice",
+				"className": "Class",
+				"currentUsageDie": "Current Die",
+				"description": "Description",
+				"dice": "Dice",
+				"exhausted": "Exhausted",
+				"hitDie": "Hit Die",
+				"hitPointsMax": "HP Maximum",
+				"hitPointsValue": "HP Current",
+				"key": "Key",
+				"largeWeapon": "Large Weapon?",
+				"level": "Level",
+				"name": "Name",
+				"none": "None",
+				"notApplicable": "-",
+				"playerName": "Player Name",
+				"quantity": "Quantity",
+				"rarity": "Rarity",
+				"size": "Size",
+				"tag": "Tag",
+				"testAttribute": "Test Attribute (for Attacks)",
+				"totalDice": "Total Dice",
+				"type": "Type",
+				"unarmedDamage": "Damage Die (Unarmed)",
+				"usageDie": "Usage Die",
+				"weapon": "Weapon",
+				"weaponKind": "Kind",
+				"weaponSize": "Size"
+			},
+			"titles": {
+				"breakArmourDie": "Break Die",
+				"decreaseQuantity": "Decrease Quantity",
+				"deleteAbility": "Delete Ability",
+				"deleteArmour": "Delete Armour Item",
+				"deleteEquipment": "Delete Item",
+				"deleteWeapon": "Delete Weapon",
+				"increaseQuantity": "Increase Quantity",
+				"repairAllArmourDie": "Repair All Armour Items",
+				"repairArmourDie": "Repair A Single Die On This Item",
+				"resetAllUsageDice": "Reset All Usage Dice",
+				"resetUsageDie": "Reset Usage Die",
+				"rollAttack": "Roll Attack",
+				"rollAttributeTest": "Roll Attribute Test",
+				"rollUsageDie": "Roll Usage Die"
+			}
+		},
+		"messages": {
+			"attributeTestFailed": "Test was a failure.",
+			"attributeTestSuccess": "Test was successful.",
+			"attacking": "%NAME% attacks with a %WEAPON%",
+			"attackMiss": "...but misses.",
+			"criticalHit": "...and lands a critical hit. Rolling damage...",
+			"normalHit": "...and hits. Rolling damage...",
+			"reducingUsageDie": "Usage die reduced to %DIE%.",
+			"rollingAttributeTest": "Rolling a %ATTRIBUTE% attribute test for %NAME%...",
+			"rollingUsageDie": "Rolling the usage die for my %NAME%.",
+			"usageDieExhausted": "Usage die for your %NAME% exhausted."
+		},
+		"rarities": {
+			"common": "Common",
+			"exotic": "Exotic",
+			"rare": "Rare"
+		},
+		"weapons": {
+			"kinds": {
+				"melee": "Melee",
+				"ranged": "Ranged",
+				"unarmed": "Unarmed"
+			},
+			"sizes": {
+				"large": "Large",
+				"normal": "Normal"
+			}
+		}
+	}
+}

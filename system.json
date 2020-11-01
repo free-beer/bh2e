@@ -1,0 +1,16 @@
+{
+  "name": "bh2e",
+  "title": "The Black Hack 2e",
+  "description": "System support for second edition of The Black Hack RPG.",
+  "author": "PAW",
+  "version": "0.1.0",
+  "minimumCoreVersion": "0.7.5",
+  "compatibleCoreVersion": "0.7.5",
+  "esmodules": ["bh2e.js"],
+  "styles": ["bh2e.css"],
+  "languages": [
+  	{"lang": "en",
+     "name": "English",
+     "path": "languages/en.json"}
+  ]
+}

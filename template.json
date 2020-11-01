@@ -1,0 +1,59 @@
+{
+  "Actor": {
+    "types" : ["character"],
+    "character": {
+      "attributes": {
+        "strength": 10,
+        "dexterity" : 10,
+        "constitution": 10,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "className": "Warrior",
+      "damageDice": {
+        "armed": "d6",
+        "unarmed": "d4"
+      },
+      "description": "",
+      "hitDie": "d6",
+      "hitPoints": {"max": 1, "value": 1},
+      "level": 1,
+      "playerName": ""
+    }
+  },
+  "Item": {
+  	"types": ["ability", "armour", "equipment", "weapon"],
+  	"templates": {
+  		"itemBasics": {
+  			"description": "",
+  			"rarity": "common"
+  		}
+  	},
+    "ability": {
+      "description": "",
+      "tag": ""
+    },
+    "armour": {
+      "armourValue": {
+        "total": 1,
+        "broken": 0
+      },
+      "templates": ["itemBasics"]
+    },
+  	"equipment": {
+      "quantity": 1,
+  		"templates" : ["itemBasics"],
+  		"usageDie": {
+        "current": "none",
+        "maximum": "none"
+      }
+  	},
+  	"weapon": {
+      "attribute": "strength",
+  	  "kind": "melee",
+      "size": "normal",
+  		"templates" : ["itemBasics"]
+  	}
+  }
+}

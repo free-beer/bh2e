@@ -1,0 +1,45 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+    </header>
+    <div>
+        <field class="bh2e-field">
+            <label class="bh2e-label">{{localize "bh2e.fields.labels.key"}}</label>
+            <input type="text" name="data.key" value="{{data.key}}" class="bh2e-input bh2e-text-input" />
+        </field>
+
+        <br>
+
+        <div class="bh2e-grid bh2e-grid-2-col">
+            <field class="bh2e-field">
+                <label for="data.damage.armed" class="bh2e-label">{{localize "bh2e.fields.labels.armedDamage"}}</label>
+                <select name="data.damage.armed" class="bh2e-select">
+                {{#select data.damage.armed}}
+                {{#each config.damageDieTypes as |label value|}}
+                    <option value="{{value}}">{{localize label}}</option>
+                {{/each}}
+                {{/select}}
+                </select>
+            </field>
+
+            <field class="bh2e-field">
+                <label for="data.damage.unarmed" class="bh2e-label">{{localize "bh2e.fields.labels.unarmedDamage"}}</label>
+                <select name="data.damage.unarmed" class="bh2e-select">
+                {{#select data.damage.unarmed}}
+                {{#each config.damageDieTypes as |label value|}}
+                    <option value="{{value}}">{{localize label}}</option>
+                {{/each}}
+                {{/select}}
+                </select>
+            </field>
+        </div>
+        
+        <br>
+
+        <field class="bh2e-field">
+            <label class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
+            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+        </field>
+    </div>
+</form>
