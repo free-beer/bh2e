@@ -50,6 +50,20 @@
 	font-size: 1.2em;
 }
 
+.bh2e-creature-attack-container {
+	margin: 5px 5px 10px 5px;
+}
+
+.bh2e-creature-attack-header{
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.bh2-creature-header {
+	display: grid;
+	grid-template-columns: 96px auto;
+}
+
 .bh2e-cs-attributes-section {
 	border: solid 1px #777;
 	padding: 5px;

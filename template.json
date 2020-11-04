@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types" : ["character"],
+    "types" : ["character", "creature"],
     "character": {
       "attributes": {
         "strength": 10,
@@ -20,10 +20,15 @@
       "hitPoints": {"max": 1, "value": 1},
       "level": 1,
       "playerName": ""
+    },
+    "creature": {
+      "hitDice": 1,
+      "hitPoints": 5,
+      "notes": ""
     }
   },
   "Item": {
-  	"types": ["ability", "armour", "equipment", "weapon"],
+  	"types": ["ability", "armour", "creature-attack", "equipment", "weapon"],
   	"templates": {
   		"itemBasics": {
   			"description": "",
@@ -40,6 +45,13 @@
         "broken": 0
       },
       "templates": ["itemBasics"]
+    },
+    "creature-attack": {
+      "attribute": "strength",
+      "damage": 1,
+      "notes": "",
+      "range": "close",
+      "targetQuantity": "1"
     },
   	"equipment": {
       "quantity": 1,

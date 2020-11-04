@@ -29,6 +29,14 @@ BH2e.hitDieTypes = {
 	d20: "bh2e.dice.d20"
 };
 
+BH2e.ranges = {
+	close: "bh2e.ranges.close",
+	nearby: "bh2e.ranges.nearby",
+	faraway: "bh2e.ranges.faraway",
+	distant: "bh2e.ranges.distant",
+	special: "bh2e.ranges.special"
+};
+
 BH2e.rarityTypes = {
 	common: "bh2e.rarities.common",
     exotic: "bh2e.rarities.exotic",

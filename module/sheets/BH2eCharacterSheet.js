@@ -1,3 +1,5 @@
+import {deleteOwnedItem, findActorFromItemId, generateDieRollFormula, interpolate} from '../shared.js';
+
 export default class BH2eCharacterSheet extends ActorSheet {
 	static get defaultOptions() {
 	    return(mergeObject(super.defaultOptions,
@@ -45,7 +47,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 		let element = event.currentTarget;
 		if(element.dataset.id) {
 			console.log(`Breakage of armour die on armour item id ${element.dataset.id}.`);
-			let actor = this.findActorByItemId(element.dataset.id);
+			let actor = findActorFromItemId(element.dataset.id);
 			if(actor) {
 				let item  = actor.items.find(i => i._id === element.dataset.id);
 
@@ -76,20 +78,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
 		let element = event.currentTarget;
 		if(element.dataset.id) {
-            console.log(`Delete of item id ${element.dataset.id} requested.`);
-	        let actor = game.actors.find((a) => {
-	        	if(a.items.find(i => i._id === element.dataset.id)) {
-	        		return(true);
-	        	} else {
-	        		return(false);
-	        	}
-	        });
-
-	        if(actor) {
-	        	actor.deleteEmbeddedEntity("OwnedItem", element.dataset.id);
-	        } else {
-	        	console.error(`Delete of item id ${element.dataset.id} requested but unable to locate the actor that owns it.`);
-	        }
+			deleteOwnedItem(element.dataset.id);
         } else {
         	console.error("Delete item called for but item id is not present on the element.");
         }
@@ -101,7 +90,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
 		let element = event.currentTarget;
 		if(element.dataset.id) {
-			let actor = this.findActorByItemId(element.dataset.id);
+			let actor = findActorFromItemId(element.dataset.id);
 			if(actor) {
 				this.decrementEquipmentQuantity(actor, element.dataset.id)
 			} else {
@@ -118,7 +107,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
 		let element = event.currentTarget;
 		if(element.dataset.id) {
-			let actor = this.findActorByItemId(element.dataset.id);
+			let actor = findActorFromItemId(element.dataset.id);
 			if(actor) {
 				this.incrementEquipmentQuantity(actor, element.dataset.id)
 			} else {
@@ -164,7 +153,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 		let element = event.currentTarget;
 		if(element.dataset.id) {
 			console.log(`Repairing of armour die on armour item id ${element.dataset.id}.`);
-			let actor = this.findActorByItemId(element.dataset.id);
+			let actor = findActorFromItemId(element.dataset.id);
 			if(actor) {
 				let item  = actor.items.find(i => i._id === element.dataset.id);
 
@@ -217,7 +206,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 		let itemId  = element.dataset.id;
 
 		if(itemId) {
-			let actor = this.findActorByItemId(itemId);
+			let actor = findActorFromItemId(itemId);
 
             if(actor) {
 			    this.resetUsageDie(actor, itemId);
@@ -240,19 +229,16 @@ export default class BH2eCharacterSheet extends ActorSheet {
 		let isCritical    = false;
 		let isHit         = false;
 		let isLargeWeapon = (element.dataset.size === "large");
-        let actor         = this.findActorByItemId(element.dataset.id);
+        let actor         = findActorFromItemId(element.dataset.id);
         let message       = {speaker: ChatMessage.getSpeaker(),
         	                 user: game.user._id};
 
         if(event.shiftKey) {
-        	formula = this.generateDiceRollFormula("d20", "advantage");
-        	attackRoll = new Roll(this.generateDiceRollFormula("d20", "advantage"));
+        	formula = generateDieRollFormula({kind: "advantage"});
         } else if(event.ctrlKey) {
-        	formula = this.generateDiceRollFormula("d20", "disadvantage");
-        	attackRoll = new Roll(this.generateDiceRollFormula("d20", "disadvantage"));
+        	formula = generateDieRollFormula({kind: "disadvantage"});
         } else {
-        	formula = this.generateDiceRollFormula("d20", "standard");
-        	attackRoll = new Roll(this.generateDiceRollFormula("d20", "standard"));
+        	formula = generateDieRollFormula();
         }
         if(isLargeWeapon) {
         	formula = `${formula}+1d4`;
@@ -267,12 +253,12 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
         if(isHit) {
         	if(element.dataset.kind === "unarmed") {
-        		formula = this.generateDiceRollFormula(actor.data.data.damageDice.unarmed, "standard");
+        		formula = generateDieRollFormula({dieType: actor.data.data.damageDice.unarmed});
         	} else {
-        		formula = this.generateDiceRollFormula(actor.data.data.damageDice.armed, "standard");
+        		formula = generateDieRollFormula({dieType: actor.data.data.damageDice.armed});
         	}
         	if(isLargeWeapon) {
-        		formula = `${formula}+${this.generateDiceRollFormula("d4", "standard")}`;
+        		formula = `${formula}+${generateDieRollFormula({dieType: "d4"})}`;
         	}
         	if(isCritical) {
         		formula = `(${formula})*2`;
@@ -280,7 +266,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         	damageRoll = new Roll(formula);
         }
 
-        message.content = this.interpolate("bh2e.messages.attacking", {name: actor.name, weapon: element.dataset.name});
+        message.content = interpolate("bh2e.messages.attacking", {name: actor.name, weapon: element.dataset.name});
         ChatMessage.create(message);
         attackRoll.toMessage({speaker: ChatMessage.getSpeaker(), user: game.user._id});
 
@@ -311,7 +297,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 			let attributeName  = game.i18n.localize(`bh2e.fields.labels.attributes.${element.dataset.attribute}.long`);
 			let roll           = null;
 
-			ChatMessage.create({content: this.interpolate("bh2e.messages.rollingAttributeTest",
+			ChatMessage.create({content: interpolate("bh2e.messages.rollingAttributeTest",
 				                                          {attribute: attributeName,
 				                                           name: actor.name}),
 								speaker: ChatMessage.getSpeaker(),
@@ -349,7 +335,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 		let element = event.currentTarget;
 
 		if(element.dataset.id) {
-			let actor = this.findActorByItemId(element.dataset.id);
+			let actor = findActorFromItemId(element.dataset.id);
 
 			if(actor) {
 				let item = actor.items.find(i => i._id === element.dataset.id);
@@ -358,9 +344,9 @@ export default class BH2eCharacterSheet extends ActorSheet {
         	        let usageDie = item.data.data.usageDie;
         	        if(usageDie.current !== "exhausted") {
 	        	        let die  = (usageDie.current === "none" ? usageDie.maximum : usageDie.current)
-	        	        let roll = new Roll(this.generateDiceRollFormula(die, "standard"));
+	        	        let roll = new Roll(generateDieRollFormula({dieType: die}));
 
-	        	        ChatMessage.create({content: this.interpolate("bh2e.messages.rollingUsageDie", {name: item.name}),
+	        	        ChatMessage.create({content: interpolate("bh2e.messages.rollingUsageDie", {name: item.name}),
 							                speaker: ChatMessage.getSpeaker(),
 	        	                            user: game.user._id});
 
@@ -378,7 +364,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
                             let oldDie  = (usageDie.current  === "none" ? usageDie.maximum : usageDie.current);
 
 	        	        	if(oldDie === "d4") {
-	        	        		ChatMessage.create({content: this.interpolate("bh2e.messages.usageDieExhausted", {name: item.name}),
+	        	        		ChatMessage.create({content: interpolate("bh2e.messages.usageDieExhausted", {name: item.name}),
 	        	        		                    speaker: ChatMessage.getSpeaker(),
 	        	                                    user: game.user._id});
 	        	        		data.data.usageDie.current = "exhausted";
@@ -404,7 +390,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 	        	        			    data.data.usageDie.current = "d12";
 	        	        			    break;
 	        	        		}
-	        	        		ChatMessage.create({content: this.interpolate("bh2e.messages.reducingUsageDie", {die: `1${data.data.usageDie.current}`}),
+	        	        		ChatMessage.create({content: interpolate("bh2e.messages.reducingUsageDie", {die: `1${data.data.usageDie.current}`}),
 	        	        	                        speaker: ChatMessage.getSpeaker(),
 	        	                                    user: game.user._id});
 	        	        	}
@@ -423,66 +409,6 @@ export default class BH2eCharacterSheet extends ActorSheet {
 			console.error("No equipment id specified on target element.");
 		}
 		return(false);
-	}
-
-	findActorByItemId(itemId) {
-		return(game.actors.find((a) => {
-					        	if(a.items.find(i => i._id === itemId)) {
-					        		return(true);
-					        	} else {
-					        		return(false);
-					        	}
-					        }));
-	}
-
-	generateDiceRollFormula(diceSides, kind) {
-		let formula = null;
-
-		if(kind === "advantage") {
-			switch(diceSides) {
-				case "one":
-				    formula = "1";
-				    break;
-				case "d4":
-				case "d6":
-				case "d8":
-				case "d10":
-				case "d12":
-				case "d20":
-				    formula = `2${diceSides}kl`;
-				    break;
-			}
-		} else if(kind === "disadvantage") {
-			switch(diceSides) {
-				case "one":
-				    formula = "1";
-				    break;
-				case "d4":
-				case "d6":
-				case "d8":
-				case "d10":
-				case "d12":
-				case "d20":
-				    formula = `2${diceSides}kh`;
-				    break;
-			}
-		} else {
-			switch(diceSides) {
-				case "one":
-				    formula = "1";
-				    break;
-				case "d4":
-				case "d6":
-				case "d8":
-				case "d10":
-				case "d12":
-				case "d20":
-				    formula = `1${diceSides}`;
-				    break;
-		    }
-		}
-
-		return(formula);
 	}
 
 	decrementEquipmentQuantity(actor, itemId) {
@@ -531,16 +457,6 @@ export default class BH2eCharacterSheet extends ActorSheet {
 			    console.error(`The actor '${actor.name}' (id ${actor._id}) does not appear to own item id ${itemId}.`);
 			}
 		}
-	}
-
-	interpolate(key, settings={}) {
-		let text = game.i18n.localize(key);
-
-		for(let name in settings) {
-			text = text.replace(`%${name.toUpperCase()}%`, settings[name]);
-		}
-
-		return(text);
 	}
 
 	resetUsageDie(actor, itemId) {

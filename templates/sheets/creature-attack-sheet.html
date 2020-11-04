@@ -1,0 +1,45 @@
+<form class="{{cssClass}}" autocomplete="off">
+	<field class="bh2e-field">
+		<label class="bh2e-label" for="name">{{localize "bh2e.fields.labels.name"}}</label>
+		<input name="name" type="text" value="{{item.name}}"/>
+	</field>
+
+    <div class="bh2e-grid bh2e-grid-4-col">
+		<field class="bh2e-field">
+			<label class="bh2e-label" for="data.attribute">{{localize "bh2e.fields.labels.attribute"}}</label>
+	    	<select name="data.attribute" class="bh2e-select">
+			{{#select data.attribute}}
+			{{#each config.attributeList as |label value|}}
+	    		<option value="{{value}}">{{localize label}}</option>
+			{{/each}}
+			{{/select}}
+	    	</select>
+		</field>
+
+		<field class="bh2e-field">
+			<label class="bh2e-label" for="data.damage">{{localize "bh2e.fields.labels.damage"}}</label>
+			<input name="data.damage" type="text" value="{{data.damage}}" class="bh2e-input"/>
+		</field>
+
+		<field class="bh2e-field">
+			<label class="bh2e-label" for="data.range">{{localize "bh2e.fields.labels.range"}}</label>
+	    	<select name="data.range" class="bh2e-select">
+			{{#select data.range}}
+			{{#each config.ranges as |label value|}}
+	    		<option value="{{value}}">{{localize label}}</option>
+			{{/each}}
+			{{/select}}
+	    	</select>
+		</field>
+
+		<field class="bh2e-field">
+			<label class="bh2e-label" for="data.targetQuantity">{{localize "bh2e.fields.labels.targetQuantity"}}</label>
+			<input name="data.targetQuantity" type="number" value="{{data.targetQuantity}}" class="bh2e-input"/>
+		</field>
+	</div>
+
+	<field class="bh2e-field">
+		<h2>{{localize "bh2e.fields.labels.notes"}}</h2>
+		{{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
+	</field>
+</form>

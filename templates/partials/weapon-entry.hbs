@@ -1,40 +1,10 @@
 <div class="bh2e-weapon-entry">
 	<div>{{name}}</div>
 	<div>
-	    {{#if (eq data.kind "melee")}}
-	        {{localize "bh2e.weapons.kinds.melee"}}
-	    {{/if}}
-	    {{#if (eq data.kind "ranged")}}
-	        {{localize "bh2e.weapons.kinds.ranged"}}
-	    {{/if}}
-	    {{#if (eq data.kind "unarmed")}}
-	        {{localize "bh2e.weapons.kinds.unarmed"}}
-	    {{/if}}
+		{{attackKind data.kind}}
 	</div>
 	<div>
-	    {{#if (eq data.attribute "strength")}}
-	        {{localize "bh2e.fields.labels.attributes.strength.long"}}
-	    {{/if}}
-
-	    {{#if (eq data.attribute "dexterity")}}
-	        {{localize "bh2e.fields.labels.attributes.dexterity.long"}}
-	    {{/if}}
-
-	    {{#if (eq data.attribute "constitution")}}
-	        {{localize "bh2e.fields.labels.attributes.constitution.long"}}
-	    {{/if}}
-
-	    {{#if (eq data.attribute "intelligence")}}
-	        {{localize "bh2e.fields.labels.attributes.intelligence.long"}}
-	    {{/if}}
-
-	    {{#if (eq data.attribute "wisdom")}}
-	        {{localize "bh2e.fields.labels.attributes.wisdom.long"}}
-	    {{/if}}
-
-	    {{#if (eq data.attribute "charisma")}}
-	        {{localize "bh2e.fields.labels.attributes.charisma.long"}}
-	    {{/if}}
+		{{longAttributeName data.attribute}}
 	</div>
 	<div>
 	    {{#if (eq data.size "normal")}}

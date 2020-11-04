@@ -21,6 +21,7 @@
 			"labels": {
 				"armedDamage": "Damage Die (Armed)",
 				"armourValue": "Armour Value",
+				"attacks": "Attacks",
 				"attribute": "Attribute",
 				"attributes": {
 					"charisma": {
@@ -52,10 +53,13 @@
 				"brokenDice": "Broken Dice",
 				"className": "Class",
 				"currentUsageDie": "Current Die",
+				"damage": "Damage",
 				"description": "Description",
 				"dice": "Dice",
 				"exhausted": "Exhausted",
+				"hitDice": "Hit Dice",
 				"hitDie": "Hit Die",
+				"hitPoints": "Hit Points",
 				"hitPointsMax": "HP Maximum",
 				"hitPointsValue": "HP Current",
 				"key": "Key",
@@ -64,11 +68,14 @@
 				"name": "Name",
 				"none": "None",
 				"notApplicable": "-",
+				"notes": "Notes",
 				"playerName": "Player Name",
 				"quantity": "Quantity",
+				"range": "Range",
 				"rarity": "Rarity",
 				"size": "Size",
 				"tag": "Tag",
+				"targetQuantity": "Target Quantity",
 				"testAttribute": "Test Attribute (for Attacks)",
 				"totalDice": "Total Dice",
 				"type": "Type",
@@ -83,6 +90,7 @@
 				"decreaseQuantity": "Decrease Quantity",
 				"deleteAbility": "Delete Ability",
 				"deleteArmour": "Delete Armour Item",
+				"deleteAttack": "Delete Attack",
 				"deleteEquipment": "Delete Item",
 				"deleteWeapon": "Delete Weapon",
 				"increaseQuantity": "Increase Quantity",
@@ -106,6 +114,13 @@
 			"rollingAttributeTest": "Rolling a %ATTRIBUTE% attribute test for %NAME%...",
 			"rollingUsageDie": "Rolling the usage die for my %NAME%.",
 			"usageDieExhausted": "Usage die for your %NAME% exhausted."
+		},
+		"ranges": {
+			"close": "Close",
+			"nearby": "Nearby",
+			"faraway": "Faraway",
+			"distant": "Distant",
+			"special": "Special"
 		},
 		"rarities": {
 			"common": "Common",
