@@ -21,7 +21,16 @@
     <section class="bh2-creature-actions">
         <h2>{{localize "bh2e.fields.labels.attacks"}}</h2>
     {{#each actions as |action id|}}
-          {{> "systems/bh2e/templates/partials/creature-attack-entry.hbs" action}}
+        {{> "systems/bh2e/templates/partials/creature-attack-entry.hbs" action}}
+    {{/each}}
+    </section>
+
+    <br>
+
+    <section class="bh2-creature-abilities">
+        <h2>{{localize "bh2e.fields.labels.abilities"}}</h2>
+    {{#each abilities as |ability id|}}
+        {{> "systems/bh2e/templates/partials/creature-ability-entry.hbs" ability}}
     {{/each}}
     </section>
 

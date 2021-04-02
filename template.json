@@ -28,7 +28,7 @@
     }
   },
   "Item": {
-  	"types": ["ability", "armour", "creature-attack", "equipment", "weapon"],
+  	"types": ["ability", "armour", "creature-ability", "creature-attack", "equipment", "weapon"],
   	"templates": {
   		"itemBasics": {
   			"description": "",
@@ -45,6 +45,9 @@
         "broken": 0
       },
       "templates": ["itemBasics"]
+    },
+    "creature-ability": {
+      "notes": ""
     },
     "creature-attack": {
       "attribute": "strength",

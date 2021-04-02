@@ -19,6 +19,7 @@
 				"weapons": "Weapons"
 			},
 			"labels": {
+				"abilities": "Abilities",
 				"armedDamage": "Damage Die (Armed)",
 				"armourValue": "Armour Value",
 				"attacks": "Attacks",

@@ -50,6 +50,33 @@
 	font-size: 1.2em;
 }
 
+.bh2-creature-ability-action-column {
+	font-size: 1.2em;
+	float: right;
+	margin-right: 15px;
+}
+
+.bh2-creature-ability-detail-column {
+	font-size: 1.1em;
+	width: 90%;
+}
+
+.bh2e-creature-ability-entry {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+.bh2-creature-ability-name {
+	font-size: 1.2em;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.bh2-create-ability-notes-container {
+	margin-left: 15px;
+}
+
 .bh2e-creature-attack-container {
 	margin: 5px 5px 10px 5px;
 }

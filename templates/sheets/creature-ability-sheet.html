@@ -1,0 +1,11 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <field class="bh2e-field">
+        <label class="bh2e-label" for="name">{{localize "bh2e.fields.labels.name"}}</label>
+        <input name="name" type="text" value="{{item.name}}"/>
+    </field>
+
+    <field class="bh2e-field">
+        <h2>{{localize "bh2e.fields.labels.notes"}}</h2>
+        {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
+    </field>
+</form>

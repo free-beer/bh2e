@@ -10,6 +10,7 @@ async function preloadHandlebarsTemplates() {
                    "systems/bh2e/templates/partials/armour-entry.hbs",
                    "systems/bh2e/templates/partials/attribute-details.hbs",
                    "systems/bh2e/templates/partials/attribute-list.hbs",
+                   "systems/bh2e/templates/partials/creature-ability-entry.hbs",
                    "systems/bh2e/templates/partials/creature-attack-entry.hbs",
                    "systems/bh2e/templates/partials/equipment-entry.hbs",
                    "systems/bh2e/templates/partials/weapon-details.hbs",
