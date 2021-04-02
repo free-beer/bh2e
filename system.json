@@ -13,5 +13,5 @@
   ],
   "url": "https://github.com/free-beer/bh2e",
   "manifest": "https://raw.githubusercontent.com/free-beer/bh2e/master/system.json",
-  "download": "https://raw.githubusercontent.com/free-beer/bh2e/master/bh2e.zip"
+  "download": "https://github.com/free-beer/bh2e/archive/refs/heads/master.zip"
 }
