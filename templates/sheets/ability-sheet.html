@@ -4,16 +4,16 @@
         <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
     </header>
     <div>
-    	<field class="bh2e-field">
-    		<label for="data.tag" class="bh2e-label">{{localize "bh2e.fields.labels.tag"}}</label>
-    		<input type="text" name="data.tag" value="{{data.tag}}" class="bh2e-input" />
-    	</field>
+      <field class="bh2e-field">
+          <label for="data.tag" class="bh2e-label">{{localize "bh2e.fields.labels.tag"}}</label>
+          <input type="text" name="data.tag" value="{{data.tag}}" class="bh2e-input" />
+      </field>
 
-        <br>
+      <br>
 
-        <field class="bh2e-field">
-        	<label for="data.description" class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
-	        {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
-	    </field>
+      <field class="bh2e-field">
+          <label for="data.description" class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
+          {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+      </field>
     </div>
 </form>

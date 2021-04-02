@@ -1,26 +1,26 @@
 <div class="bh2e-armour-entry">
-	<div>
-	{{#if (eq data.armourValue.total data.armourValue.broken)}}
-		<s class="armour-name-broken">{{name}}</s>
-	{{else}}
-		<span class="armour-name-unbroken">{{name}}</span>
-	{{/if}}
-	</div>
-	<div>
-	    <center>{{data.armourValue.total}}</center>
-	</div>
-	<div>
-	    <center>{{data.armourValue.broken}}</center>
-	</div>
-	<div>
-		<a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.breakArmourDie"}}">
-			<i class="fas fa-bolt bh2e-break-armour-die-icon" data-id="{{_id}}"></i>
-		</a>
-		<a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.repairArmourDie"}}">
-			<i class="fas fa-hammer bh2e-repair-armour-die-icon" data-id="{{_id}}"></i>
-		</a>
-		<a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.deleteArmour"}}">
-			<i class="far fa-trash-alt bh2e-delete-item-icon" data-id="{{_id}}"></i>
-		</a>
-	</div>
+    <div>
+    {{#if (eq data.armourValue.total data.armourValue.broken)}}
+        <s class="armour-name-broken">{{name}}</s>
+    {{else}}
+        <span class="armour-name-unbroken">{{name}}</span>
+    {{/if}}
+    </div>
+    <div>
+        <center>{{data.armourValue.total}}</center>
+    </div>
+    <div>
+        <center>{{data.armourValue.broken}}</center>
+    </div>
+    <div>
+        <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.breakArmourDie"}}">
+            <i class="fas fa-bolt bh2e-break-armour-die-icon" data-id="{{_id}}"></i>
+        </a>
+        <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.repairArmourDie"}}">
+            <i class="fas fa-hammer bh2e-repair-armour-die-icon" data-id="{{_id}}"></i>
+        </a>
+        <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.deleteArmour"}}">
+            <i class="far fa-trash-alt bh2e-delete-item-icon" data-id="{{_id}}"></i>
+        </a>
+    </div>
 </div>

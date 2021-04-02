@@ -4,25 +4,25 @@
         <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
     </header>
     <div>
-    	<field class="bh2e-field">
-    		<label for="data.armourValue.total" class="bh2e-label">{{localize "bh2e.fields.labels.armourValue"}}</label>
-    		<input type="number" name="data.armourValue.total" value="{{data.armourValue.total}}" class="bh2e-input" />
-    	</field>
-
-    	<field class="bh2e-field">
-	    	<label for="data.rarity" class="bh2e-label">{{localize "bh2e.fields.labels.rarity"}}</label>
-	    	<select name="data.rarity" class="bh2e-input bh2e-select">
-			{{#select data.rarity}}
-			{{#each config.rarityTypes as |label value|}}
-	    		<option value="{{value}}">{{localize label}}</option>
-			{{/each}}
-			{{/select}}
-	    	</select>
-	    </field>
-
         <field class="bh2e-field">
-        	<label for="data.description" class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
-	        {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
-	    </field>
+            <label for="data.armourValue.total" class="bh2e-label">{{localize "bh2e.fields.labels.armourValue"}}</label>
+            <input type="number" name="data.armourValue.total" value="{{data.armourValue.total}}" class="bh2e-input" />
+        </field>
+
+      <field class="bh2e-field">
+          <label for="data.rarity" class="bh2e-label">{{localize "bh2e.fields.labels.rarity"}}</label>
+          <select name="data.rarity" class="bh2e-input bh2e-select">
+      {{#select data.rarity}}
+        {{#each config.rarityTypes as |label value|}}
+            <option value="{{value}}">{{localize label}}</option>
+        {{/each}}
+      {{/select}}
+          </select>
+      </field>
+
+      <field class="bh2e-field">
+          <label for="data.description" class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
+          {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+      </field>
     </div>
 </form>

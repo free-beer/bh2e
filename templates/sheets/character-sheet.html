@@ -1,155 +1,158 @@
 <form class="{{cssClass}}" autocomplete="off">
-	<div class="bh2e-cs-container">
-		{{> "systems/bh2e/templates/partials/attribute-details.hbs"}}
+    <div class="bh2e-cs-container">
+        {{> "systems/bh2e/templates/partials/attribute-details.hbs"}}
 
-		<section class="bh2e-cs-main-body">
-			<field class="bh2e-field">
-				<label class="bh2e-label" for="actor.name">{{localize "bh2e.fields.labels.name"}}</label>
-				<input type="text" name="name" value="{{actor.name}}" />
-			</field>
+        <section class="bh2e-cs-main-body">
+            <field class="bh2e-field">
+                <label class="bh2e-label" for="actor.name">{{localize "bh2e.fields.labels.name"}}</label>
+                <input type="text" name="name" value="{{actor.name}}" />
+            </field>
 
-			<field class="bh2e-field">
-				<label class="bh2e-label" for="data.playerName">{{localize "bh2e.fields.labels.playerName"}}</label>
-				<input type="text" name="data.playerName" value="{{data.playerName}}" />
-			</field>
+            <field class="bh2e-field">
+                <label class="bh2e-label" for="data.playerName">{{localize "bh2e.fields.labels.playerName"}}</label>
+                <input type="text" name="data.playerName" value="{{data.playerName}}" />
+            </field>
 
             <div class="bh2e-grid bh2e-grid-4-col">
-				<field class="bh2e-field">
-					<label class="bh2e-label" for="data.className">{{localize "bh2e.fields.labels.className"}}</label>
-					<input type="text" name="data.className" value="{{data.className}}" />
-				</field>
+                <field class="bh2e-field">
+                    <label class="bh2e-label" for="data.className">{{localize "bh2e.fields.labels.className"}}</label>
+                    <input type="text" name="data.className" value="{{data.className}}" />
+                </field>
 
-				<field class="bh2e-field">
-					<label class="bh2e-label" for="data.level">{{localize "bh2e.fields.labels.level"}}</label>
-					<input style="text-align: center;" type="number" name="data.level" value="{{data.level}}" />
-				</field>
+                <field class="bh2e-field">
+                    <label class="bh2e-label" for="data.level">{{localize "bh2e.fields.labels.level"}}</label>
+                    <input style="text-align: center;" type="number" name="data.level" value="{{data.level}}" />
+                </field>
 
-				<field class="bh2e-field">
-					<label class="bh2e-label" for="data.hitPoints.max">{{localize "bh2e.fields.labels.hitPointsMax"}}</label>
-					<input style="text-align: center;" type="number" name="data.hitPoints.max" value="{{data.hitPoints.max}}" />
-				</field>
+                <field class="bh2e-field">
+                    <label class="bh2e-label" for="data.hitPoints.max">{{localize "bh2e.fields.labels.hitPointsMax"}}</label>
+                    <input style="text-align: center;" type="number" name="data.hitPoints.max" value="{{data.hitPoints.max}}" />
+                </field>
 
-				<field class="bh2e-field">
-					<label class="bh2e-label" for="data.hitPoints.value">{{localize "bh2e.fields.labels.hitPointsValue"}}</label>
-					<input style="text-align: center;" type="number" name="data.hitPoints.value" value="{{data.hitPoints.value}}" />
-				</field>
-			</div>
-			<div class="bh2e-grid bh2e-grid-3-col">
-		    	<field class="bh2e-field">
-			    	<label for="data.hitDie" class="bh2e-label">{{localize "bh2e.fields.labels.hitDie"}}</label>
-			    	<select name="data.hitDie" class="bh2e-select">
-					{{#select data.hitDie}}
-					{{#each config.hitDieTypes as |label value|}}
-			    		<option value="{{value}}">{{localize label}}</option>
-					{{/each}}
-					{{/select}}
-			    	</select>
-			    </field>
+                <field class="bh2e-field">
+                    <label class="bh2e-label" for="data.hitPoints.value">{{localize "bh2e.fields.labels.hitPointsValue"}}</label>
+                    <input style="text-align: center;" type="number" name="data.hitPoints.value" value="{{data.hitPoints.value}}" />
+                </field>
+            </div>
 
-		    	<field class="bh2e-field">
-			    	<label for="data.damageDice.armed" class="bh2e-label">{{localize "bh2e.fields.labels.armedDamage"}}</label>
-			    	<select name="data.damageDice.armed" class="bh2e-select">
-					{{#select data.damageDice.armed}}
-					{{#each config.damageDieTypes as |label value|}}
-			    		<option value="{{value}}">{{localize label}}</option>
-					{{/each}}
-					{{/select}}
-			    	</select>
-			    </field>
+            <div class="bh2e-grid bh2e-grid-3-col">
+                <field class="bh2e-field">
+                    <label for="data.hitDie" class="bh2e-label">{{localize "bh2e.fields.labels.hitDie"}}</label>
+                    <select name="data.hitDie" class="bh2e-select">
+                  {{#select data.hitDie}}
+                  {{#each config.hitDieTypes as |label value|}}
+                        <option value="{{value}}">{{localize label}}</option>
+                  {{/each}}
+                  {{/select}}
+                    </select>
+                </field>
 
-		    	<field class="bh2e-field">
-			    	<label for="data.damageDice.unarmed" class="bh2e-label">{{localize "bh2e.fields.labels.unarmedDamage"}}</label>
-			    	<select name="data.damageDice.unarmed" class="bh2e-select">
-					{{#select data.damageDice.unarmed}}
-					{{#each config.damageDieTypes as |label value|}}
-			    		<option value="{{value}}">{{localize label}}</option>
-					{{/each}}
-					{{/select}}
-			    	</select>
-			    </field>
-			</div>
+                <field class="bh2e-field">
+                    <label for="data.damageDice.armed" class="bh2e-label">{{localize "bh2e.fields.labels.armedDamage"}}</label>
+                    <select name="data.damageDice.armed" class="bh2e-select">
+                  {{#select data.damageDice.armed}}
+                  {{#each config.damageDieTypes as |label value|}}
+                        <option value="{{value}}">{{localize label}}</option>
+                  {{/each}}
+                  {{/select}}
+                    </select>
+                </field>
 
-			<hr>
+                <field class="bh2e-field">
+                    <label for="data.damageDice.unarmed" class="bh2e-label">{{localize "bh2e.fields.labels.unarmedDamage"}}</label>
+                    <select name="data.damageDice.unarmed" class="bh2e-select">
+                  {{#select data.damageDice.unarmed}}
+                  {{#each config.damageDieTypes as |label value|}}
+                        <option value="{{value}}">{{localize label}}</option>
+                  {{/each}}
+                  {{/select}}
+                    </select>
+                </field>
+            </div>
+
+            <hr>
 
             <div class="bh2e-weapons-container">
-			    <h2>{{localize "bh2e.fields.headers.weapons"}}</h2>
-			    <div class="bh2e-weapon-headers">
-			    	<div>{{localize "bh2e.fields.labels.name"}}</div>
-			    	<div>{{localize "bh2e.fields.labels.type"}}</div>
-			    	<div>{{localize "bh2e.fields.labels.attribute"}}</div>
-			    	<div>{{localize "bh2e.fields.labels.size"}}</div>
-			    	<div></div>
-			    </div>
-			{{#each weapons as |weapon id|}}
-			    {{> "systems/bh2e/templates/partials/weapon-entry.hbs" weapon}}
-			{{/each}}
-			</div>
+                <h2>{{localize "bh2e.fields.headers.weapons"}}</h2>
+                <div class="bh2e-weapon-headers">
+                    <div>{{localize "bh2e.fields.labels.name"}}</div>
+                    <div>{{localize "bh2e.fields.labels.type"}}</div>
+                    <div>{{localize "bh2e.fields.labels.attribute"}}</div>
+                    <div>{{localize "bh2e.fields.labels.size"}}</div>
+                    <div></div>
+                </div>
+            {{#each weapons as |weapon id|}}
+                {{> "systems/bh2e/templates/partials/weapon-entry.hbs" weapon}}
+            {{/each}}
+            </div>
 
-			<br><br>
+            <br><br>
 
             <div class="bh2e-armour-container">
-			    <h2>
-			    	<div class="bh2e-armour-section-header">
-			            <div>{{localize "bh2e.fields.headers.armour"}}</div>
-			            <div>
-							<a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.repairAllArmourDie"}}">
-								<i class="fas fa-tools bh2e-repair-all-armour-dice-icon" data-id="{{actor._id}}"></i>
-							</a>
-			            </div>
-			        </div>
-			    </h2>
-			    <div class="bh2e-armour-headers">
-			    	<div>{{localize "bh2e.fields.labels.name"}}</div>
-			    	<div><center>{{localize "bh2e.fields.labels.totalDice"}}</center></div>
-			    	<div><center>{{localize "bh2e.fields.labels.brokenDice"}}</center></div>
-			    	<div></div>
-			    </div>
-			{{#each armour as |item id|}}
-			    {{> "systems/bh2e/templates/partials/armour-entry.hbs" item}}
-			{{/each}}
-			</div>
+                <h2>
+                    <div class="bh2e-armour-section-header">
+                        <div>{{localize "bh2e.fields.headers.armour"}}</div>
+                        <div>
+                            <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.repairAllArmourDie"}}">
+                              <i class="fas fa-tools bh2e-repair-all-armour-dice-icon" data-id="{{actor._id}}"></i>
+                            </a>
+                        </div>
+                    </div>
+                </h2>
 
-			<br><br>
+                <div class="bh2e-armour-headers">
+                    <div>{{localize "bh2e.fields.labels.name"}}</div>
+                    <div><center>{{localize "bh2e.fields.labels.totalDice"}}</center></div>
+                    <div><center>{{localize "bh2e.fields.labels.brokenDice"}}</center></div>
+                    <div></div>
+                </div>
+
+            {{#each armour as |item id|}}
+                {{> "systems/bh2e/templates/partials/armour-entry.hbs" item}}
+            {{/each}}
+            </div>
+
+            <br><br>
 
             <div class="bh2e-equipment-container">
-			    <h2>
-			    	<div class="bh2e-equipment-section-header">
-			            <div>{{localize "bh2e.fields.headers.equipment"}}</div>
-			            <div>
-							<a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.resetAllUsageDice"}}">
-								<i class="fas fa-undo-alt bh2e-reset-all-usage-dice-icon" data-id="{{actor._id}}"></i>
-							</a>
-			            </div>
-			        </div>
-			    </h2>
-			    <div class="bh2e-equipment-headers">
-			    	<div>{{localize "bh2e.fields.labels.name"}}</div>
-			    	<div><center>{{localize "bh2e.fields.labels.quantity"}}</center></div>
-			    	<div><center>{{localize "bh2e.fields.labels.usageDie"}}</center></div>
-			    	<div></div>
-			    </div>
-			{{#each equipment as |item id|}}
-			    {{> "systems/bh2e/templates/partials/equipment-entry.hbs" item}}
-			{{/each}}
-			</div>
+                <h2>
+                    <div class="bh2e-equipment-section-header">
+                        <div>{{localize "bh2e.fields.headers.equipment"}}</div>
+                        <div>
+                          <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.resetAllUsageDice"}}">
+                            <i class="fas fa-undo-alt bh2e-reset-all-usage-dice-icon" data-id="{{actor._id}}"></i>
+                          </a>
+                        </div>
+                    </div>
+                </h2>
+                <div class="bh2e-equipment-headers">
+                    <div>{{localize "bh2e.fields.labels.name"}}</div>
+                    <div><center>{{localize "bh2e.fields.labels.quantity"}}</center></div>
+                    <div><center>{{localize "bh2e.fields.labels.usageDie"}}</center></div>
+                    <div></div>
+                </div>
+            {{#each equipment as |item id|}}
+                {{> "systems/bh2e/templates/partials/equipment-entry.hbs" item}}
+            {{/each}}
+            </div>
 
-			<br><br>
+            <br><br>
 
             <div class="bh2e-abilities-container">
-			    <h2>{{localize "bh2e.fields.headers.abilities"}}</h2>
-			{{#each abilities as |ability id|}}
-			    {{> "systems/bh2e/templates/partials/ability-entry.hbs" ability}}
-			{{/each}}
-			</div>
+                <h2>{{localize "bh2e.fields.headers.abilities"}}</h2>
+            {{#each abilities as |ability id|}}
+                {{> "systems/bh2e/templates/partials/ability-entry.hbs" ability}}
+            {{/each}}
+            </div>
 
-			<br><br>
+            <br><br>
 
             <div class="bh2e-description-container">
-            	<h2>{{localize "bh2e.fields.headers.background"}}</h2>
-		        <field class="bh2e-field">
-			        {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
-			    </field>
+                <h2>{{localize "bh2e.fields.headers.background"}}</h2>
+                <field class="bh2e-field">
+                    {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+                </field>
             </div>
-		</section>
-	</div>
+        </section>
+    </div>
 </form>

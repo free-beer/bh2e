@@ -3,37 +3,38 @@
         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
         <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
     </header>
+
     <div>
-	    <field class="bh2e-field">
-	    	<label for="data.quantity" class="bh2e-label">{{localize "bh2e.fields.labels.quantity"}}</label>
-	    	<input type="number" name="data.quantity" value="{{data.quantity}}" />
-	    </field>
-
-    	<field class="bh2e-field">
-	    	<label for="data.usageDie.maximum" class="bh2e-label">{{localize "bh2e.fields.labels.usageDie"}}</label>
-	    	<select name="data.usageDie.maximum" class="bh2e-input bh2e-select">
-			{{#select data.usageDie.maximum}}
-			{{#each config.usageDieTypes as |label value|}}
-	    		<option value="{{value}}">{{localize label}}</option>
-			{{/each}}
-			{{/select}}
-	    	</select>
-	    </field>
-
-    	<field class="bh2e-field">
-	    	<label for="data.rarity" class="bh2e-label">{{localize "bh2e.fields.labels.rarity"}}</label>
-	    	<select name="data.rarity" class="bh2e-input bh2e-select">
-			{{#select data.rarity}}
-			{{#each config.rarityTypes as |label value|}}
-	    		<option value="{{value}}">{{localize label}}</option>
-			{{/each}}
-			{{/select}}
-	    	</select>
-	    </field>
+        <field class="bh2e-field">
+            <label for="data.quantity" class="bh2e-label">{{localize "bh2e.fields.labels.quantity"}}</label>
+            <input type="number" name="data.quantity" value="{{data.quantity}}" />
+        </field>
 
         <field class="bh2e-field">
-        	<label for="data.description" class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
-	        {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
-	    </field>
+            <label for="data.usageDie.maximum" class="bh2e-label">{{localize "bh2e.fields.labels.usageDie"}}</label>
+            <select name="data.usageDie.maximum" class="bh2e-input bh2e-select">
+        {{#select data.usageDie.maximum}}
+          {{#each config.usageDieTypes as |label value|}}
+                <option value="{{value}}">{{localize label}}</option>
+          {{/each}}
+        {{/select}}
+            </select>
+        </field>
+
+        <field class="bh2e-field">
+            <label for="data.rarity" class="bh2e-label">{{localize "bh2e.fields.labels.rarity"}}</label>
+            <select name="data.rarity" class="bh2e-input bh2e-select">
+        {{#select data.rarity}}
+          {{#each config.rarityTypes as |label value|}}
+                <option value="{{value}}">{{localize label}}</option>
+          {{/each}}
+        {{/select}}
+            </select>
+        </field>
+
+        <field class="bh2e-field">
+            <label for="data.description" class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
+            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+        </field>
     </div>
 </form>

@@ -1,18 +1,18 @@
 <section class="bh2e-creature-attack-container">
-	<div class="bh2e-creature-attack-header">
-		<span class="bh2e-creature-attack-name">{{name}}</span>
-		-
-		<span class="bh2e-creature-attack-attribute">{{shortAttributeName data.attribute}}</span>
-		(<span class="bh2e-creature-attack-targets">{{data.targetQuantity}} {{rangeName data.range}}</span>)
-		<span class="bh2e-creature-attack-damage">{{data.damage}} Dmg</span>
-		<span>
-			<a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.deleteAttack"}}">
-				<i class="far fa-trash-alt bh2e-delete-item-icon" data-id="{{_id}}"></i>
-			</a>
-		</span>
-	</div>
+    <div class="bh2e-creature-attack-header">
+        <span class="bh2e-creature-attack-name">{{name}}</span>
+        -
+        <span class="bh2e-creature-attack-attribute">{{shortAttributeName data.attribute}}</span>
+        (<span class="bh2e-creature-attack-targets">{{data.targetQuantity}} {{rangeName data.range}}</span>)
+        <span class="bh2e-creature-attack-damage">{{data.damage}} Dmg</span>
+        <span>
+            <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.deleteAttack"}}">
+                <i class="far fa-trash-alt bh2e-delete-item-icon" data-id="{{_id}}"></i>
+            </a>
+        </span>
+    </div>
 
-	<div class="bh2e-creature-attack-notes">
-		{{{data.notes}}}
-	</div>
+    <div class="bh2e-creature-attack-notes">
+        {{{data.notes}}}
+    </div>
 </section>

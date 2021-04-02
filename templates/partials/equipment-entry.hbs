@@ -1,48 +1,48 @@
 <div class="bh2e-equipment-entry">
-	<div>
-	{{#if (eq data.usageDie.current "exhausted")}}
-		<s>{{name}}</s>
-	{{else}}
-		<span>{{name}}</span>
-	{{/if}}
-	</div>
-	<div>
-	    <center>{{data.quantity}}</center>
+    <div>
+    {{#if (eq data.usageDie.current "exhausted")}}
+        <s>{{name}}</s>
+    {{else}}
+        <span>{{name}}</span>
+    {{/if}}
     </div>
-	<div>
-		<center>
-		{{#if (eq data.usageDie.maximum "none")}}
-		    {{localize "bh2e.fields.labels.notApplicable"}}
-		{{else}}
-			{{#if (eq data.usageDie.current "none")}}
-			    1{{data.usageDie.maximum}}
-			{{else}}
-				{{#if (eq data.usageDie.current "exhausted")}}
-				    {{localize "bh2e.fields.labels.exhausted"}}
-				{{else}}
-				    1{{data.usageDie.current}}
-				{{/if}}
-			{{/if}}
-		{{/if}}
-		</center>
-	</div>
-	<div>
-	{{#unless  (eq data.usageDie.maximum "none")}}
-		<a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.rollUsageDie"}}">
-			<i class="fas fa-dice-two bh2e-roll-usage-die-icon" data-id="{{_id}}"></i>
-		</a>
-		<a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.resetUsageDie"}}">
-			<i class="fas fa-undo-alt bh2e-reset-usage-die-icon" data-id="{{_id}}"></i>
-		</a>
-		<a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.increaseQuantity"}}">
-			<i class="fas fa-plus bh2e-increase-quantity-icon" data-id="{{_id}}"></i>
-		</a>
-		<a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.decreaseQuantity"}}">
-			<i class="fas fa-minus bh2e-decrease-quantity-icon" data-id="{{_id}}"></i>
-		</a>
-	{{/unless}}
-		<a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.deleteEquipment"}}">
-			<i class="far fa-trash-alt bh2e-delete-item-icon" data-id="{{_id}}"></i>
-		</a>
-	</div>
+    <div>
+        <center>{{data.quantity}}</center>
+    </div>
+    <div>
+        <center>
+        {{#if (eq data.usageDie.maximum "none")}}
+            {{localize "bh2e.fields.labels.notApplicable"}}
+        {{else}}
+          {{#if (eq data.usageDie.current "none")}}
+              1{{data.usageDie.maximum}}
+          {{else}}
+            {{#if (eq data.usageDie.current "exhausted")}}
+                {{localize "bh2e.fields.labels.exhausted"}}
+            {{else}}
+                1{{data.usageDie.current}}
+            {{/if}}
+          {{/if}}
+        {{/if}}
+        </center>
+    </div>
+    <div>
+    {{#unless  (eq data.usageDie.maximum "none")}}
+        <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.rollUsageDie"}}">
+            <i class="fas fa-dice-two bh2e-roll-usage-die-icon" data-id="{{_id}}"></i>
+        </a>
+        <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.resetUsageDie"}}">
+            <i class="fas fa-undo-alt bh2e-reset-usage-die-icon" data-id="{{_id}}"></i>
+        </a>
+        <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.increaseQuantity"}}">
+            <i class="fas fa-plus bh2e-increase-quantity-icon" data-id="{{_id}}"></i>
+        </a>
+        <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.decreaseQuantity"}}">
+            <i class="fas fa-minus bh2e-decrease-quantity-icon" data-id="{{_id}}"></i>
+        </a>
+    {{/unless}}
+        <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.deleteEquipment"}}">
+            <i class="far fa-trash-alt bh2e-delete-item-icon" data-id="{{_id}}"></i>
+        </a>
+    </div>
 </div>

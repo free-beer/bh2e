@@ -1,20 +1,20 @@
 <section class="bh2e-character-weapons">
-	<h3>Weapons</h3>
-	<div class="bh2e-grid bh2e-grid-4-col">
-	    <div>{{localize "bh2e.fields.labels.weapon"}}</div>
-	    <div>{{localize "bh2e.fields.labels.weaponKind"}}</div>
-	    <div>{{localize "bh2e.fields.labels.attribute"}}</div>
-	    <div></div>
-	</div>
+    <h3>Weapons</h3>
+    <div class="bh2e-grid bh2e-grid-4-col">
+        <div>{{localize "bh2e.fields.labels.weapon"}}</div>
+        <div>{{localize "bh2e.fields.labels.weaponKind"}}</div>
+        <div>{{localize "bh2e.fields.labels.attribute"}}</div>
+        <div></div>
+    </div>
 
-	<hr>
+    <hr>
 
-	<div class="bh2e-grid bh2e-grid-4-col">
+    <div class="bh2e-grid bh2e-grid-4-col">
     {{#each weapons as |weapon id|}}
-	    <div>{{weapon.name}}</div>
-	    <div>{{attackKind weapon.data.kind}}</div>
-	    <div>{{longAttributeName weapon.data.attribute}}</div>
-	    <div></div>
-	{{/each}}
-	</div>
+        <div>{{weapon.name}}</div>
+        <div>{{attackKind weapon.data.kind}}</div>
+        <div>{{longAttributeName weapon.data.attribute}}</div>
+        <div></div>
+    {{/each}}
+    </div>
 </section>

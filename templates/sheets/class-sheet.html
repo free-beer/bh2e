@@ -16,9 +16,9 @@
                 <label for="data.damage.armed" class="bh2e-label">{{localize "bh2e.fields.labels.armedDamage"}}</label>
                 <select name="data.damage.armed" class="bh2e-select">
                 {{#select data.damage.armed}}
-                {{#each config.damageDieTypes as |label value|}}
+                  {{#each config.damageDieTypes as |label value|}}
                     <option value="{{value}}">{{localize label}}</option>
-                {{/each}}
+                  {{/each}}
                 {{/select}}
                 </select>
             </field>
@@ -27,14 +27,14 @@
                 <label for="data.damage.unarmed" class="bh2e-label">{{localize "bh2e.fields.labels.unarmedDamage"}}</label>
                 <select name="data.damage.unarmed" class="bh2e-select">
                 {{#select data.damage.unarmed}}
-                {{#each config.damageDieTypes as |label value|}}
+                  {{#each config.damageDieTypes as |label value|}}
                     <option value="{{value}}">{{localize label}}</option>
-                {{/each}}
+                  {{/each}}
                 {{/select}}
                 </select>
             </field>
         </div>
-        
+
         <br>
 
         <field class="bh2e-field">
