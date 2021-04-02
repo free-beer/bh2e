@@ -7,9 +7,9 @@ export function deleteOwnedItem(itemId) {
     let actor = findActorFromItemId(itemId);
 
     if(actor) {
-    	actor.deleteEmbeddedEntity("OwnedItem", itemId);
+        actor.deleteEmbeddedEntity("OwnedItem", itemId);
     } else {
-    	console.error(`Delete of item id ${itemId} requested but unable to locate the actor that owns it.`);
+        console.error(`Delete of item id ${itemId} requested but unable to locate the actor that owns it.`);
     }
 }
 
@@ -18,13 +18,13 @@ export function deleteOwnedItem(itemId) {
  * specified itemId.
  */
 export function findActorFromItemId(itemId) {
-	return(game.actors.find((a) => {
-				        	if(a.items.find(i => i._id === itemId)) {
-				        		return(true);
-				        	} else {
-				        		return(false);
-				        	}
-				        }));
+  return(game.actors.find((a) => {
+        if(a.items.find(i => i._id === itemId)) {
+          return(true);
+        } else {
+          return(false);
+        }
+      }));
 }
 
 /**
@@ -35,41 +35,41 @@ export function findActorFromItemId(itemId) {
  * be assumed if kind if not explicitly set).
  */
 export function generateDieRollFormula(options={}) {
-		let formula  = null;
-		let dieType = (options.dieType ? options.dieType : "d20");
-		let kind     = (options.kind ? options.kind : "standard");
+    let formula = null;
+    let dieType = (options.dieType ? options.dieType : "d20");
+    let kind    = (options.kind ? options.kind : "standard");
 
-		switch(dieType) {
-			case "one":
-			    formula = "1";
-			    break;
-			case "d4":
-			case "d6":
-			case "d8":
-			case "d10":
-			case "d12":
-			case "d20":
-			    formula = `${dieType}`;
-			    break;
-	    }
+    switch(dieType) {
+        case "one":
+            formula = "1";
+            break;
+        case "d4":
+        case "d6":
+        case "d8":
+        case "d10":
+        case "d12":
+        case "d20":
+            formula = `${dieType}`;
+            break;
+    }
 
-	    if(kind === "advantage") {
-	    	if(formula !== "1") {
-	    		formula = `2${formula}kl`;
-	    	} else {
-	    		formula = "2";
-	    	}
-	    } else if(kind === "disadvantage") {
-	    	if(formula !== "1") {
-	    		formula = `2${formula}kh`;
-	    	}
-	    } else {
-	    	if(formula !== "1") {
-	    		formula = `1${formula}`;
-	    	}
-	    }
+    if(kind === "advantage") {
+        if(formula !== "1") {
+          formula = `2${formula}kl`;
+        } else {
+          formula = "2";
+        }
+    } else if(kind === "disadvantage") {
+        if(formula !== "1") {
+          formula = `2${formula}kh`;
+        }
+    } else {
+        if(formula !== "1") {
+          formula = `1${formula}`;
+        }
+    }
 
-		return(formula);
+    return(formula);
 }
 
 /**
@@ -83,11 +83,11 @@ export function generateDieRollFormula(options={}) {
  * context need not be all upper case.
  */
 export function interpolate(key, context={}) {
-	let text = game.i18n.localize(key);
+    let text = game.i18n.localize(key);
 
-	for(let name in context) {
-		text = text.replace(`%${name.toUpperCase()}%`, context[name]);
-	}
+    for(let name in context) {
+      text = text.replace(`%${name.toUpperCase()}%`, context[name]);
+    }
 
-	return(text);
+    return(text);
 }
