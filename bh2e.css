@@ -81,9 +81,14 @@
 	margin: 5px 5px 10px 5px;
 }
 
-.bh2e-creature-attack-header{
+.bh2e-creature-attack-header {
 	font-size: 1.2em;
 	font-weight: bold;
+}
+
+.bh2e-creature-attack-targets {
+	font-style: italic;
+	font-weight: normal;
 }
 
 .bh2-creature-header {
