@@ -23,6 +23,8 @@ export default class BH2eCharacterSheet extends ActorSheet {
         data.classes   = data.items.filter((i) => i.type === "class");
         data.armour    = data.items.filter((i) => i.type === "armour");
         data.equipment = data.items.filter((i) => i.type === "equipment");
+        data.prayers   = data.items.filter((i) => i.type === "magic" && i.data.kind === "prayer");
+        data.spells    = data.items.filter((i) => i.type === "magic" && i.data.kind === "spell");
         data.weapons   = data.items.filter((i) => i.type === "weapon");
         return(data);
     }
@@ -39,6 +41,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         html.find(".bh2e-reset-usage-die-icon").click(this._onResetUsageDieClicked.bind(this));
         html.find(".bh2e-increase-quantity-icon").click(this._onIncreaseEquipmentQuantityClicked.bind(this));
         html.find(".bh2e-decrease-quantity-icon").click(this._onDecreaseEquipmentQuantityClicked.bind(this));
+        html.find(".bh2e-toggle-collapse-widget").click(this._toggleCollapseClicked.bind(this));
         super.activateListeners(html);
     }
 
@@ -485,6 +488,39 @@ export default class BH2eCharacterSheet extends ActorSheet {
             if(!item) {
                 console.error(`The actor '${actor.name}' (id ${actor._id}) does not appear to own item id ${itemId}.`);
             }
+        }
+    }
+
+    _toggleCollapseClicked(event) {
+        let widget       = event.currentTarget;
+        let container    = widget;
+        let collapseIcon = widget.querySelector(".bh2e-collapse-icon");
+        let expandIcon   = widget.querySelector(".bh2e-expand-icon");
+
+        while(container && !container.classList.contains("bh2e-collapsible-container")) {
+            container = container.parentElement;
+        }
+
+        if(container) {
+            let target = container.querySelector(".bh2e-collapsible");
+
+            if(target) {
+                if(widget.dataset.state === "expanded") {
+                    target.classList.add("bh2e-hidden");
+                    collapseIcon.classList.add("bh2e-hidden");
+                    expandIcon.classList.remove("bh2e-hidden");
+                    widget.dataset.state = "collapsed";
+                } else {
+                    target.classList.remove("bh2e-hidden");
+                    collapseIcon.classList.remove("bh2e-hidden");
+                    expandIcon.classList.add("bh2e-hidden");
+                    widget.dataset.state = "expanded";
+                }
+            } else {
+                console.error("Failed to find an element with the class bh2e-collapsible");
+            }
+        } else {
+            console.error("Failed to find a parent element with the class 'bh2e-collapsible-container'.");
         }
     }
 }

@@ -175,7 +175,11 @@
 }
 
 .bh2e-input {
-	margin: 3px 0;
+	margin: 3px 0 !important;
+}
+
+.bh2e-see-through {
+	opacity: 0;
 }
 
 .bh2e-select {
@@ -183,6 +187,10 @@
 }
 
 .bh2e-text-input {
+}
+
+.bh2e-toggle-collapse-widget {
+	display: inline;
 }
 
 .bh2e-weapon-entry {
@@ -196,6 +204,10 @@
 	font-weight: bold;
 	grid-template-columns: 40% 15% 15% 15% 15%;
 	margin: 3px 0;
+}
+
+.bh2e-weapons-list-container {
+	transition: opacity 1s;
 }
 
 .editor {

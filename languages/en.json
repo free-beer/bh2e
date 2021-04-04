@@ -66,6 +66,8 @@
 				"key": "Key",
 				"largeWeapon": "Large Weapon?",
 				"level": "Level",
+				"magicKind": "Type",
+				"magicLevel": "Level",
 				"name": "Name",
 				"none": "None",
 				"notApplicable": "-",
@@ -93,6 +95,8 @@
 				"deleteArmour": "Delete Armour Item",
 				"deleteAttack": "Delete Attack",
 				"deleteEquipment": "Delete Item",
+				"deletePrayer": "Delete Prayer",
+				"deleteSpell": "Delete Spell",
 				"deleteWeapon": "Delete Weapon",
 				"increaseQuantity": "Increase Quantity",
 				"repairAllArmourDie": "Repair All Armour Items",
@@ -102,6 +106,12 @@
 				"rollAttack": "Roll Attack",
 				"rollAttributeTest": "Roll Attribute Test",
 				"rollUsageDie": "Roll Usage Die"
+			}
+		},
+		"magic": {
+			"kinds": {
+				"prayer": "Prayer",
+				"spell": "Spell"
 			}
 		},
 		"messages": {
