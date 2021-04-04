@@ -13,6 +13,8 @@ This repository contains a Foundry VTT system definition that is based on the
 
 [Creating A World](#creating-a-world)
 
+[Documentation](#documentation)
+
 
 ## Foreword
 
