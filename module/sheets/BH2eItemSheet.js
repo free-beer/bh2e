@@ -7,7 +7,8 @@ export default class BH2eItemSheet  extends ItemSheet {
 
     getData() {
         let data = super.getData();
-        data.config = CONFIG.bh2e;
+        data.bh2e   = CONFIG.bh2e;
+        data.config = CONFIG.bh2e.configuration;
         return(data);
     }
 }
