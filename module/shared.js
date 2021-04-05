@@ -105,7 +105,6 @@ export function initializeCollapsibleWidget(element, state) {
         console.log("Assigning the state.");
         state.set(key, setting);
     }
-    console.log("THE STATE IS:", setting);
 
     if(setting === "expanded") {
         container.classList.remove("bh2e-hidden");
