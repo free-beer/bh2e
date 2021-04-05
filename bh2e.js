@@ -1,4 +1,5 @@
 import {BH2e} from './module/config.js';
+import {BH2eState} from './module/bh2e_state.js';
 import BH2eItemSheet from './module/sheets/BH2eItemSheet.js';
 import BH2eCharacterSheet from './module/sheets/BH2eCharacterSheet.js';
 import BH2eCreatureSheet from './module/sheets/BH2eCreatureSheet.js';
@@ -13,15 +14,21 @@ async function preloadHandlebarsTemplates() {
                    "systems/bh2e/templates/partials/creature-ability-entry.hbs",
                    "systems/bh2e/templates/partials/creature-attack-entry.hbs",
                    "systems/bh2e/templates/partials/equipment-entry.hbs",
+                   "systems/bh2e/templates/partials/prayer-entry.hbs",
+                   "systems/bh2e/templates/partials/spell-entry.hbs",
+                   "systems/bh2e/templates/partials/toggle-collapse-widget.hbs",
                    "systems/bh2e/templates/partials/weapon-details.hbs",
                    "systems/bh2e/templates/partials/weapon-entry.hbs"];
     return(loadTemplates(paths))
 }
 
 Hooks.once("init", function() {
+    let state = new BH2eState();
+
     console.log("Initializing the Black Hack 2e System.");
 
-    CONFIG.bh2e = BH2e;
+    CONFIG.bh2e  = {configuration: BH2e, state: state};
+    window.bh2e  = {configuration: BH2e, state: state};
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("bh2e", BH2eItemSheet, {makeDefault: true});
