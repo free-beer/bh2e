@@ -29,6 +29,11 @@ BH2e.hitDieTypes = {
     d20: "bh2e.dice.d20"
 };
 
+BH2e.magicKinds = {
+    prayer: "bh2e.magic.kinds.prayer",
+    spell: "bh2e.magic.kinds.spell"
+};
+
 BH2e.ranges = {
     close:   "bh2e.ranges.close",
     nearby:  "bh2e.ranges.nearby",
