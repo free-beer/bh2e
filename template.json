@@ -28,7 +28,7 @@
     }
   },
   "Item": {
-  	"types": ["ability", "armour", "creature-attack", "equipment", "weapon"],
+  	"types": ["ability", "armour", "creature-attack", "equipment", "magic", "weapon"],
   	"templates": {
   		"itemBasics": {
   			"description": "",
@@ -61,6 +61,11 @@
         "maximum": "none"
       }
   	},
+    "magic": {
+      "description": "",
+      "level": 1,
+      "kind": "spell"
+    },
   	"weapon": {
       "attribute": "strength",
   	  "kind": "melee",

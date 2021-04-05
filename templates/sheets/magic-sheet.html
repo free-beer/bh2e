@@ -1,0 +1,32 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+    </header>
+    <div>
+        <div class="bh2e-grid bh2e-grid-2-col">
+            <field class="bh2e-field">
+                <label for="data.kind" class="bh2e-label">{{localize "bh2e.fields.labels.magicKind"}}</label>
+                <select name="data.kind" class="bh2e-input bh2e-select">
+            {{#select data.kind}}
+              {{#each config.magicKinds as |label value|}}
+                    <option value="{{value}}">{{localize label}}</option>
+              {{/each}}
+            {{/select}}
+                </select>
+            </field>
+
+            <field class="bh2e-field">
+                <label class="bh2e-label" for="data.level">{{localize "bh2e.fields.labels.magicLevel"}}</label>
+                <input name="data.level" type="text" value="{{data.level}}" class="bh2e-input"/>
+            </field>
+        </div>
+
+        <br>
+
+        <field class="bh2e-field">
+            <label for="data.description" class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
+            {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+        </field>
+    </div>
+</form>
