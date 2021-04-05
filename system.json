@@ -12,6 +12,6 @@
   	{"lang": "en", "name": "English", "path": "languages/en.json"}
   ],
   "url": "https://github.com/free-beer/bh2e",
-  "manifest": "https://raw.githubusercontent.com/free-beer/bh2e/v0.1.1/system.json",
-  "download": "https://github.com/free-beer/bh2e/archive/refs/tags/v0.1.1.zip"
+  "manifest": "https://raw.githubusercontent.com/free-beer/bh2e/v0.1.2/system.json",
+  "download": "https://github.com/free-beer/bh2e/archive/refs/tags/v0.1.2.zip"
 }
