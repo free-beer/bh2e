@@ -62,9 +62,11 @@
       }
   	},
     "magic": {
+      "cast": false,
       "description": "",
       "level": 1,
-      "kind": "spell"
+      "kind": "spell",
+      "prepared": false
     },
   	"weapon": {
       "attribute": "strength",

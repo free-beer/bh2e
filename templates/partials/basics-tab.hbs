@@ -1,0 +1,97 @@
+<div class="bh2e-basics-tab bh2e-tab-content bh2e-hidden">
+    <div class="bh2e-weapons-container bh2e-collapsible-container bh2e-clear-both">
+        <h2>
+            {{> "systems/bh2e/templates/partials/toggle-collapse-widget.hbs" "cs.collapsibles.weapons" }}
+            {{localize "bh2e.fields.headers.weapons"}}
+        </h2>
+        <div class="bh2e-weapons-list-container bh2e-collapsible">
+            <div class="bh2e-weapon-headers">
+                <div>{{localize "bh2e.fields.labels.name"}}</div>
+                <div>{{localize "bh2e.fields.labels.type"}}</div>
+                <div>{{localize "bh2e.fields.labels.attribute"}}</div>
+                <div>{{localize "bh2e.fields.labels.size"}}</div>
+                <div></div>
+            </div>
+        {{#each weapons as |weapon id|}}
+            {{> "systems/bh2e/templates/partials/weapon-entry.hbs" weapon}}
+        {{/each}}
+        </div>
+    </div>
+
+    <br>
+
+    <div class="bh2e-armour-container bh2e-collapsible-container">
+        <h2>
+            <div class="bh2e-armour-section-header">
+                <div>
+                    {{> "systems/bh2e/templates/partials/toggle-collapse-widget.hbs" "cs.collapsibles.armour" }}
+                    {{localize "bh2e.fields.headers.armour"}}
+                </div>
+                <div>
+                    <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.repairAllArmourDie"}}">
+                      <i class="fas fa-tools bh2e-repair-all-armour-dice-icon" data-id="{{actor._id}}"></i>
+                    </a>
+                </div>
+            </div>
+        </h2>
+
+        <div class="bh2e-armour-list-container bh2e-collapsible">
+            <div class="bh2e-armour-headers">
+                <div>{{localize "bh2e.fields.labels.name"}}</div>
+                <div><center>{{localize "bh2e.fields.labels.totalDice"}}</center></div>
+                <div><center>{{localize "bh2e.fields.labels.brokenDice"}}</center></div>
+                <div></div>
+            </div>
+
+        {{#each armour as |item id|}}
+            {{> "systems/bh2e/templates/partials/armour-entry.hbs" item}}
+        {{/each}}
+        </div>
+    </div>
+
+    <br>
+
+    <div class="bh2e-equipment-container bh2e-collapsible-container">
+        <h2>
+            <div class="bh2e-equipment-section-header">
+                <div>
+                    {{> "systems/bh2e/templates/partials/toggle-collapse-widget.hbs"  "cs.collapsibles.equipment" }}
+                    {{localize "bh2e.fields.headers.equipment"}}
+                </div>
+                <div>
+                  <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.resetAllUsageDice"}}">
+                    <i class="fas fa-undo-alt bh2e-reset-all-usage-dice-icon" data-id="{{actor._id}}"></i>
+                  </a>
+                </div>
+            </div>
+        </h2>
+
+        <div class="bh2e-equipment-list-container bh2e-collapsible">
+            <div class="bh2e-equipment-headers">
+                <div>{{localize "bh2e.fields.labels.name"}}</div>
+                <div><center>{{localize "bh2e.fields.labels.quantity"}}</center></div>
+                <div><center>{{localize "bh2e.fields.labels.usageDie"}}</center></div>
+                <div></div>
+            </div>
+        {{#each equipment as |item id|}}
+            {{> "systems/bh2e/templates/partials/equipment-entry.hbs" item}}
+        {{/each}}
+        </div>
+    </div>
+
+    <br>
+
+    <div class="bh2e-abilities-container bh2e-collapsible-container">
+        <h2>
+            {{> "systems/bh2e/templates/partials/toggle-collapse-widget.hbs" "cs.collapsibles.abilities" }}
+            {{localize "bh2e.fields.headers.abilities"}}
+        </h2>
+        <div class="bh2e-abilities-list-container bh2e-collapsible">
+        {{#each abilities as |ability id|}}
+            {{> "systems/bh2e/templates/partials/ability-entry.hbs" ability}}
+        {{/each}}
+        </div>
+    </div>
+
+    <br>
+</div>

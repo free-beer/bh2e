@@ -3,6 +3,10 @@
 	text-decoration: none;
 }
 
+.bh2e-alert-icon {
+	color: #a00;
+}
+
 .bh2e-armour-entry {
 	display: grid;
 	grid-template-columns: 50% 15% 15% 20%;
@@ -48,6 +52,10 @@
 
 .bh2e-attribute-table {
 	font-size: 1.2em;
+}
+
+.bh2e-clear-both {
+	clear: both;
 }
 
 .bh2-creature-ability-action-column {
@@ -143,6 +151,14 @@
 	width: 95%;
 }
 
+.bh2e-float-left {
+	float: left;
+}
+
+.bh2e-float-right {
+	float: right;
+}
+
 .bh2e-grid {
 	display: grid;
 	width: 95%;
@@ -178,12 +194,63 @@
 	margin: 3px 0 !important;
 }
 
+.bh2e-magic-level-title {
+	font-weight: bold;
+}
+
+.bh2e-magic-name {
+	color: #070;
+	font-weight: bold;
+}
+
+.bh2e-magic-name-unprepared {
+	color: #aaa;
+	font-weight: bold;
+}
+
+.bh2e-prayer-entry {
+	margin: 0 10px 20px 5px;
+}
+
 .bh2e-see-through {
 	opacity: 0;
 }
 
 .bh2e-select {
 	width: 100%;
+}
+
+.bh2e-selected-tab .bh2e-tab-label {
+    color: #000;
+    font-weight: bold;
+}
+
+.bh2e-spell-entry {
+	margin: 0 10px 20px 5px;
+}
+
+.bh2e-tab {
+	border-left: solid 1px #aaa;
+	border-right: solid 1px #aaa;
+	border-top: solid 1px #aaa;
+	cursor: pointer;
+	float: left;
+	height: 35px;
+	padding: 5px 15px;
+	margin-right: 3px;
+}
+
+.bh2e-tabs-container {
+	border-bottom: solid 1px #aaa;
+	margin-bottom: 10px;
+	min-height: 35px;
+	padding-left: 5px;
+}
+
+.bh2e-tab-label {
+	color: #aaa;
+	font-size: 1.2em;
+	font-weight: bold;
 }
 
 .bh2e-text-input {

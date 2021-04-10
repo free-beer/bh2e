@@ -1,14 +1,42 @@
 <div class="bh2e-prayer-entry">
     <h3>
-        <span>{{name}}</span>
-        <span>
-            <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.deletePrayer"}}">
-                <i class="far fa-trash-alt bh2e-delete-item-icon" data-id="{{_id}}"></i>
+        <div class="bh2e-float-right">
+        {{#data.prepared}}
+            <a class="bh2e-action-link bh2e-unprepare-magic-icon" data-id="{{_id}}" href="#" title="{{localize "bh2e.fields.titles.unpreparePrayer"}}">
+                <i class="fas fa-ban"></i>
             </a>
+            <a class="bh2e-action-link bh2e-cast-magic-icon" data-id="{{_id}}" href="#" title="{{localize "bh2e.fields.titles.castPrayer"}}">
+                <i class="fas fa-praying-hands"></i>
+            </a>
+        {{/data.prepared}}
+        {{^data.prepared}}
+            <a class="bh2e-action-link bh2e-prepare-magic-icon" data-id="{{_id}}" href="#" title="{{localize "bh2e.fields.titles.preparePrayer"}}">
+                <i class="far fa-eye"></i>
+            </a>
+        {{/data.prepared}}
+            <a class="bh2e-action-link bh2e-cast-magic-as-ritual-icon" data-id="{{_id}}" href="#" title="{{localize "bh2e.fields.titles.castPrayerAsRitual"}}">
+                <i class="fas fa-book-reader"></i>
+            </a>
+            <a class="bh2e-action-link bh2e-delete-item-icon" data-id="{{_id}}" href="#" title="{{localize "bh2e.fields.titles.deletePrayer"}}">
+                <i class="far fa-trash-alt"></i>
+            </a>
+        </div>
+
+    {{#data.prepared}}
+        <span class="bh2e-magic-name" title="{{name}}">
+            {{name}}
+        {{#data.cast}}
+            <i class="fas fa-exclamation bh2e-alert-icon" title="{{localize "bh2e.fields.titles.prayerAlreadyCast"}}"></i>
+        {{/data.cast}}
         </span>
+    {{/data.prepared}}
+    {{^data.prepared}}
+        <span class="bh2e-magic-name-unprepared" title="{{name}} ({{localize "bh2e.fields.titles.unprepared"}})">
+            {{name}}
+        </span>
+    {{/data.prepared}}
     </h3>
     <div>
         {{{data.description}}}
     </div>
-    <br>
 </div>

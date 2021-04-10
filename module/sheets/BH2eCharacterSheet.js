@@ -1,4 +1,13 @@
-import {deleteOwnedItem, findActorFromItemId, generateDieRollFormula, initializeCollapsibleWidget, interpolate} from '../shared.js';
+import {castMagic,
+        castMagicAsRitual,
+        prepareMagic,
+        unprepareMagic} from '../magic.js';
+import {deleteOwnedItem,
+        findActorFromItemId,
+        generateDieRollFormula,
+        initializeCharacterSheetUI,
+        interpolate,
+        onTabSelected} from '../shared.js';
 
 export default class BH2eCharacterSheet extends ActorSheet {
     static get defaultOptions() {
@@ -8,11 +17,67 @@ export default class BH2eCharacterSheet extends ActorSheet {
     }
 
     getData() {
-        let data = super.getData();
+        let data    = super.getData();
+        let abilities = [];
+        let armour    = [];
+        let classes   = [];
+        let equipment = [];
+        let prayers   = [[], [], [], [], [], [], [], [], [], []];
+        let spells    = [[], [], [], [], [], [], [], [], [], []];
+        let weapons   = [];
 
         data.bh2e      = CONFIG.bh2e;
         data.config    = CONFIG.bh2e.configuration;
-        data.abilities = data.items.filter((i) => i.type === "ability").sort(function(lhs, rhs) {
+
+        data.items.forEach((item) => {
+            switch(item.type) {
+                case "ability":
+                    abilities.push(item);
+                    break;
+
+                case "armour":
+                    armour.push(item);
+                    break;
+
+                case "class":
+                    classes.push(item);
+                    break;
+
+                case "equipment":
+                    equipment.push(item);
+                    break;
+
+                case "magic":
+                    let index = item.data.level - 1;
+
+                    if(index >= 0 && index < spells.length) {
+                        switch(item.data.kind) {
+                            case "prayer":
+                                prayers[index].push(item);
+                                break;
+
+                            case "spell":
+                                spells[index].push(item);
+                                break;
+
+                            default:
+                                console.warn("Ignoring character item magic", item);
+                        }
+                    } else {
+                        console.error(`An invalid level of ${item.data.level} was specified for a spell or prayer.`, item);
+                    }
+                    break;
+
+                case "weapon":
+                    weapons.push(item);
+                    break;
+
+                default:
+                    console.warn("Ignoring character item", item);
+            }
+        });
+
+        abilities.sort(function(lhs, rhs) {
             if(lhs.name > rhs.name) {
               return(1);
             } else if(lhs.name < rhs.name) {
@@ -21,21 +86,58 @@ export default class BH2eCharacterSheet extends ActorSheet {
               return(0);
             }
         });
-        data.classes   = data.items.filter((i) => i.type === "class");
-        data.armour    = data.items.filter((i) => i.type === "armour");
-        data.equipment = data.items.filter((i) => i.type === "equipment");
-        data.prayers   = data.items.filter((i) => i.type === "magic" && i.data.kind === "prayer");
-        data.spells    = data.items.filter((i) => i.type === "magic" && i.data.kind === "spell");
-        data.weapons   = data.items.filter((i) => i.type === "weapon");
+
+        data.abilities    = abilities;
+        data.armour       = armour;
+        data.classes      = classes;
+        data.equipment    = equipment;
+        data.hasPrayers1  = (prayers[0].length > 0)
+        data.hasPrayers2  = (prayers[1].length > 0)
+        data.hasPrayers3  = (prayers[2].length > 0)
+        data.hasPrayers4  = (prayers[3].length > 0)
+        data.hasPrayers5  = (prayers[4].length > 0)
+        data.hasPrayers6  = (prayers[5].length > 0)
+        data.hasPrayers7  = (prayers[6].length > 0)
+        data.hasPrayers8  = (prayers[7].length > 0)
+        data.hasPrayers9  = (prayers[8].length > 0)
+        data.hasPrayers10 = (prayers[9].length > 0)
+        data.hasSpells1   = (spells[0].length > 0)
+        data.hasSpells2   = (spells[1].length > 0)
+        data.hasSpells3   = (spells[2].length > 0)
+        data.hasSpells4   = (spells[3].length > 0)
+        data.hasSpells5   = (spells[4].length > 0)
+        data.hasSpells6   = (spells[5].length > 0)
+        data.hasSpells7   = (spells[6].length > 0)
+        data.hasSpells8   = (spells[7].length > 0)
+        data.hasSpells9   = (spells[8].length > 0)
+        data.hasSpells10  = (spells[9].length > 0)
+        data.prayers1     = prayers[0];
+        data.prayers2     = prayers[1];
+        data.prayers3     = prayers[2];
+        data.prayers4     = prayers[3];
+        data.prayers5     = prayers[4];
+        data.prayers6     = prayers[5];
+        data.prayers7     = prayers[6];
+        data.prayers8     = prayers[7];
+        data.prayers9     = prayers[8];
+        data.prayers10    = prayers[9];
+        data.spells1      = spells[0];
+        data.spells2      = spells[1];
+        data.spells3      = spells[2];
+        data.spells4      = spells[3];
+        data.spells5      = spells[4];
+        data.spells6      = spells[5];
+        data.spells7      = spells[6];
+        data.spells8      = spells[7];
+        data.spells9      = spells[8];
+        data.spells10     = spells[9];
+        data.weapons      = weapons;
+
         return(data);
     }
 
     activateListeners(html) {
-        let toggleWidgets = document.querySelectorAll(".bh2e-toggle-collapse-widget");
-
-        for(var i = 0; i < toggleWidgets.length; i++) {
-            initializeCollapsibleWidget(toggleWidgets[i], window.bh2e.state);
-        }
+        initializeCharacterSheetUI(window.bh2e.state);
 
         html.find(".bh2e-roll-attack-icon").click(this._onRollAttackClicked.bind(this));
         html.find(".bh2e-roll-attribute-test-icon").click(this._onRollAttributeTest.bind(this));
@@ -48,6 +150,10 @@ export default class BH2eCharacterSheet extends ActorSheet {
         html.find(".bh2e-reset-usage-die-icon").click(this._onResetUsageDieClicked.bind(this));
         html.find(".bh2e-increase-quantity-icon").click(this._onIncreaseEquipmentQuantityClicked.bind(this));
         html.find(".bh2e-decrease-quantity-icon").click(this._onDecreaseEquipmentQuantityClicked.bind(this));
+        html.find(".bh2e-cast-magic-icon").click(castMagic);
+        html.find(".bh2e-cast-magic-as-ritual-icon").click(castMagicAsRitual);
+        html.find(".bh2e-prepare-magic-icon").click(prepareMagic);
+        html.find(".bh2e-unprepare-magic-icon").click(unprepareMagic);
         super.activateListeners(html);
     }
 

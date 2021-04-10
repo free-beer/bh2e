@@ -14,7 +14,7 @@
 			"headers": {
 				"abilities": "Abilities",
 				"armour": "Armour",
-				"background": "Description/Background",
+				"background": "Description",
 				"equipment": "Equipment",
 				"weapons": "Weapons"
 			},
@@ -90,6 +90,10 @@
 			},
 			"titles": {
 				"breakArmourDie": "Break Die",
+				"castPrayer": "Perform This Prayer",
+				"castPrayerAsRitual": "Perform This Prayer As A Ritual",
+				"castSpell": "Cast This Spell",
+				"castSpellAsRitual": "Cast This Spell As A Ritual",
 				"decreaseQuantity": "Decrease Quantity",
 				"deleteAbility": "Delete Ability",
 				"deleteArmour": "Delete Armour Item",
@@ -99,13 +103,20 @@
 				"deleteSpell": "Delete Spell",
 				"deleteWeapon": "Delete Weapon",
 				"increaseQuantity": "Increase Quantity",
+				"prayerAlreadyCast": "Prayer Has Been Performed At Least Once Already",
+				"preparePrayer": "Prepare This Prayer",
+				"prepareSpell": "Prepare This Spell",
 				"repairAllArmourDie": "Repair All Armour Items",
 				"repairArmourDie": "Repair A Single Die On This Item",
 				"resetAllUsageDice": "Reset All Usage Dice",
 				"resetUsageDie": "Reset Usage Die",
 				"rollAttack": "Roll Attack",
 				"rollAttributeTest": "Roll Attribute Test",
-				"rollUsageDie": "Roll Usage Die"
+				"rollUsageDie": "Roll Usage Die",
+				"spellAlreadyCast": "Spell Has Been Cast At Least Once Already",
+				"unprepared": "Unprepared",
+				"unpreparePrayer": "Unprepare This Prayer",
+				"unprepareSpell": "Unprepare This Spell"
 			}
 		},
 		"magic": {
@@ -119,6 +130,10 @@
 			"attributeTestSuccess": "Test was successful.",
 			"attacking": "%NAME% attacks with a %WEAPON%",
 			"attackMiss": "...but misses.",
+			"castMagicKept": "%NAME% casts %SPELL% (Attribute Test Total: %TOTAL%).",
+			"castMagicLost": "%NAME% casts %SPELL% (Attribute Test Total: %TOTAL%). %SPELL% is unavailable until it is prepared again.",
+			"castMagicRitualFail": "%NAME% attempts to cast %SPELL% but fails (Attribute Test Total: %TOTAL%)! Caster must roll on the Magical Side Effects table", 
+			"castMagicRitualSuccess": "%NAME% casts %SPELL% as a ritual (Attribute Test Total: %TOTAL%).", 
 			"criticalHit": "...and lands a critical hit. Rolling damage...",
 			"normalHit": "...and hits. Rolling damage...",
 			"reducingUsageDie": "Usage die reduced to %DIE%.",
@@ -137,6 +152,26 @@
 			"common": "Common",
 			"exotic": "Exotic",
 			"rare": "Rare"
+		},
+		"tabs": {
+			"labels": {
+				"background": "Background",
+				"basics": "Basics",
+				"prayers": "Prayers",
+				"spells": "Spells"
+			},
+			"titles": {
+				"level1": "Level 1",
+				"level2": "Level 2",
+				"level3": "Level 3",
+				"level4": "Level 4",
+				"level5": "Level 5",
+				"level6": "Level 6",
+				"level7": "Level 7",
+				"level8": "Level 8",
+				"level9": "Level 9",
+				"level10": "Level 10"
+			}
 		},
 		"weapons": {
 			"kinds": {

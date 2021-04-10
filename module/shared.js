@@ -28,6 +28,13 @@ export function findActorFromItemId(itemId) {
 }
 
 /**
+ * Searches the game item list to a specific item.
+ */
+export function findItemFromId(itemId) {
+    return(game.items.find((item) => item._id === itemId));
+}
+
+/**
  * Generates a string containing the formula for a single die based on the set
  * of options passed in. Recognised options include dieType, which defaults to
  * d20 if not set, and kind which should be one of 'standard', 'advantage' or
@@ -132,10 +139,35 @@ export function interpolate(key, context={}) {
     let text = game.i18n.localize(key);
 
     for(let name in context) {
-      text = text.replace(`%${name.toUpperCase()}%`, context[name]);
+        while(text.includes(`%${name.toUpperCase()}%`)) {
+            text = text.replace(`%${name.toUpperCase()}%`, `${context[name]}`);
+        }
     }
 
     return(text);
+}
+
+export function onTabSelected(event, state, key) {
+    let selected    = event.currentTarget;
+    let tabs        = document.querySelectorAll(".bh2e-tab");
+    let tabContents = document.querySelectorAll(".bh2e-tab-content");
+    let className   = selected.dataset.tab;
+
+    event.preventDefault();
+
+    for(var t = 0; t < tabs.length; t++) {
+        tabs[t].classList.remove("bh2e-selected-tab");
+    }
+
+    for(var i = 0; i < tabContents.length; i++) {
+        if(tabContents[i].classList.contains(className)) {
+            tabContents[i].classList.remove("bh2e-hidden");
+        } else {
+            tabContents[i].classList.add("bh2e-hidden");
+        }
+    }
+    state.set(key, className);
+    selected.classList.add("bh2e-selected-tab");
 }
 
 function toggleCollapsibleWidget(widget, state) {
@@ -170,5 +202,39 @@ function toggleCollapsibleWidget(widget, state) {
     } else {
         console.error("Failed to find a parent element with the class 'bh2e-collapsible-container'.");
     }
+}
 
+function initializeTabs(state) {
+    let tabContainers = document.querySelectorAll(".bh2e-tabs-container");
+
+    console.log(`Found ${tabContainers.length} tab containers.`);
+    for(var i = 0; i < tabContainers.length; i++) {
+        let container = tabContainers[i];
+        let tabs      = container.querySelectorAll(".bh2e-tab");
+        let selected  = state.get(container.dataset.key, container.dataset.default);
+
+        for(var j = 0; j < tabs.length; j++) {
+            let tab     = tabs[j];
+            let content = document.querySelector(`.${tab.dataset.tab}`);
+
+            tab.dataset.key = container.dataset.key;
+            if(tab.dataset.tab === selected) {
+                content.classList.remove("bh2e-hidden");
+                tab.classList.add("bh2e-selected-tab");
+            } else {
+                content.classList.add("bh2e-hidden");
+                tab.classList.remove("bh2e-selected-tab");
+            }
+            tab.addEventListener("click", (e) => onTabSelected(e, state, container.dataset.key));
+        }
+    }
+}
+
+export function initializeCharacterSheetUI(state) {
+    let toggleWidgets = document.querySelectorAll(".bh2e-toggle-collapse-widget");
+
+    for(var i = 0; i < toggleWidgets.length; i++) {
+        initializeCollapsibleWidget(toggleWidgets[i], window.bh2e.state);
+    }
+    initializeTabs(state);
 }
