@@ -44,7 +44,7 @@ highlighted in red in the following image...
 With the field selected enter the following (or right click on the link below,
 select the copy link address or location option and paste this into the field)...
 
-[https://raw.githubusercontent.com/free-beer/bh2e/v0.2.0/system.json](https://raw.githubusercontent.com/free-beer/bh2e/v0.2.0/system.json)
+[https://raw.githubusercontent.com/free-beer/bh2e/master/system.json](https://raw.githubusercontent.com/free-beer/bh2e/master/system.json)
 
 When you've entered that value into the field click on the Install button and
 it should install after a few moments. If you close the Install Systems dialog
