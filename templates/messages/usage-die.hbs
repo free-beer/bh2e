@@ -3,3 +3,15 @@
 </p>
 
 {{> "systems/bh2e/templates/messages/roll.hbs" roll}}
+
+{{#downgraded}}
+<p class="bh2e-usage-die-fail">
+    {{localize "bh2e.messages.blurbs.usageDieDowngrade"}} 1{{die}}
+</p>
+{{/downgraded}}
+
+{{#exhausted}}
+<p class="bh2e-usage-die-fail">
+    {{localize "bh2e.messages.blurbs.usageDieExhausted"}} {{item}}
+</p>
+{{/exhausted}}

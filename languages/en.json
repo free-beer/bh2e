@@ -137,7 +137,7 @@
 				"damageInflicted": "Damage Caused",
 				"spellLost": "This spell is no longer prepared or available for use!",
 				"spellMiscast": "Spell is not cast and caster must roll on the Magical Side Effects table!",
-				"usageDie": "Rolling The Usage Die For:",
+				"usageDie": "Rolling The Usage Die For",
 				"usageDieDowngrade": "Usage Die Has Been Downgrade To:",
 				"usageDieExhausted": "Usage Die Has Been Exhausted For:"
 			},

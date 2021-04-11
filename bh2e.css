@@ -327,6 +327,12 @@
 	display: inline;
 }
 
+.bh2e-usage-die-fail {
+	color: #a00;
+	font-size: 110%;
+	text-align: center;	
+}
+
 .bh2e-weapon-entry {
 	display: grid;
 	grid-template-columns: 40% 15% 15% 15% 15%;

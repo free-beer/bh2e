@@ -189,6 +189,11 @@ export function logUsageDieRoll(itemId) {
                         }
                         message.die = data.data.usageDie.current;
                     }
+                    if(data.data.usageDie.current === "exhausted") {
+                        message.exhausted = true;
+                    } else {
+                        message.downgraded = true;
+                    }
                     actor.updateOwnedItem(data, {diff: true});
                 } else {
                     message.roll.success       = true;
