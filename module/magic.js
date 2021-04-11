@@ -13,6 +13,7 @@ export function castMagic(event) {
         let attribute = interpolate(`bh2e.fields.labels.attributes.${result.attribute}.long`);
         let message   = {lost:      !result.successful,
                          miscast:   false,
+                         ritual:    false,
                          roll:      {formula: result.formula,
                                      labels: {result: "",
                                               title:  interpolate("bh2e.messages.titles.attributeTest", {attribute: attribute})},
@@ -54,6 +55,7 @@ export function castMagicAsRitual(event) {
         let attribute = interpolate(`bh2e.fields.labels.attributes.${result.attribute}.long`);
         let message   = {lost:      false,
                          miscast:   !result.successful,
+                         ritual:    true,
                          roll:      {formula: result.formula,
                                      labels: {result: "",
                                               title:  interpolate("bh2e.messages.titles.attributeTest", {attribute: attribute})},
