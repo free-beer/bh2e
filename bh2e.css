@@ -120,6 +120,16 @@
 	padding: 5px;
 }
 
+.bh2e-damage-button-container {
+	margin-top: 5px;
+}
+
+.bh2e-damage-details {
+	color: #a00;
+	font-size: 120%;
+	text-align: center;
+}
+
 .bh2e-editor-field {
 	display: block;
 	min-height: 200px;
@@ -212,6 +222,51 @@
 	margin: 0 10px 20px 5px;
 }
 
+.bh2e-roll-column {
+	float: left;
+	padding: 5px 0;
+	margin: 0;
+	width: 50%;
+}
+
+.bh2e-roll-column-content {
+	font-size: 120%;
+	text-align: center;
+}
+
+.bh2e-roll-column-title {
+	font-size: 120%;
+	font-weight: bold;
+	margin: 3px 0;
+	text-align: center;
+}
+
+.bh2e-roll-failure {
+	background-color: #a00;
+	clear: both;
+	color: #fff;
+	margin-top: 5px;
+	padding: 5px 0;
+	text-align: center;
+}
+
+.bh2e-roll-success {
+	background-color: #0a0;
+	clear: both;
+	color: #fff;
+	margin-top: 5px;
+	padding: 5px 0;
+	text-align: center;
+}
+
+.bh2e-roll-title {
+	background-color: #000;
+	color: #fff;
+	cursor: pointer;
+	padding: 5px 0;
+	text-align: center;
+}
+
 .bh2e-see-through {
 	opacity: 0;
 }
@@ -227,6 +282,18 @@
 
 .bh2e-spell-entry {
 	margin: 0 10px 20px 5px;
+}
+
+.bh2e-spell-miscast {
+	color: #a00;
+	font-size: 110%;
+	text-align: center;
+}
+
+.bh2e-spell-unprepared {
+	color: #a00;
+	font-size: 110%;
+	text-align: center;
 }
 
 .bh2e-tab {

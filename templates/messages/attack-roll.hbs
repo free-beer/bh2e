@@ -1,0 +1,9 @@
+<p>
+    {{localize "bh2e.messages.blurbs.attacksWith"}}: {{weapon}}
+</p>
+
+{{> "systems/bh2e/templates/messages/roll.hbs" roll}}
+
+{{#damage}}
+  {{> "systems/bh2e/templates/messages/damage.hbs"}}
+{{/damage}}

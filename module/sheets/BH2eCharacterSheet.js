@@ -8,6 +8,9 @@ import {deleteOwnedItem,
         initializeCharacterSheetUI,
         interpolate,
         onTabSelected} from '../shared.js';
+import {logAttackRoll,
+        logAttributeTest,
+        logUsageDieRoll} from '../chat_messages.js';
 
 export default class BH2eCharacterSheet extends ActorSheet {
     static get defaultOptions() {
@@ -154,6 +157,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         html.find(".bh2e-cast-magic-as-ritual-icon").click(castMagicAsRitual);
         html.find(".bh2e-prepare-magic-icon").click(prepareMagic);
         html.find(".bh2e-unprepare-magic-icon").click(unprepareMagic);
+
         super.activateListeners(html);
     }
 
@@ -331,69 +335,11 @@ export default class BH2eCharacterSheet extends ActorSheet {
     }
 
     _onRollAttackClicked(event) {
-        let element       = event.currentTarget;
-        let attackRoll    = null;
-        let damageRoll    = null;
-        let formula       = null;
-        let isCritical    = false;
-        let isHit         = false;
-        let isLargeWeapon = (element.dataset.size === "large");
-        let actor         = findActorFromItemId(element.dataset.id);
-        let message       = {speaker: ChatMessage.getSpeaker(),
-                             user: game.user._id};
+        let element = event.currentTarget;
+        let actor   = findActorFromItemId(element.dataset.id);
 
         event.preventDefault();
-        if(event.shiftKey) {
-            formula = generateDieRollFormula({kind: "advantage"});
-        } else if(event.ctrlKey) {
-            formula = generateDieRollFormula({kind: "disadvantage"});
-        } else {
-            formula = generateDieRollFormula();
-        }
-
-        if(isLargeWeapon) {
-            formula = `${formula}+1d4`;
-        }
-        attackRoll = new Roll(formula);
-        attackRoll.roll();
-
-        if(attackRoll.total === 1 || attackRoll.total < actor.data.data.attributes[element.dataset.attribute]) {
-            isCritical = (attackRoll.results[0] === 1);
-            isHit      = true;
-        }
-
-        if(isHit) {
-            if(element.dataset.kind === "unarmed") {
-                formula = generateDieRollFormula({dieType: actor.data.data.damageDice.unarmed});
-            } else {
-                formula = generateDieRollFormula({dieType: actor.data.data.damageDice.armed});
-            }
-
-            if(isLargeWeapon) {
-                formula = `${formula}+${generateDieRollFormula({dieType: "d4"})}`;
-            }
-            if(isCritical) {
-                formula = `(${formula})*2`;
-            }
-            damageRoll = new Roll(formula);
-        }
-
-        message.content = interpolate("bh2e.messages.attacking", {name: actor.name, weapon: element.dataset.name});
-        ChatMessage.create(message);
-        attackRoll.toMessage({speaker: ChatMessage.getSpeaker(), user: game.user._id});
-
-        if(isHit) {
-            if(isCritical) {
-                message.content = game.i18n.localize("bh2e.messages.criticalHit");
-            } else {
-                message.content = game.i18n.localize("bh2e.messages.normalHit");
-            }
-            ChatMessage.create(message);
-            damageRoll.toMessage({speaker: ChatMessage.getSpeaker(), user: game.user._id});
-        } else {
-            message.content = game.i18n.localize("bh2e.messages.attackMiss");
-            ChatMessage.create(message);
-        }
+        logAttackRoll(actor._id, element.dataset.id, event.shiftKey, event.ctrlKey);
 
         return(false);
     }
@@ -403,40 +349,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
       let actor   = game.actors.find(a => a._id === element.dataset.id);
 
       event.preventDefault();
-      if(actor) {
-          let attributeValue = actor.data.data.attributes[element.dataset.attribute];
-          let attributeName  = game.i18n.localize(`bh2e.fields.labels.attributes.${element.dataset.attribute}.long`);
-          let roll           = null;
-
-          ChatMessage.create({content: interpolate("bh2e.messages.rollingAttributeTest",
-                                                   {attribute: attributeName,
-                                                    name:      actor.name}),
-                              speaker: ChatMessage.getSpeaker(),
-                              user:    game.user._id});
-
-
-          if(event.shiftKey) {
-              roll = new Roll("2d20kl");
-          } else if(event.ctrlKey) {
-              roll = new Roll("2d20kh");
-          } else {
-              roll = new Roll("1d20");
-          }
-          roll.roll();
-          roll.toMessage({speaker: ChatMessage.getSpeaker(), user: game.user._id});
-
-          if(roll.total < attributeValue) {
-              ChatMessage.create({content: game.i18n.localize("bh2e.messages.attributeTestSuccess"),
-                                  speaker: ChatMessage.getSpeaker(),
-                                  user:    game.user._id});
-          } else {
-              ChatMessage.create({content: game.i18n.localize("bh2e.messages.attributeTestFailed"),
-                                  speaker: ChatMessage.getSpeaker(),
-                                  user:    game.user._id});
-          }
-      } else {
-          console.error(`Unable to find actor for the id ${element.dataset.id} for attribute test.`);
-      }
+      logAttributeTest(element.dataset.id, element.dataset.attribute, event.shiftKey, event.ctrlKey);
       return(false);
     }
 
@@ -444,80 +357,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let element = event.currentTarget;
 
         event.preventDefault();
-        if(element.dataset.id) {
-            let actor = findActorFromItemId(element.dataset.id);
-
-            if(actor) {
-                let item = actor.items.find(i => i._id === element.dataset.id);
-
-                if(item) {
-                    let usageDie = item.data.data.usageDie;
-
-                    if(usageDie.current !== "exhausted") {
-                        let die  = (usageDie.current === "none" ? usageDie.maximum : usageDie.current)
-                        let roll = new Roll(generateDieRollFormula({dieType: die}));
-
-                        ChatMessage.create({content: interpolate("bh2e.messages.rollingUsageDie", {name: item.name}),
-                                            speaker: ChatMessage.getSpeaker(),
-                                            user:    game.user._id});
-
-                        roll.roll();
-                        roll.toMessage({speaker: ChatMessage.getSpeaker(),
-                                        user: game.user._id});
-
-                        if(roll.total < 3) {
-                            let data     = {_id: item.id,
-                                            data: {
-                                              usageDie: {
-                                                current: ""
-                                              }
-                                            }};
-                            let oldDie  = (usageDie.current  === "none" ? usageDie.maximum : usageDie.current);
-
-                            if(oldDie === "d4") {
-                                ChatMessage.create({content: interpolate("bh2e.messages.usageDieExhausted", {name: item.name}),
-                                                    speaker: ChatMessage.getSpeaker(),
-                                                    user:    game.user._id});
-                                data.data.usageDie.current = "exhausted";
-                                data.data.quantity = item.data.data.quantity - 1;
-                                if(data.data.quantity < 0) {
-                                    data.data.quantity = 0;
-                                }
-                            } else {
-                                switch(oldDie) {
-                                    case "d6":
-                                        data.data.usageDie.current = "d4";
-                                        break;
-                                    case "d8":
-                                        data.data.usageDie.current = "d6";
-                                        break;
-                                    case "d10":
-                                        data.data.usageDie.current = "d8";
-                                        break;
-                                    case "d12":
-                                        data.data.usageDie.current = "d10";
-                                        break;
-                                    case "d20":
-                                        data.data.usageDie.current = "d12";
-                                        break;
-                                }
-                                ChatMessage.create({content: interpolate("bh2e.messages.reducingUsageDie", {die: `1${data.data.usageDie.current}`}),
-                                                    speaker: ChatMessage.getSpeaker(),
-                                                    user:    game.user._id});
-                            }
-                            actor.updateOwnedItem(data, {diff: true});
-                        }
-                        console.log("ITEM:", item);
-                    }
-                } else {
-                    console.error(`Failed to locate the equipment for the id ${element.dataset.id} on actor id ${actor._id}.`)
-                }
-            } else {
-                console.error(`Failed to find the actor that owns equipment id ${element.dataset.id}.`);
-            }
-        } else {
-            console.error("No equipment id specified on target element.");
-        }
+        logUsageDieRoll(element.dataset.id);
         return(false);
     }
 
@@ -592,6 +432,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
                     }
                 } else {
                   console.warn(`Unable to reset the usage die for item ${item.name} (id ${item._id}) as it's supply is depleted.`);
+                  ui.notifications.error(interpolate("bh2e.messages.errors.supplyDepleted", {item: item.name}))
                 }
             } else {
               console.warn(`Unable to reset the usage die for item id ${item.name} (${item._id}) as it does not have a usage die.`);

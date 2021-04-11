@@ -130,15 +130,46 @@
 			"attributeTestSuccess": "Test was successful.",
 			"attacking": "%NAME% attacks with a %WEAPON%",
 			"attackMiss": "...but misses.",
-			"castMagicKept": "%NAME% casts %SPELL% (Attribute Test Total: %TOTAL%).",
-			"castMagicLost": "%NAME% casts %SPELL% (Attribute Test Total: %TOTAL%). %SPELL% is unavailable until it is prepared again.",
-			"castMagicRitualFail": "%NAME% attempts to cast %SPELL% but fails (Attribute Test Total: %TOTAL%)! Caster must roll on the Magical Side Effects table", 
-			"castMagicRitualSuccess": "%NAME% casts %SPELL% as a ritual (Attribute Test Total: %TOTAL%).", 
+			"blurbs": {
+				"attacksWith": "Attacks With",
+				"casts": "Casts Spell",
+				"damageInflicted": "Damage Caused",
+				"spellLost": "This spell is no longer prepared or available for use!",
+				"spellMiscast": "Caster must roll on the Magical Side Effects table!",
+				"usageDie": "Rolling The Usage Die For:",
+				"usageDieDowngrade": "Usage Die Has Been Downgrade To:",
+				"usageDieExhausted": "Usage Die Has Been Exhausted For:"
+			},
 			"criticalHit": "...and lands a critical hit. Rolling damage...",
+			"errors": {
+				"supplyDepleted": "Unable to reset the usage die for your %ITEM% as your supply is depleted.",
+				"usageDieExhausted": "The usage die for your %ITEM% is already exhausted."
+			},
+			"labels": {
+				"buttons": {
+					"rollDamage": "Roll Damage"
+				},
+				"critical": "Critical Hit!",
+				"failure": "Failed",
+				"hit": "Hit!",
+				"miss": "Missed",
+				"success": "Success"
+			},
 			"normalHit": "...and hits. Rolling damage...",
 			"reducingUsageDie": "Usage die reduced to %DIE%.",
 			"rollingAttributeTest": "Rolling a %ATTRIBUTE% attribute test for %NAME%...",
 			"rollingUsageDie": "Rolling the usage die for my %NAME%.",
+			"titles": {
+				"attackRoll": "Attack Roll",
+				"attributeTest": "Test: %ATTRIBUTE%",
+				"damageRoll": "Damage Roll",
+				"failure": "Failed",
+				"formula": "Roll",
+				"roll": "Result",
+				"success": "Success",
+				"test": "Test:",
+				"usageDie": "Usage Die"
+			},
 			"usageDieExhausted": "Usage die for your %NAME% exhausted."
 		},
 		"ranges": {

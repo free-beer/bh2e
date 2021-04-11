@@ -1,0 +1,24 @@
+<div class="bh2e-roll-title">
+    <strong>{{labels.title}}</strong>
+</div>
+
+<div class="bh2e-roll-details bh2e-hidden">
+    <div class="bh2e-roll-column">
+        <div class="bh2e-roll-column-title">{{localize "bh2e.messages.titles.formula"}}</div>
+        <div class="bh2e-roll-column-content">{{formula}}</div>
+    </div>
+    <div class="bh2e-roll-column">
+        <div class="bh2e-roll-column-title">{{localize "bh2e.messages.titles.roll"}}</div>
+        <div class="bh2e-roll-column-content">{{result}}</div>
+    </div>
+</div>
+
+{{#tested}}
+  {{#success}}
+<div class="bh2e-roll-success">{{labels.result}}</div>
+  {{/success}}
+
+  {{^success}}
+<div class="bh2e-roll-failure">{{labels.result}}</div>
+  {{/success}}
+{{/tested}}

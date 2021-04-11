@@ -3,6 +3,8 @@ import {BH2eState} from './module/bh2e_state.js';
 import BH2eItemSheet from './module/sheets/BH2eItemSheet.js';
 import BH2eCharacterSheet from './module/sheets/BH2eCharacterSheet.js';
 import BH2eCreatureSheet from './module/sheets/BH2eCreatureSheet.js';
+import {logDamageRoll} from './module/chat_messages.js';
+import {toggleAttributeTestDisplay} from './module/shared.js';
 
 async function preloadHandlebarsTemplates() {
     const paths = ["systems/bh2e/templates/partials/ability-details.hbs",
@@ -22,7 +24,13 @@ async function preloadHandlebarsTemplates() {
                    "systems/bh2e/templates/partials/spells-tab.hbs",
                    "systems/bh2e/templates/partials/toggle-collapse-widget.hbs",
                    "systems/bh2e/templates/partials/weapon-details.hbs",
-                   "systems/bh2e/templates/partials/weapon-entry.hbs"];
+                   "systems/bh2e/templates/partials/weapon-entry.hbs",
+                   "systems/bh2e/templates/messages/attack-roll.hbs",
+                   "systems/bh2e/templates/messages/attribute-test.hbs",
+                   "systems/bh2e/templates/messages/cast-magic.hbs",
+                   "systems/bh2e/templates/messages/damage.hbs",
+                   "systems/bh2e/templates/messages/damage-roll.hbs",
+                   "systems/bh2e/templates/messages/roll.hbs"];
     return(loadTemplates(paths))
 }
 
@@ -55,5 +63,22 @@ Hooks.once("init", function() {
     });
     Handlebars.registerHelper("shortAttributeName", function(key) {
         return(game.i18n.localize(`bh2e.fields.labels.attributes.${key}.short`));
+    });
+
+    // Add hook functions.
+    Hooks.on("renderChatMessage", (message, speaker) => {
+        setTimeout(() => {
+            let element = document.querySelector(`[data-message-id="${message._id}"]`);
+            let node    = element.querySelector(".bh2e-roll-title");
+
+            if(node) {
+                node.addEventListener("click", toggleAttributeTestDisplay);
+            }
+
+            node = element.querySelector(".bh2e-damage-button");
+            if(node) {
+                node.addEventListener("click", logDamageRoll);
+            }
+        }, 250);
     });
 });

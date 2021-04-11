@@ -204,6 +204,24 @@ function toggleCollapsibleWidget(widget, state) {
     }
 }
 
+export function toggleAttributeTestDisplay(event) {
+    let element = event.currentTarget;
+    let parent  = element.parentElement;
+
+    event.preventDefault();
+    if(parent) {
+        let details = parent.querySelector(".bh2e-roll-details");
+
+        if(details) {
+            if(details.classList.contains("bh2e-hidden")) {
+                details.classList.remove("bh2e-hidden");
+            } else {
+                details.classList.add("bh2e-hidden");
+            }
+        }
+    }
+}
+
 function initializeTabs(state) {
     let tabContainers = document.querySelectorAll(".bh2e-tabs-container");
 
