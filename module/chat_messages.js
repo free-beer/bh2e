@@ -218,7 +218,7 @@ export function showMessage(actor, templateKey, data) {
     getTemplate(templateKey)
         .then((template) => {
             let message = {speaker: ChatMessage.getSpeaker(),
-                           user:    actor._id};
+                           user:    game.user};
 
             console.log("Template Data:", data);
             message.content = template(data);
