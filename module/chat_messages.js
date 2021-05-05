@@ -8,19 +8,24 @@ export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false) 
 
         if(weapon) {
             let roll     = null;
+            let extraDie = "";
             let critical = false;
             let data     = {actor:    actor.name, 
                             actorId:  actorId,
                             weapon:   weapon.name,
                             weaponId: weapon._id};
+            let settings = {};
+
+            if(weapon.data.data.size === "large") {
+                extraDie = "+1d4";
+            }
 
             if(shiftKey) {
-                roll = new Roll(generateDieRollFormula({kind: "advantage"}));
+                settings.kind = "advantage";
             } else if(ctrlKey) {
-                roll = new Roll(generateDieRollFormula({kind: "disadvantage"}));
-            } else {
-                roll = new Roll(generateDieRollFormula());
+                settings.kind = "disadvantage";
             }
+            roll = new Roll(`${generateDieRollFormula(settings)}${extraDie}`);
             roll.roll();
             critical  = (roll.results[0] === 1);
             data.roll = {formula: roll.formula,
@@ -48,13 +53,9 @@ export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false) 
                 if(damageDie !== "special") {
                     data.damage = {actorId:  actor._id, 
                                    critical: critical,
-                                   formula:  generateDieRollFormula({dieType: damageDie}),
+                                   formula:  `${generateDieRollFormula({dieType: damageDie})}${extraDie}`,
                                    weapon:   weapon.name,
                                    weaponId: weapon._id};
-
-                    if(weapon.data.data.size === "large") {
-                        data.damage.formula = `${data.damage.formula}+1d4`;
-                    }
                 }
             }
 
