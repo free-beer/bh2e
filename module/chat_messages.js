@@ -111,7 +111,7 @@ export function logDamageRoll(event) {
         let roll    = null;
 
         if(rollData.critical === "true") {
-            formula = `${formula}*2`;
+            formula = `(${formula})*2`;
         }
         data.roll.formula = formula;
 
