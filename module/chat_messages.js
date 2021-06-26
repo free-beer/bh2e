@@ -1,10 +1,10 @@
 import {findActorFromItemId, generateDieRollFormula, interpolate} from './shared.js';
 
 export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false) {
-    let actor  = game.actors.find((a) => a._id === actorId);
+    let actor  = game.actors.find((a) => a.id === actorId);
 
     if(actor) {
-        let weapon = actor.items.find((i) => i._id === weaponId);
+        let weapon = actor.items.find((i) => i.id === weaponId);
 
         if(weapon) {
             let roll     = null;
@@ -13,7 +13,7 @@ export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false) 
             let data     = {actor:    actor.name, 
                             actorId:  actorId,
                             weapon:   weapon.name,
-                            weaponId: weapon._id};
+                            weaponId: weapon.id};
             let settings = {};
 
             if(weapon.data.data.size === "large") {
@@ -27,7 +27,7 @@ export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false) 
             }
             roll = new Roll(`${generateDieRollFormula(settings)}${extraDie}`);
             roll.roll();
-            critical  = (roll.results[0] === 1);
+            critical  = (roll.terms[0].results[0].result === 1);
             data.roll = {formula: roll.formula,
                          labels:  {title: interpolate("bh2e.messages.titles.attackRoll")},
                          result:  roll.total,
@@ -51,11 +51,11 @@ export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false) 
                 }
 
                 if(damageDie !== "special") {
-                    data.damage = {actorId:  actor._id, 
+                    data.damage = {actorId:  actor.id, 
                                    critical: critical,
                                    formula:  `${generateDieRollFormula({dieType: damageDie})}${extraDie}`,
                                    weapon:   weapon.name,
-                                   weaponId: weapon._id};
+                                   weaponId: weapon.id};
                 }
             }
 
@@ -69,7 +69,7 @@ export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false) 
 }
 
 export function logAttributeTest(actorId, attribute, shiftKey=false, ctrlKey=false) {
-    let actor  = game.actors.find((a) => a._id === actorId);
+    let actor  = game.actors.find((a) => a.id === actorId);
 
     if(actor) {
         let roll  = null;
@@ -104,7 +104,7 @@ export function logDamageRoll(event) {
     let rollData = element.dataset;
 
     if(rollData.formula && rollData.actor) {
-        let actor   = game.actors.find((a) => a._id === rollData.actor);
+        let actor   = game.actors.find((a) => a.id === rollData.actor);
         let data    = {roll: {labels: {title: interpolate("bh2e.messages.titles.damageRoll")},
                               tested: false}};
         let formula = rollData.formula;
@@ -131,12 +131,12 @@ export function logUsageDieRoll(itemId) {
     let actor = findActorFromItemId(itemId);
 
     if(actor) {
-        let item = actor.items.find(i => i._id === itemId);
+        let item = actor.items.find(i => i.id === itemId);
 
         if(item) {
             let usageDie = item.data.data.usageDie;
             let message  = {actor:   actor.name,
-                            actorId: actor._id,
+                            actorId: actor.id,
                             item:    item.name,
                             itemId:  itemId,
                             roll: {labels: {result: "",
@@ -208,7 +208,7 @@ export function logUsageDieRoll(itemId) {
                 ui.notifications.error(interpolate("bh2e.messages.errors.usageDieExhausted", {item: item.name}));
             }
         } else {
-            console.error(`Failed to locate the equipment for the id ${itemId} on actor id ${actor._id}.`)
+            console.error(`Failed to locate the equipment for the id ${itemId} on actor id ${actor.id}.`)
         }
     } else {
         console.error(`Failed to find the actor that owns equipment id ${itemId}.`);

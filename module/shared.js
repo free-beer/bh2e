@@ -19,7 +19,7 @@ export function deleteOwnedItem(itemId) {
  */
 export function findActorFromItemId(itemId) {
   return(game.actors.find((a) => {
-        if(a.items.find(i => i._id === itemId)) {
+        if(a.items.find(i => i.id === itemId)) {
           return(true);
         } else {
           return(false);
@@ -31,7 +31,7 @@ export function findActorFromItemId(itemId) {
  * Searches the game item list to a specific item.
  */
 export function findItemFromId(itemId) {
-    return(game.items.find((item) => item._id === itemId));
+    return(game.items.find((item) => item.id === itemId));
 }
 
 /**

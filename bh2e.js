@@ -1,3 +1,6 @@
+import {BH2eActor} from './module/documents/bh2e_actor.js';
+import {BH2eItem} from './module/documents/bh2e_item.js';
+
 import {BH2e} from './module/config.js';
 import {BH2eState} from './module/bh2e_state.js';
 import BH2eItemSheet from './module/sheets/BH2eItemSheet.js';
@@ -39,7 +42,12 @@ Hooks.once("init", function() {
 
     console.log("Initializing the Black Hack 2e System.");
 
-    CONFIG.bh2e  = {configuration: BH2e, state: state};
+    game.bh2e = {BH2eActor, BH2eItem};
+
+    CONFIG.BH2E = {configuration: BH2e, state: state};
+    CONFIG.Actor.documentClass = BH2eActor;
+    CONFIG.Item.documentClass  = BH2eItem;
+
     window.bh2e  = {configuration: BH2e, state: state};
 
     Items.unregisterSheet("core", ItemSheet);
@@ -68,7 +76,7 @@ Hooks.once("init", function() {
     // Add hook functions.
     Hooks.on("renderChatMessage", (message, speaker) => {
         setTimeout(() => {
-            let element = document.querySelector(`[data-message-id="${message._id}"]`);
+            let element = document.querySelector(`[data-message-id="${message.id}"]`);
             let node    = element.querySelector(".bh2e-roll-title");
 
             if(node) {

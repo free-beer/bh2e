@@ -15,12 +15,55 @@ import {logAttackRoll,
 export default class BH2eCharacterSheet extends ActorSheet {
     static get defaultOptions() {
         return(mergeObject(super.defaultOptions,
-                           {classes: ["bh2e", "sheet", "character"],
-                            template: "systems/bh2e/templates/sheets/character-sheet.html"}));
+                           {classes:  ["bh2e", "sheet", "character"],
+                            height:   850,
+                            template: "systems/bh2e/templates/sheets/character-sheet.html",
+                            width:    750}));
     }
 
+    /** @override */
+    get template() {
+        return(`systems/bh2e/templates/sheets/character-sheet.html`);
+    }
+
+    /** @override */
     getData() {
-        let data    = super.getData();
+        const context   = super.getData();
+        const actorData = context.actor.data;
+
+        context.data  = actorData.data;
+        context.flags = actorData.flags;
+
+        if(actorData.type === "character") {
+            this._prepareCharacterData(context);
+        }
+
+        return(context);
+    }
+
+    activateListeners(html) {
+        super.activateListeners(html);
+
+        initializeCharacterSheetUI(window.bh2e.state);
+
+        html.find(".bh2e-roll-attack-icon").click(this._onRollAttackClicked.bind(this));
+        html.find(".bh2e-roll-attribute-test-icon").click(this._onRollAttributeTest.bind(this));
+        html.find(".bh2e-roll-usage-die-icon").click(this._onRollUsageDieClicked.bind(this));
+        html.find(".bh2e-delete-item-icon").click(this._onDeleteItemClicked.bind(this));
+        html.find(".bh2e-break-armour-die-icon").click(this._onBreakArmourDieClicked.bind(this));
+        html.find(".bh2e-repair-armour-die-icon").click(this._onRepairArmourDieClicked.bind(this));
+        html.find(".bh2e-repair-all-armour-dice-icon").click(this._onRepairAllArmourDiceClicked.bind(this));
+        html.find(".bh2e-reset-all-usage-dice-icon").click(this._onResetUsageDiceClicked.bind(this));
+        html.find(".bh2e-reset-usage-die-icon").click(this._onResetUsageDieClicked.bind(this));
+        html.find(".bh2e-increase-quantity-icon").click(this._onIncreaseEquipmentQuantityClicked.bind(this));
+        html.find(".bh2e-decrease-quantity-icon").click(this._onDecreaseEquipmentQuantityClicked.bind(this));
+        html.find(".bh2e-cast-magic-icon").click(castMagic);
+        html.find(".bh2e-cast-magic-as-ritual-icon").click(castMagicAsRitual);
+        html.find(".bh2e-prepare-magic-icon").click(prepareMagic);
+        html.find(".bh2e-unprepare-magic-icon").click(unprepareMagic);
+    }
+
+    _prepareCharacterData(context) {
         let abilities = [];
         let armour    = [];
         let classes   = [];
@@ -29,10 +72,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let spells    = [[], [], [], [], [], [], [], [], [], []];
         let weapons   = [];
 
-        data.bh2e      = CONFIG.bh2e;
-        data.config    = CONFIG.bh2e.configuration;
-
-        data.items.forEach((item) => {
+        context.items.forEach((item) => {
             switch(item.type) {
                 case "ability":
                     abilities.push(item);
@@ -90,75 +130,53 @@ export default class BH2eCharacterSheet extends ActorSheet {
             }
         });
 
-        data.abilities    = abilities;
-        data.armour       = armour;
-        data.classes      = classes;
-        data.equipment    = equipment;
-        data.hasPrayers1  = (prayers[0].length > 0)
-        data.hasPrayers2  = (prayers[1].length > 0)
-        data.hasPrayers3  = (prayers[2].length > 0)
-        data.hasPrayers4  = (prayers[3].length > 0)
-        data.hasPrayers5  = (prayers[4].length > 0)
-        data.hasPrayers6  = (prayers[5].length > 0)
-        data.hasPrayers7  = (prayers[6].length > 0)
-        data.hasPrayers8  = (prayers[7].length > 0)
-        data.hasPrayers9  = (prayers[8].length > 0)
-        data.hasPrayers10 = (prayers[9].length > 0)
-        data.hasSpells1   = (spells[0].length > 0)
-        data.hasSpells2   = (spells[1].length > 0)
-        data.hasSpells3   = (spells[2].length > 0)
-        data.hasSpells4   = (spells[3].length > 0)
-        data.hasSpells5   = (spells[4].length > 0)
-        data.hasSpells6   = (spells[5].length > 0)
-        data.hasSpells7   = (spells[6].length > 0)
-        data.hasSpells8   = (spells[7].length > 0)
-        data.hasSpells9   = (spells[8].length > 0)
-        data.hasSpells10  = (spells[9].length > 0)
-        data.prayers1     = prayers[0];
-        data.prayers2     = prayers[1];
-        data.prayers3     = prayers[2];
-        data.prayers4     = prayers[3];
-        data.prayers5     = prayers[4];
-        data.prayers6     = prayers[5];
-        data.prayers7     = prayers[6];
-        data.prayers8     = prayers[7];
-        data.prayers9     = prayers[8];
-        data.prayers10    = prayers[9];
-        data.spells1      = spells[0];
-        data.spells2      = spells[1];
-        data.spells3      = spells[2];
-        data.spells4      = spells[3];
-        data.spells5      = spells[4];
-        data.spells6      = spells[5];
-        data.spells7      = spells[6];
-        data.spells8      = spells[7];
-        data.spells9      = spells[8];
-        data.spells10     = spells[9];
-        data.weapons      = weapons;
+        context.abilities    = abilities;
+        context.armour       = armour;
+        context.classes      = classes;
+        context.config       = CONFIG.BH2E.configuration;
+        context.equipment    = equipment;
+        context.hasPrayers1  = (prayers[0].length > 0)
+        context.hasPrayers2  = (prayers[1].length > 0)
+        context.hasPrayers3  = (prayers[2].length > 0)
+        context.hasPrayers4  = (prayers[3].length > 0)
+        context.hasPrayers5  = (prayers[4].length > 0)
+        context.hasPrayers6  = (prayers[5].length > 0)
+        context.hasPrayers7  = (prayers[6].length > 0)
+        context.hasPrayers8  = (prayers[7].length > 0)
+        context.hasPrayers9  = (prayers[8].length > 0)
+        context.hasPrayers10 = (prayers[9].length > 0)
+        context.hasSpells1   = (spells[0].length > 0)
+        context.hasSpells2   = (spells[1].length > 0)
+        context.hasSpells3   = (spells[2].length > 0)
+        context.hasSpells4   = (spells[3].length > 0)
+        context.hasSpells5   = (spells[4].length > 0)
+        context.hasSpells6   = (spells[5].length > 0)
+        context.hasSpells7   = (spells[6].length > 0)
+        context.hasSpells8   = (spells[7].length > 0)
+        context.hasSpells9   = (spells[8].length > 0)
+        context.hasSpells10  = (spells[9].length > 0)
+        context.prayers1     = prayers[0];
+        context.prayers2     = prayers[1];
+        context.prayers3     = prayers[2];
+        context.prayers4     = prayers[3];
+        context.prayers5     = prayers[4];
+        context.prayers6     = prayers[5];
+        context.prayers7     = prayers[6];
+        context.prayers8     = prayers[7];
+        context.prayers9     = prayers[8];
+        context.prayers10    = prayers[9];
+        context.spells1      = spells[0];
+        context.spells2      = spells[1];
+        context.spells3      = spells[2];
+        context.spells4      = spells[3];
+        context.spells5      = spells[4];
+        context.spells6      = spells[5];
+        context.spells7      = spells[6];
+        context.spells8      = spells[7];
+        context.spells9      = spells[8];
+        context.spells10     = spells[9];
+        context.weapons      = weapons;
 
-        return(data);
-    }
-
-    activateListeners(html) {
-        initializeCharacterSheetUI(window.bh2e.state);
-
-        html.find(".bh2e-roll-attack-icon").click(this._onRollAttackClicked.bind(this));
-        html.find(".bh2e-roll-attribute-test-icon").click(this._onRollAttributeTest.bind(this));
-        html.find(".bh2e-roll-usage-die-icon").click(this._onRollUsageDieClicked.bind(this));
-        html.find(".bh2e-delete-item-icon").click(this._onDeleteItemClicked.bind(this));
-        html.find(".bh2e-break-armour-die-icon").click(this._onBreakArmourDieClicked.bind(this));
-        html.find(".bh2e-repair-armour-die-icon").click(this._onRepairArmourDieClicked.bind(this));
-        html.find(".bh2e-repair-all-armour-dice-icon").click(this._onRepairAllArmourDiceClicked.bind(this));
-        html.find(".bh2e-reset-all-usage-dice-icon").click(this._onResetUsageDiceClicked.bind(this));
-        html.find(".bh2e-reset-usage-die-icon").click(this._onResetUsageDieClicked.bind(this));
-        html.find(".bh2e-increase-quantity-icon").click(this._onIncreaseEquipmentQuantityClicked.bind(this));
-        html.find(".bh2e-decrease-quantity-icon").click(this._onDecreaseEquipmentQuantityClicked.bind(this));
-        html.find(".bh2e-cast-magic-icon").click(castMagic);
-        html.find(".bh2e-cast-magic-as-ritual-icon").click(castMagicAsRitual);
-        html.find(".bh2e-prepare-magic-icon").click(prepareMagic);
-        html.find(".bh2e-unprepare-magic-icon").click(unprepareMagic);
-
-        super.activateListeners(html);
     }
 
     _onBreakArmourDieClicked(event) {
@@ -169,11 +187,11 @@ export default class BH2eCharacterSheet extends ActorSheet {
             console.log(`Breakage of armour die on armour item id ${element.dataset.id}.`);
             let actor = findActorFromItemId(element.dataset.id);
             if(actor) {
-                let item  = actor.items.find(i => i._id === element.dataset.id);
+                let item  = actor.items.find(i => i.id === element.dataset.id);
 
                 if(item) {
                     if(item.data.data.armourValue.total > item.data.data.armourValue.broken) {
-                        let data = {_id: item._id,
+                        let data = {_id: item.id,
                                     data: {
                                       armourValue: {
                                         broken: item.data.data.armourValue.broken + 1
@@ -243,17 +261,17 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
     _onRepairAllArmourDiceClicked(event) {
         let element = event.currentTarget;
-        let actor   = game.actors.find(a => a._id === element.dataset.id);
+        let actor   = game.actors.find(a => a.id === element.dataset.id);
 
         event.preventDefault();
         if(actor) {
-            console.log("Repairing all armour dice for actor id ${actor._id}.");
+            console.log("Repairing all armour dice for actor id ${actor.id}.");
             actor.data.items.forEach(function(item) {
                 let data = {data: {armourValue: {broken: 0}}};
 
                 if(item.type === "armour") {
                     if(item.data.armourValue.broken > 0) {
-                      data._id = item._id;
+                      data.id = item.id;
                       actor.updateOwnedItem(data, {diff: true});
                     }
                 }
@@ -272,11 +290,11 @@ export default class BH2eCharacterSheet extends ActorSheet {
             console.log(`Repairing of armour die on armour item id ${element.dataset.id}.`);
             let actor = findActorFromItemId(element.dataset.id);
             if(actor) {
-                let item  = actor.items.find(i => i._id === element.dataset.id);
+                let item  = actor.items.find(i => i.id === element.dataset.id);
 
                 if(item) {
                     if(item.data.data.armourValue.broken > 0) {
-                        let data = {_id: item._id,
+                        let data = {_id: item.id,
                                     data: {
                                       armourValue: {
                                         broken: item.data.data.armourValue.broken - 1
@@ -302,10 +320,10 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
         event.preventDefault();
         if(actorId) {
-            let actor = game.actors.find(a => a._id === actorId);
+            let actor = game.actors.find(a => a.id === actorId);
 
             if(actor) {
-                actor.items.forEach(item => this.resetUsageDie(actor, item._id));
+                actor.items.forEach(item => this.resetUsageDie(actor, item.id));
             } else {
                 console.error(`Unable to locate an actor wth the id ${actorId}.`);
             }
@@ -339,14 +357,14 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let actor   = findActorFromItemId(element.dataset.id);
 
         event.preventDefault();
-        logAttackRoll(actor._id, element.dataset.id, event.shiftKey, event.ctrlKey);
+        logAttackRoll(actor.id, element.dataset.id, event.shiftKey, event.ctrlKey);
 
         return(false);
     }
 
     _onRollAttributeTest(event) {
       let element = event.currentTarget;
-      let actor   = game.actors.find(a => a._id === element.dataset.id);
+      let actor   = game.actors.find(a => a.id === element.dataset.id);
 
       event.preventDefault();
       logAttributeTest(element.dataset.id, element.dataset.attribute, event.shiftKey, event.ctrlKey);
@@ -362,55 +380,55 @@ export default class BH2eCharacterSheet extends ActorSheet {
     }
 
     decrementEquipmentQuantity(actor, itemId) {
-        let item = actor.items.find(i => i._id === itemId);
+        let item = actor.items.find(i => i.id === itemId);
 
         if(item && item.type === "equipment") {
             let itemData = item.data.data;
 
             if(itemData.usageDie && itemData.usageDie.maximum !== "none") {
                 if(itemData.quantity > 0) {
-                    let data = {_id: item._id,
+                    let data = {_id: item.id,
                                 data: {
                                   quantity: itemData.quantity - 1
                                 }};
                     actor.updateOwnedItem(data, {diff: true});
                 } else {
-                    console.warn(`Unable to decrease quantity for the ${item.name} item (id: ${item._id}) as it's already at zero.`);
+                    console.warn(`Unable to decrease quantity for the ${item.name} item (id: ${item.id}) as it's already at zero.`);
                 }
             } else {
-              console.warn(`Unable to increase quantity for the ${item.name} item (id ${item.name}) (${item._id}) as it does not have a usage die.`);
+              console.warn(`Unable to increase quantity for the ${item.name} item (id ${item.name}) (${item.id}) as it does not have a usage die.`);
             }
         } else {
             if(!item) {
-                console.error(`The actor '${actor.name}' (id ${actor._id}) does not appear to own item id ${itemId}.`);
+                console.error(`The actor '${actor.name}' (id ${actor.id}) does not appear to own item id ${itemId}.`);
             }
         }
     }
 
     incrementEquipmentQuantity(actor, itemId) {
-        let item = actor.items.find(i => i._id === itemId);
+        let item = actor.items.find(i => i.id === itemId);
 
         if(item && item.type === "equipment") {
             let itemData = item.data.data;
 
             if(itemData.usageDie && itemData.usageDie.maximum !== "none") {
-                let data = {_id: item._id,
+                let data = {_id: item.id,
                             data: {
                               quantity: itemData.quantity + 1
                             }};
                 actor.updateOwnedItem(data, {diff: true});
             } else {
-                console.warn(`Unable to increase quantity for item id ${item.name} (${item._id}) as it does not have a usage die.`);
+                console.warn(`Unable to increase quantity for item id ${item.name} (${item.id}) as it does not have a usage die.`);
             }
         } else {
             if(!item) {
-                console.error(`The actor '${actor.name}' (id ${actor._id}) does not appear to own item id ${itemId}.`);
+                console.error(`The actor '${actor.name}' (id ${actor.id}) does not appear to own item id ${itemId}.`);
             }
         }
     }
 
     resetUsageDie(actor, itemId) {
-        let item = actor.items.find(i => i._id === itemId);
+        let item = actor.items.find(i => i.id === itemId);
 
         if(item && item.type === "equipment") {
             let itemData = item.data.data;
@@ -419,7 +437,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
                 if(itemData.quantity > 0) {
                     if(itemData.usageDie.current !== itemData.usageDie.maximum) {
                         let data = {
-                          _id: item._id,
+                          _id: item.id,
                             data: {
                               usageDie: {
                                 current: itemData.usageDie.maximum
@@ -428,18 +446,18 @@ export default class BH2eCharacterSheet extends ActorSheet {
                         };
                         actor.updateOwnedItem(data, {diff: true});
                     } else {
-                      console.warn(`Unable to reset the usage die for item ${item.name} (id ${item._id}) as it's at it's maximum usage die.`);
+                      console.warn(`Unable to reset the usage die for item ${item.name} (id ${item.id}) as it's at it's maximum usage die.`);
                     }
                 } else {
-                  console.warn(`Unable to reset the usage die for item ${item.name} (id ${item._id}) as it's supply is depleted.`);
+                  console.warn(`Unable to reset the usage die for item ${item.name} (id ${item.id}) as it's supply is depleted.`);
                   ui.notifications.error(interpolate("bh2e.messages.errors.supplyDepleted", {item: item.name}))
                 }
             } else {
-              console.warn(`Unable to reset the usage die for item id ${item.name} (${item._id}) as it does not have a usage die.`);
+              console.warn(`Unable to reset the usage die for item id ${item.name} (${item.id}) as it does not have a usage die.`);
             }
         } else {
             if(!item) {
-                console.error(`The actor '${actor.name}' (id ${actor._id}) does not appear to own item id ${itemId}.`);
+                console.error(`The actor '${actor.name}' (id ${actor.id}) does not appear to own item id ${itemId}.`);
             }
         }
     }

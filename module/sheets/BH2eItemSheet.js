@@ -1,14 +1,45 @@
 export default class BH2eItemSheet  extends ItemSheet {
-    get template() {
-        let path = `systems/bh2e/templates/sheets/${this.item.data.type}-sheet.html`;
-        console.log("Returning a template path of '" + path +"'.");
-        return(path);
+    /** @override */
+    static get defaultOptions() {
+        return(mergeObject(super.defaultOptions,
+                           {classes: ["bh2e", "sheet", "item"],
+                            height:  520,
+                            width:   480}));
     }
 
+    /** @override */
+    get template() {
+        return(`systems/bh2e/templates/sheets/${this.item.data.type}-sheet.html`);
+    }
+
+    /** @override */
     getData() {
-        let data = super.getData();
-        data.bh2e   = CONFIG.bh2e;
-        data.config = CONFIG.bh2e.configuration;
-        return(data);
+        const context  = super.getData();
+        const itemData = context.item.data;
+
+        context.bh2e   = CONFIG.BH2E;
+        context.config = CONFIG.BH2E.configuration;
+        context.data = itemData.data;
+        context.flags = itemData.flags;
+
+        return(context);
+    }
+
+    /** @override */
+    setPosition(options={}) {
+        const position   = super.setPosition(options);
+        const sheetBody  = this.element.find(".sheet-body");
+        const bodyHeight = position.height - 192;
+
+        sheetBody.css("height", bodyHeight);
+        return(position);
+    }
+
+    /** @override */
+    activateListeners(html) {
+        super.activateListeners(html);
+        if(this.options.editable) {
+            // TBD: Activate listeners here!!!
+        }
     }
 }
