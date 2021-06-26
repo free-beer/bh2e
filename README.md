@@ -23,7 +23,17 @@ being said it did take time, effort and skill on my part to work out how to do
 it and to put it together. If you get some use out of this work, and can afford
 to, I'd would ask you to show your appreciation for my efforts using the Ko-fi
 link above. If nothing else it will make it more likely that I'll continue to
-work on the system or deliver others like it. Thanks in advance.
+work on the system.
+
+Alternatively you can make a more long term commitment using my Patreon, a link
+for which you can find on the right hand side of the page. I'll be providing access
+to exclusive offerings to patrons and I currently have an in-progress implementation
+of a Foundry VTT system for
+[The Black Sword Hack RPG](https://www.drivethrurpg.com/product/331118/Black-Sword-Hack)
+and have plans on expanding my offerings over time. You can access my Patreon page
+[here](https://www.patreon.com/toocrows).
+
+Thanks in advance.
 
 ## Installation
 
