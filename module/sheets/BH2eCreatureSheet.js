@@ -10,8 +10,8 @@ export default class BH2eCreatureSheet extends ActorSheet {
     getData() {
         let data = super.getData();
 
-        data.bh2e      = CONFIG.bh2e;
-        data.config    = CONFIG.bh2e.configuration;
+        data.BH2E      = CONFIG.BH2E;
+        data.config    = CONFIG.BH2E.configuration;
         data.abilities = data.items.filter(a => a.type === "ability");
         data.actions   = data.items.filter(i => i.type === "creature-attack");
         return(data);
