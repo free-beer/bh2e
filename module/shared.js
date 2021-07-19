@@ -7,7 +7,7 @@ export function deleteOwnedItem(itemId) {
     let actor = findActorFromItemId(itemId);
 
     if(actor) {
-        actor.deleteEmbeddedEntity("OwnedItem", itemId);
+        actor.deleteEmbeddedDocuments("Item", [itemId]);
     } else {
         console.error(`Delete of item id ${itemId} requested but unable to locate the actor that owns it.`);
     }
