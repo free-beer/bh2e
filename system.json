@@ -11,6 +11,50 @@
   "languages": [
   	{"lang": "en", "name": "English", "path": "languages/en.json"}
   ],
+  "packs": [
+    {
+      "name": "arcane-spells",
+      "label": "Arcane Spells",
+      "path": "packs/arcane-spells.db",
+      "entity": "Item",
+      "system": "bh2e"
+    },
+    {
+      "name": "armour",
+      "label": "Armour",
+      "path": "packs/armour.db",
+      "entity": "Item",
+      "system": "bh2e"
+    },
+    {
+      "name": "classes",
+      "label": "Classes",
+      "path": "packs/classes.db",
+      "entity": "Actor",
+      "system": "bh2e"
+    },
+    {
+      "name": "creatures",
+      "label": "Creatures",
+      "path": "packs/creatures.db",
+      "entity": "Actor",
+      "system": "bh2e"
+    },
+    {
+      "name": "divine-spells",
+      "label": "Divine Spells",
+      "path": "packs/divine-spells.db",
+      "entity": "Item",
+      "system": "bh2e"
+    },
+    {
+      "name": "equipment",
+      "label": "Equipment",
+      "path": "packs/equipment.db",
+      "entity": "Item",
+      "system": "bh2e"
+    }
+  ],
   "url": "https://github.com/free-beer/bh2e",
   "manifest": "https://raw.githubusercontent.com/free-beer/bh2e/master/system.json",
   "download": "https://github.com/free-beer/bh2e/archive/refs/tags/v0.2.7.zip"
