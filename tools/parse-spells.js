@@ -35,15 +35,8 @@ const generateSpellJsonString = (spell, level, id) => JSON.stringify({
     "effects": [],
     "folder": null,
     "sort": 0,
-    "permission": {
-        // "default": 0,
-        // "lHWBQ8rohFtdVcP1": 3
-    },
-    "flags": {
-        // "core": {
-            // "sourceId": "Item.VAGM0WUk6KyemUJ8"
-        // }
-    },
+    "permission": {},
+    "flags": {},
 });
 
 let spellLevel = 1;
