@@ -176,7 +176,6 @@ export default class BH2eCharacterSheet extends ActorSheet {
         context.spells9      = spells[8];
         context.spells10     = spells[9];
         context.weapons      = weapons;
-
     }
 
     _onBreakArmourDieClicked(event) {
