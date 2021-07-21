@@ -9,12 +9,12 @@
     <div class="bh2e-grid bh2e-grid-2-col">
         <field class="bh2e-field">
             <label class="bh2e-label" for="data.hitDice">{{localize "bh2e.fields.labels.hitDice"}}</label>
-            <input type="number" name="data.hitDice" value="{{data.hitDice}}" class="bh2e-input" />
+            <input type="number" name="data.hitDice" value="{{data.data.hitDice}}" class="bh2e-input" />
         </field>
 
         <field class="bh2e-field">
             <label class="bh2e-label" for="data.hitPoints">{{localize "bh2e.fields.labels.hitPoints"}}</label>
-            <input type="number" name="data.hitPoints" value="{{data.hitPoints}}" class="bh2e-input" />
+            <input type="number" name="data.hitPoints" value="{{data.data.hitPoints}}" class="bh2e-input" />
         </field>
     </div>
 
@@ -38,6 +38,6 @@
 
     <field class="bh2e-field">
         <label for="data.description" class="bh2e-label">{{localize "bh2e.fields.labels.notes"}}</label>
-        {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+        {{editor content=data.data.notes target="data.notes" button=true owner=owner editable=editable}}
     </field>
 </form>
