@@ -119,6 +119,9 @@
 				"unprepareSpell": "Unprepare This Spell"
 			}
 		},
+		"initiative": {
+			"roll": "Rolling DEX test for initiative."
+		},
 		"magic": {
 			"kinds": {
 				"prayer": "Prayer",

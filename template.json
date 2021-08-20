@@ -4,7 +4,7 @@
     "character": {
       "attributes": {
         "strength": 10,
-        "dexterity" : 10,
+        "dexterity": 10,
         "constitution": 10,
         "intelligence": 10,
         "wisdom": 10,
@@ -23,7 +23,7 @@
     },
     "creature": {
       "hitDice": 1,
-      "hitPoints": 5,
+      "hitPoints": {"max": 5, "value": 5},
       "notes": ""
     }
   },

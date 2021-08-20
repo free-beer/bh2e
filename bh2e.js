@@ -5,6 +5,7 @@ import {BH2e} from './module/config.js';
 import {BH2eState} from './module/bh2e_state.js';
 import BH2eItemSheet from './module/sheets/BH2eItemSheet.js';
 import BH2eCharacterSheet from './module/sheets/BH2eCharacterSheet.js';
+import BH2eCombat from './module/bh2e_combat.js';
 import BH2eCreatureSheet from './module/sheets/BH2eCreatureSheet.js';
 import {logDamageRoll} from './module/chat_messages.js';
 import {toggleAttributeTestDisplay} from './module/shared.js';
@@ -37,6 +38,29 @@ async function preloadHandlebarsTemplates() {
     return(loadTemplates(paths))
 }
 
+async function runMigrations() {
+    console.log("Running migrations...");
+    updateCreatureHitPoints(game.actors);
+}
+
+async function updateCreatureHitPoints(actors) {
+    actors.forEach((actor) => {
+        if(actor.type === "creature") {
+            let hitPoints = actor.data.data.hitPoints;
+
+            console.log(`Checking if '${actor.name}' needs an update.`);
+            if(!hitPoints) {
+                hitPoints = 5;
+            }
+
+            if(Number.isNumeric(hitPoints)) {
+                console.log(`Updating hit points for '${actor.name}'.`);
+                actor.update({data: {hitPoints: {max: hitPoints, value: hitPoints}}});
+            }
+        }
+    });
+}
+
 Hooks.once("init", function() {
     let state = new BH2eState();
 
@@ -46,6 +70,7 @@ Hooks.once("init", function() {
 
     CONFIG.BH2E = {configuration: BH2e, state: state};
     CONFIG.Actor.documentClass = BH2eActor;
+    CONFIG.Combat.entityClass  = BH2eCombat;
     CONFIG.Item.documentClass  = BH2eItem;
 
     window.bh2e  = {configuration: BH2e, state: state};
@@ -89,4 +114,8 @@ Hooks.once("init", function() {
             }
         }, 250);
     });
+});
+
+Hooks.once("ready", function() {
+    setTimeout(runMigrations, 500);
 });
