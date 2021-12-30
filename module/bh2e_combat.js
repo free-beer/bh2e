@@ -14,14 +14,14 @@ export default class BH2eCombat extends Combat {
             for(let combatant of this.combatants) {
                 ids.push(combatant.id);
             }
-            await this.rollInitiative(ids);
-            await this._pushRoundInitiatives(this.round);
+            this.rollInitiative(ids)
+                .then(() => this._pushRoundInitiatives(this.round))
+                .then(() => this.update({combatants: this.combatants.toJSON(), round: this.round + 1, turn: 0}));
         } else {
             // Re-apply the initiative scores for the appropriate round.
-            await this._applyRoundInitiatives(roundIndex);
+            this._applyRoundInitiatives(roundIndex)
+                .then(() => this.update({combatants: this.combatants.toJSON(), round: this.round + 1, turn: 0}));
         }
-
-        return(this.update({combatants: this.combatants.toJSON(), round: this.round + 1, turn: 0}));
     }
 
     /**
@@ -44,24 +44,26 @@ export default class BH2eCombat extends Combat {
      * Generate initiative values for a collection of combatants.
      */
     async rollInitiative(ids, {formula=null, updateTurn=true, messageOptions={}}={}) {
-        let results = this._rollCombatantInitiatives(ids);
-        let changes = [];
+        let results;
 
-
-        for(let i = 0; i < results.length; i++) {
-            changes.push({_id: results[i].id, initiative: results[i].initiative});
-        }
-
-        await this.updateEmbeddedDocuments("Combatant", changes);
-        this._createChatMessages(results, messageOptions)
-            .then(async (messages) => {
-                if(messages.length > 0) {
-                    console.log(`There are ${messages.length} chat messages.`, messages);
-                    await ChatMessage.implementation.create(messages);
-                }
-            });
-
-        return(this.update({combatants: this.combatants.toJSON(), round: this.round, turn: this.turn}));
+        return(this._rollCombatantInitiatives(ids)
+                    .then((rolls) => {
+                        results = rolls;
+                        return(rolls.map((e) => {
+                            return({_id: e.id, initiative: e.initiative});
+                        }));
+                    })
+                    .then((changes) => {
+                        return(this.updateEmbeddedDocuments("Combatant", changes))
+                    })
+                    .then(() => this._createChatMessages(results, messageOptions))
+                    .then((messages) => {
+                        if(messages.length > 0) {
+                            console.log(`There are ${messages.length} chat messages.`, messages);
+                            ChatMessage.implementation.create(messages);
+                        }                
+                    })
+                    .then(() => this.update({combatants: this.combatants.toJSON(), round: this.round, turn: this.turn})));
     }
 
     /**
@@ -128,25 +130,23 @@ export default class BH2eCombat extends Combat {
      * Generates an array of initiative roll results.
      */
     _rollCombatantInitiatives(combatantIds) {
-        let results = [];
+        let list = combatantIds.map((id) => {
+                    let combatant = this.combatants.get(id);
+        
+                    if(combatant.actor.type === "character") {
+                        let dexterity = combatant.actor.data.data.attributes.dexterity;
+                        let roll      = new Roll("1d20");
+        
+                        return(roll.evaluate()
+                                   .then(() => {
+                                       return({combatant: combatant, id: id, initiative: (roll.total < dexterity ? 1 : 3), roll: roll});
+                                   }));
+                    } else {
+                        return({combatant: combatant, id: id, initiative: 2});
+                    }
+                });
 
-        for(let i = 0; i < combatantIds.length; i++) {
-            let result    = {combatant: this.combatants.get(combatantIds[i]),
-                             id:        combatantIds[i]};
-
-            if(result.combatant.actor.type === "character") {
-                let dexterity = result.combatant.actor.data.data.attributes.dexterity;
-
-                result.roll = new Roll("1d20");
-                result.roll.roll();
-                result.initiative = (result.roll.total < dexterity ? 1 : 3);
-            } else {
-                result.initiative = 2;
-            }
-            results.push(result);
-        }
-
-        return(results);
+        return(Promise.all(list));
     }
 
     /**

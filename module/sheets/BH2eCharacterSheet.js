@@ -190,13 +190,13 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
                 if(item) {
                     if(item.data.data.armourValue.total > item.data.data.armourValue.broken) {
-                        let data = {_id: item.id,
+                        let data = {id: item.id,
                                     data: {
                                       armourValue: {
                                         broken: item.data.data.armourValue.broken + 1
                                     }}};
 
-                        actor.updateOwnedItem(data, {diff: true});
+                        item.update(data, {diff: true});
                     }
                 } else {
                     console.error(`Failed to find item id ${element.dataset.id}.`);
@@ -269,9 +269,9 @@ export default class BH2eCharacterSheet extends ActorSheet {
                 let data = {data: {armourValue: {broken: 0}}};
 
                 if(item.type === "armour") {
-                    if(item.data.armourValue.broken > 0) {
+                    if(item.data.data.armourValue.broken > 0) {
                       data.id = item.id;
-                      actor.updateOwnedItem(data, {diff: true});
+                      item.update(data, {diff: true})
                     }
                 }
             });
@@ -293,13 +293,13 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
                 if(item) {
                     if(item.data.data.armourValue.broken > 0) {
-                        let data = {_id: item.id,
+                        let data = {id: item.id,
                                     data: {
                                       armourValue: {
                                         broken: item.data.data.armourValue.broken - 1
                                     }}};
 
-                        actor.updateOwnedItem(data, {diff: true});
+                        item.update(data, {diff: true});
                     }
                 } else {
                     console.error(`Failed to find item id ${element.dataset.id}.`);
@@ -386,11 +386,11 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
             if(itemData.usageDie && itemData.usageDie.maximum !== "none") {
                 if(itemData.quantity > 0) {
-                    let data = {_id: item.id,
+                    let data = {id: item.id,
                                 data: {
                                   quantity: itemData.quantity - 1
                                 }};
-                    actor.updateOwnedItem(data, {diff: true});
+                    item.update(data, {diff: true});
                 } else {
                     console.warn(`Unable to decrease quantity for the ${item.name} item (id: ${item.id}) as it's already at zero.`);
                 }
@@ -411,11 +411,11 @@ export default class BH2eCharacterSheet extends ActorSheet {
             let itemData = item.data.data;
 
             if(itemData.usageDie && itemData.usageDie.maximum !== "none") {
-                let data = {_id: item.id,
+                let data = {id: item.id,
                             data: {
                               quantity: itemData.quantity + 1
                             }};
-                actor.updateOwnedItem(data, {diff: true});
+                item.update(data, {diff: true});
             } else {
                 console.warn(`Unable to increase quantity for item id ${item.name} (${item.id}) as it does not have a usage die.`);
             }
@@ -443,7 +443,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
                               }
                             }
                         };
-                        actor.updateOwnedItem(data, {diff: true});
+                        item.update(data, {diff: true});
                     } else {
                       console.warn(`Unable to reset the usage die for item ${item.name} (id ${item.id}) as it's at it's maximum usage die.`);
                     }

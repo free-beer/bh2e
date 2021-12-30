@@ -70,7 +70,7 @@ Hooks.once("init", function() {
 
     CONFIG.BH2E = {configuration: BH2e, state: state};
     CONFIG.Actor.documentClass = BH2eActor;
-    CONFIG.Combat.entityClass  = BH2eCombat;
+    CONFIG.Combat.documentClass = BH2eCombat;
     CONFIG.Item.documentClass  = BH2eItem;
 
     window.bh2e  = {configuration: BH2e, state: state};
