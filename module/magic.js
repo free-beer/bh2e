@@ -26,9 +26,8 @@ export function castMagic(event) {
                 let data      = {id:   item.id,
                                  data: {cast:     false,
                                         prepared: false}};
-                let total     = result.attributeRoll + result.spellLevel;
 
-                console.log(`Attribute Test: Roll=${result.attributeRoll}, Level=${result.spellLevel}, Total=${result.attributeRoll + result.spellLevel}`);
+                console.log(`Attribute Test: Roll=${result.attributeRoll}, Level=${result.spellLevel}`);
                 if(result.successful) {
                     data.data.cast             = true;
                     data.data.prepared         = true;
@@ -69,8 +68,6 @@ export function castMagicAsRitual(event) {
                                              tested: true},
                                  spellName: result.spellName};
 
-                let total     = result.attributeRoll + result.spellLevel;
-
                 if(result.successful) {
                     message.roll.labels.result = interpolate("bh2e.messages.labels.success");
                 } else {
@@ -95,7 +92,6 @@ function invokeMagic(magicId, caster) {
                          spellLevel:    parseInt(magic.data.data.level),
                          spellName:     magic.name,
                          successful:    false}
-    let total         = 0;
 
     if(event.shiftKey) {
         if(!magic.data.data.cast) {
