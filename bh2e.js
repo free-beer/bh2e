@@ -41,6 +41,27 @@ async function preloadHandlebarsTemplates() {
 async function runMigrations() {
     console.log("Running migrations...");
     updateCreatureHitPoints(game.actors);
+    updateCharacterCoins(game.actors);
+}
+
+async function updateCharacterCoins(actors) {
+    actors.forEach((actor) => {
+        if(actor.type === "character") {
+            let coins  = actor.data.data.coins;
+            let update = false;
+
+            console.log(`Checking if '${actor.name}' needs a coins update.`);
+            if(!coins || !Number.isNumeric(coins)) {
+                coins  = (coins ? parseInt(coins) : 0);
+                update = true;
+            }
+
+            if(update) {
+                console.log(`Updating coins for '${actor.name}'.`);
+                actor.update({data: {coins: coins}});
+            }
+        }
+    });
 }
 
 async function updateCreatureHitPoints(actors) {

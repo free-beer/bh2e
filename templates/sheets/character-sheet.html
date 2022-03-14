@@ -35,7 +35,7 @@
                 </field>
             </div>
 
-            <div class="bh2e-grid bh2e-grid-3-col">
+            <div class="bh2e-grid bh2e-grid-4-col">
                 <field class="bh2e-field">
                     <label for="data.hitDie" class="bh2e-label">{{localize "bh2e.fields.labels.hitDie"}}</label>
                     <select name="data.hitDie" class="bh2e-select">
@@ -67,6 +67,11 @@
                   {{/each}}
                   {{/select}}
                     </select>
+                </field>
+
+                <field class="bh2e-field">
+                    <label class="bh2e-label" for="data.coins">{{localize "bh2e.fields.labels.coinsValue"}}</label>
+                    <input style="text-align: center;" type="number" name="data.coins" value="{{data.coins}}" />
                 </field>
             </div>
 

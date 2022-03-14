@@ -139,6 +139,9 @@ export default class BH2eCombat extends Combat {
         
                         return(roll.evaluate()
                                    .then(() => {
+                                       if(game.dice3d) {
+                                           game.dice3d.showForRoll(roll);
+                                       }
                                        return({combatant: combatant, id: id, initiative: (roll.total < dexterity ? 1 : 3), roll: roll});
                                    }));
                     } else {

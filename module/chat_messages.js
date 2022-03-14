@@ -60,6 +60,9 @@ export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false) 
                         }
                     }
 
+                    if(game.dice3d) {
+                        game.dice3d.showForRoll(roll);
+                    }
                     showMessage(actor, "systems/bh2e/templates/messages/attack-roll.hbs", data);
                 });
         } else {
@@ -87,7 +90,7 @@ export function logAttributeTest(actorId, attribute, shiftKey=false, ctrlKey=fal
             roll = new Roll(generateDieRollFormula());
         }
         roll.evaluate()
-            .then(() => {
+            .then((roll) => {
                 data.roll = {formula: roll.formula,
                              labels:  {title: interpolate("bh2e.messages.titles.attributeTest", {attribute: data.attribute})},
                              result:  roll.total,
@@ -95,6 +98,9 @@ export function logAttributeTest(actorId, attribute, shiftKey=false, ctrlKey=fal
 
                 data.roll.success = (actor.data.data.attributes[attribute] > data.roll.result);
                 data.roll.labels.result = interpolate(data.roll.success ? "bh2e.messages.labels.success" : "bh2e.messages.labels.failure");
+                if(game.dice3d) {
+                    game.dice3d.showForRoll(roll);
+                }
 
                 showMessage(actor, "systems/bh2e/templates/messages/attribute-test.hbs", data);
             });
@@ -123,6 +129,9 @@ export function logDamageRoll(event) {
         roll.evaluate()
             .then(() => {
                 data.roll.result = roll.total;
+                if(game.dice3d) {
+                    game.dice3d.showForRoll(roll);
+                }
                 showMessage(actor, "systems/bh2e/templates/messages/damage-roll.hbs", data)
             });
     } else {
@@ -154,7 +163,11 @@ export function logUsageDieRoll(itemId) {
 
                 roll.evaluate()
                     .then(() => {
-                message.roll.formula = roll.formula;
+                        if(game.dice3d) {
+                            game.dice3d.showForRoll(roll);
+                        }
+
+                        message.roll.formula = roll.formula;
                         message.roll.result  = roll.total;
 
                         if(roll.total < 3) {

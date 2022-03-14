@@ -105,11 +105,15 @@ function invokeMagic(magicId, caster) {
     attributeTest = new Roll(formula);
 
     return(attributeTest.roll()
-            .then(() => {
+            .then((roll) => {
                 result.attribute     = attribute;
                 result.attributeRoll = attributeTest.total;
                 result.formula       = attributeTest.formula;
                 result.successful    = result.attributeRoll < caster.data.data.attributes[attribute];
+
+                if(game.dice3d) {
+                    game.dice3d.showForRoll(roll);
+                }
                 return(result);
             }));
 }
