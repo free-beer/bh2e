@@ -397,6 +397,12 @@
 	text-align: center;
 }
 
+.bh2e-spell-sheet-body {
+	display: grid;
+	grid-template-columns: 128px auto;
+	grid-gap: 5px 10px;
+}
+
 .bh2e-tab {
 	border-left: solid 1px #aaa;
 	border-right: solid 1px #aaa;
