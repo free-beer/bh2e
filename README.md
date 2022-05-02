@@ -9,10 +9,6 @@ This repository contains a Foundry VTT system definition that is based on the
 
 [Foreward](#foreword)
 
-[Installation](#installation)
-
-[Creating A World](#creating-a-world)
-
 [Documentation](#documentation)
 
 
