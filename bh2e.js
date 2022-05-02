@@ -10,6 +10,8 @@ import BH2eCreatureSheet from './module/sheets/BH2eCreatureSheet.js';
 import {logDamageRoll} from './module/chat_messages.js';
 import {toggleAttributeTestDisplay} from './module/shared.js';
 
+import BH2eScene from './module/bh2e_scene.js';
+
 async function preloadHandlebarsTemplates() {
     const paths = ["systems/bh2e/templates/partials/ability-details.hbs",
                    "systems/bh2e/templates/partials/ability-entry.hbs",
@@ -89,10 +91,19 @@ Hooks.once("init", function() {
 
     game.bh2e = {BH2eActor, BH2eItem};
 
-    CONFIG.BH2E = {configuration: BH2e, state: state};
-    CONFIG.Actor.documentClass = BH2eActor;
+    CONFIG.BH2E                 = {configuration: BH2e, state: state};
+    CONFIG.Actor.documentClass  = BH2eActor;
     CONFIG.Combat.documentClass = BH2eCombat;
-    CONFIG.Item.documentClass  = BH2eItem;
+    CONFIG.Item.documentClass   = BH2eItem;
+    CONFIG.Scene.documentClass  = BH2eScene;
+
+    game.settings.register("bh2e", "randomizeCreatureHP", {config:  true,
+                                                           default: false,
+                                                           hint:    "Indicates if creatures added to scenes will have their HP randomly generated.",
+                                                           name:    "Randomize Creature HP",
+                                                           scope:   "world",
+                                                           type:    Boolean});
+
 
     window.bh2e  = {configuration: BH2e, state: state};
 
