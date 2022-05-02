@@ -1,5 +1,13 @@
 {
 	"bh2e": {
+		"buttons": {
+			"roll": "Roll"
+		},
+		"dialogs": {
+			"titles": {
+				"attackRoll": "Attack Roll"
+			}
+		},
 		"dice": {
 			"one": "1",
 			"d4": "1d4",
@@ -188,6 +196,11 @@
 			"common": "Common",
 			"exotic": "Exotic",
 			"rare": "Rare"
+		},
+		"rolls": {
+			"advantage": "Advantage",
+			"disadvantage": "Disadvantage",
+			"modifier": "Roll Modifier:"
 		},
 		"tabs": {
 			"labels": {

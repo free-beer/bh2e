@@ -3,15 +3,31 @@
   "title": "The Black Hack 2e",
   "description": "System support for second edition of The Black Hack RPG.",
   "author": "Peter Wood",
+  "authors": [],
+  "url": "https://github.com/free-beer/bh2e",
+  "flags": {},
   "version": "0.3.3",
   "minimumCoreVersion": "0.7.5",
   "compatibleCoreVersion": "9",
-  "esmodules": ["bh2e.js"],
-  "styles": ["bh2e.css"],
-  "languages": [
-  	{"lang": "en", "name": "English", "path": "languages/en.json"}
+  "scripts": [],
+  "esmodules": [
+    "bh2e.js"
   ],
-  "url": "https://github.com/free-beer/bh2e",
+  "styles": [
+    "bh2e.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }
+  ],
+  "packs": [],
+  "system": [],
+  "dependencies": [],
+  "socket": false,
   "manifest": "https://raw.githubusercontent.com/free-beer/bh2e/master/system.json",
-  "download": "https://github.com/free-beer/bh2e/archive/refs/tags/v0.3.3.zip"
+  "download": "https://github.com/free-beer/bh2e/archive/refs/tags/v0.3.3.zip",
+  "protected": false
 }

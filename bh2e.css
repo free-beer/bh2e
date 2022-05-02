@@ -26,6 +26,16 @@
 	margin: 3px 0;
 }
 
+.bh2e-attack-roll-modifier-field {
+	display: grid;
+	grid-template-columns: auto 40px;
+	grid-gap: 0 5px;
+	justify-content: center;
+	line-height: 30px;
+	margin: 10px 0;
+	vertical-align: middle;
+}
+
 .bh2e-attribute-cell {
 	text-align: center;
 }
@@ -52,6 +62,26 @@
 
 .bh2e-attribute-table {
 	font-size: 1.2em;
+}
+
+.bh2e-attribute-value-container input {
+	font-size: 1.3em;
+	height:  50px;
+	width: 60px;
+}
+
+.bh2e-character-details-section {
+	display: grid;
+	grid-template-columns: 2fr 2fr 1fr;
+	grid-gap: 5px 15px;
+	margin-bottom: 15px;
+}
+
+.bh2e-checkbox-row {
+	display: grid;
+	grid-template-columns: 30px auto;
+	line-height: 30px;
+	vertical-align: middle;
 }
 
 .bh2e-clear-both {
@@ -107,6 +137,7 @@
 .bh2e-cs-attributes-section {
 	border: solid 1px #777;
 	padding: 5px;
+	width: 100px;
 }
 
 .bh2e-cs-container {
@@ -127,6 +158,16 @@
 .bh2e-damage-details {
 	color: #a00;
 	font-size: 120%;
+	text-align: center;
+}
+
+.bh2e-dialog-header {
+	border-bottom: solid 1px #555;
+	border-top: solid 1px #555;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 10px;
+	padding: 5px 0;
 	text-align: center;
 }
 
@@ -158,7 +199,6 @@
 .bh2e-field {
 	display: block;
 	margin-bottom: 10px;
-	width: 95%;
 }
 
 .bh2e-float-left {
@@ -171,27 +211,60 @@
 
 .bh2e-grid {
 	display: grid;
-	width: 95%;
 }
 
 .bh2e-grid-2-col {
-	grid-template-columns: 50% 50%;
+	display:  grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 5px;
 }
 
 .bh2e-grid-3-col {
-	grid-template-columns: 33% 33% 33%;
+	display:  grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 10px;
 }
 
 .bh2e-grid-4-col {
-	grid-template-columns: 25% 25% 25% 25%;
+	display:  grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-gap: 5px;
 }
 
 .bh2e-grid-5-col {
-	grid-template-columns: 20% 20% 20% 20% 20%;
+	display:  grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-gap: 5px;
 }
 
 .bh2e-hidden {
 	display: none;
+}
+
+.bh2e-horizontal-field {
+	display: grid;
+	grid-gap: 5px;
+	margin: 2px 0;
+}
+
+.bh2e-horizontal-field-hp {
+	grid-template-columns: auto 45px 20px 45px;
+}
+
+.bh2e-horizontal-field-number {
+	grid-template-columns: auto 45px;
+}
+
+.bh2e-horizontal-field-number-wide {
+	grid-template-columns: auto 70px;
+}
+
+.bh2e-horizontal-field-select-narrow {
+	grid-template-columns: auto 70px;
+}
+
+.bh2e-horizontal-field-text {
+	grid-template-columns: auto 125px;
 }
 
 .bh2e-label {
@@ -320,6 +393,27 @@
 	font-weight: bold;
 }
 
+.bh2e-text-bold {
+	font-weight: bold;
+}
+
+.bh2e-text-center {
+	text-align: center;
+}
+
+.bh2e-text-left {
+	text-align: left;
+}
+
+.bh2e-text-line {
+	line-height: 25px;
+	vertical-align: bottom;
+}
+
+.bh2e-text-right {
+	text-align: right;
+}
+
 .bh2e-text-input {
 }
 
@@ -356,4 +450,12 @@
 
 .editor-content {
 	height: 200px;
+}
+
+input,select {
+	background-color: #fff !important;
+}
+
+input[type=number] {
+	text-align: center;
 }
