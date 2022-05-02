@@ -1,19 +1,23 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-    </header>
-    <div>
-      <field class="bh2e-field">
-          <label for="data.tag" class="bh2e-label">{{localize "bh2e.fields.labels.tag"}}</label>
-          <input type="text" name="data.tag" value="{{data.tag}}" class="bh2e-input" />
-      </field>
+    <div class="bh2e-ability-sheet-body">
+        <section>
+            <img src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+        </section>
 
-      <br>
+        <section>
+            <hr>
+            <input name="name" placeholder="{{localize 'bh2e.fields.placeholders.name'}}" type="text" value="{{item.name}}"/>
+            <hr>
 
-      <field class="bh2e-field">
-          <label for="data.description" class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
-          {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
-      </field>
+            <field class="bh2e-field">
+                <label for="data.tag" class="bh2e-label">{{localize "bh2e.fields.labels.tag"}}</label>
+                <input type="text" name="data.tag" value="{{data.tag}}" class="bh2e-input" />
+            </field>
+
+            <field class="bh2e-field">
+                <label for="data.description" class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
+                {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+            </field>
+        </section>
     </div>
 </form>
