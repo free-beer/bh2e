@@ -3,8 +3,8 @@ export default class BH2eItemSheet  extends ItemSheet {
     static get defaultOptions() {
         return(mergeObject(super.defaultOptions,
                            {classes: ["bh2e", "sheet", "item"],
-                            height:  520,
-                            width:   480}));
+                            height:  475,
+                            width:   600}));
     }
 
     /** @override */
