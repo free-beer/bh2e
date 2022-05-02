@@ -488,7 +488,8 @@
 }
 
 .editor-content {
-	height: 200px;
+	height: 190px;
+	padding-right: 10px;
 }
 
 input,select {
