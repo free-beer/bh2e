@@ -38,6 +38,6 @@ Thanks in advance.
 ## Documentation
 
 More information on the structure, content and capabilities of the system
-can be found in the [system guide](https://app.gitbook.com/s/6yYWYFmQ5xow7KNo94Jo/).
+can be found in the [system guide](https://peter-wood-1.gitbook.io/the-black-hack-2e-foundryvtt-system-user-manual/).
 
 
