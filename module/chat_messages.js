@@ -1,5 +1,21 @@
 import {findActorFromItemId, generateDieRollFormula, interpolate} from './shared.js';
 
+function isRollCritical(roll, options={}) {
+    let outcome = false;
+
+    if(options.advantage) {
+        outcome = (roll.terms[0].results[0].result === 1 ||
+                   roll.terms[0].results[1].result === 1);
+    } else if(options.disadvantage) {
+        outcome = (roll.terms[0].results[0].result === 1 &&
+                   roll.terms[0].results[1].result === 1);
+    } else {
+        outcome = (roll.terms[0].results[0].result === 1);
+    }
+
+    return(outcome);
+}
+
 export function logAttackRoll(actorId, weaponId, options={}) {
     let actor  = game.actors.find((a) => a.id === actorId);
 
@@ -33,7 +49,7 @@ export function logAttackRoll(actorId, weaponId, options={}) {
             roll = new Roll(`${generateDieRollFormula(settings)}${extraDie}`);
             roll.evaluate({async: true})
                 .then(() => {
-                    critical  = (roll.terms[0].results[0].result === 1);
+                    critical  = isRollCritical(roll, options);
                     data.roll = {formula: roll.formula,
                                  labels:  {title: interpolate("bh2e.messages.titles.attackRoll")},
                                  result:  roll.total,
