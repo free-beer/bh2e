@@ -94,6 +94,10 @@
 	margin-right: 15px;
 }
 
+.bh2e-creature-ability-container {
+	margin: 5px 5px 10px 5px;
+}
+
 .bh2-creature-ability-detail-column {
 	font-size: 1.1em;
 	width: 90%;
@@ -109,10 +113,6 @@
 	font-size: 1.2em;
 	font-style: italic;
 	font-weight: bold;
-}
-
-.bh2-create-ability-notes-container {
-	margin-left: 15px;
 }
 
 .bh2e-creature-attack-container {
@@ -132,6 +132,12 @@
 .bh2-creature-header {
 	display: grid;
 	grid-template-columns: 96px auto;
+}
+
+.bh2e-creature-sheet-body {
+	display: grid;
+	grid-template-columns: 128px auto;
+	grid-gap: 5px 10px;
 }
 
 .bh2e-cs-attributes-section {
@@ -235,6 +241,10 @@
 	display:  grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-gap: 5px;
+}
+
+.bh2e-grid-wider-column-separation {
+	grid-gap: 5px 15px;
 }
 
 .bh2e-hidden {

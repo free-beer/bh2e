@@ -4,7 +4,9 @@ export default class BH2eCreatureSheet extends ActorSheet {
     static get defaultOptions() {
         return(mergeObject(super.defaultOptions,
                            {classes: ["bh2e", "sheet", "creature"],
-                            template: "systems/bh2e/templates/sheets/creature-sheet.html"}));
+                            height: 520,
+                            template: "systems/bh2e/templates/sheets/creature-sheet.html",
+                            width: 900}));
     }
 
     getData() {

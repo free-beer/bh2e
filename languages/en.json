@@ -97,6 +97,9 @@
 				"weaponKind": "Kind",
 				"weaponSize": "Size"
 			},
+			"placeholders": {
+				"name": "Enter a name"
+			},
 			"titles": {
 				"breakArmourDie": "Break Die",
 				"castPrayer": "Perform This Prayer",
