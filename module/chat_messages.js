@@ -1,6 +1,6 @@
 import {findActorFromItemId, generateDieRollFormula, interpolate} from './shared.js';
 
-export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false) {
+export function logAttackRoll(actorId, weaponId, options={}) {
     let actor  = game.actors.find((a) => a.id === actorId);
 
     if(actor) {
@@ -20,13 +20,18 @@ export function logAttackRoll(actorId, weaponId, shiftKey=false, ctrlKey=false) 
                 extraDie = "+1d4";
             }
 
-            if(shiftKey) {
+            if(options.advantage) {
                 settings.kind = "advantage";
-            } else if(ctrlKey) {
+            } else if(options.disadvantage) {
                 settings.kind = "disadvantage";
             }
+
+            if(options.modifier) {
+                settings.modifier = options.modifier;
+            }
+
             roll = new Roll(`${generateDieRollFormula(settings)}${extraDie}`);
-            roll.evaluate()
+            roll.evaluate({async: true})
                 .then(() => {
                     critical  = (roll.terms[0].results[0].result === 1);
                     data.roll = {formula: roll.formula,
@@ -89,7 +94,7 @@ export function logAttributeTest(actorId, attribute, shiftKey=false, ctrlKey=fal
         } else {
             roll = new Roll(generateDieRollFormula());
         }
-        roll.evaluate()
+        roll.evaluate({async: true})
             .then((roll) => {
                 data.roll = {formula: roll.formula,
                              labels:  {title: interpolate("bh2e.messages.titles.attributeTest", {attribute: data.attribute})},
@@ -126,7 +131,7 @@ export function logDamageRoll(event) {
         data.roll.formula = formula;
 
         roll = new Roll(formula)
-        roll.evaluate()
+        roll.evaluate({async: true})
             .then(() => {
                 data.roll.result = roll.total;
                 if(game.dice3d) {
@@ -161,7 +166,7 @@ export function logUsageDieRoll(itemId) {
                 let die  = (usageDie.current === "none" ? usageDie.maximum : usageDie.current)
                 let roll = new Roll(generateDieRollFormula({dieType: die}));
 
-                roll.evaluate()
+                roll.evaluate({async: true})
                     .then(() => {
                         if(game.dice3d) {
                             game.dice3d.showForRoll(roll);

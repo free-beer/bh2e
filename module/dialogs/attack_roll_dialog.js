@@ -1,10 +1,12 @@
+import {logAttackRoll} from "../chat_messages.js";
+
 /**
  * This class provides the advanced attack roll dialog for the system.
  */
 export default class AttackRollDialog extends Dialog {
     static get defaultOptions() {
         return(mergeObject(super.defaultOptions,
-                           {width: 275}));
+                           {width: 325}));
     }
 
 	constructor(settings) {
@@ -30,6 +32,18 @@ export default class AttackRollDialog extends Dialog {
         return(this._actorId);
     }
 
+    get advantage() {
+        return(this.element[0].querySelector('input[name="advantage"]').checked);
+    }
+
+    get disadvantage() {
+        return(this.element[0].querySelector('input[name="disadvantage"]').checked);
+    }
+
+    get modifier() {
+        return(parseInt(this.element[0].querySelector('input[name="modifier"]').value));
+    }
+
     get weapon() {
         let weapon = this.actor.items.find((i) => i.type === "weapon" && i.id === this._weaponId);
 
@@ -45,43 +59,11 @@ export default class AttackRollDialog extends Dialog {
     }
 
     _rollAttack() {
-        let actor  = this.actor;
-        let data   = {actorId:       actor.id,
-                      actorName:     actor.name,
-                      attribute:     this.attribute,
-                      bonusDice:     this.bonusDice,
-                      combatAbility: this.combatAbility,
-                      defence:       this.defence,
-                      penaltyDice:   this.penaltyDice,
-                      rangeModifier: this.rangeModifier,
-                      weaponType:    this.combatAbility,
-                      weaponUsed:    false};
-        let dice;
+        let options = {advantage:    this.advantage,
+                       disadvantage: this.disadvantage,
+                       modifier:     this.modifier};
 
-        data.formula = generateAttackRollFormula(actor.id,
-                                                 data.attribute,
-                                                 data.combatAbility,
-                                                 data.bonusDice,
-                                                 data.penaltyDice,
-                                                 data.defence,
-                                                 data.rangeModifier);
-        data.roll   = new Roll(data.formula);
-
-        if(this.weaponId) {
-            let weapon = this.weapon;
-
-            data.weaponId   = weapon.id;
-            data.weaponName = weapon.name;
-            data.weaponUsed = true;
-        }
-
-        rollIt(data.roll)
-            .then((roll) => {
-                data.dice        = roll.dice;
-                data.resultLevel = getRollResultLevel(roll);
-                data.rollTotal   = roll.total;
-                showMessage("systems/bh2e/templates/chat/attack-roll.html", data);
-            });
+        logAttackRoll(this.actorId, this.weaponId, options);
     }
 
     static build(event, options={}) {

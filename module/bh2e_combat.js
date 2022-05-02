@@ -137,7 +137,7 @@ export default class BH2eCombat extends Combat {
                         let dexterity = combatant.actor.data.data.attributes.dexterity;
                         let roll      = new Roll("1d20");
         
-                        return(roll.evaluate()
+                        return(roll.evaluate({async: true})
                                    .then(() => {
                                        if(game.dice3d) {
                                            game.dice3d.showForRoll(roll);

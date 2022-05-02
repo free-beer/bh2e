@@ -366,7 +366,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
         event.preventDefault();
         if(!event.altKey) {
-            logAttackRoll(actor.id, element.dataset.id, event.shiftKey, event.ctrlKey);
+            logAttackRoll(actor.id, element.dataset.id, {advantage: event.shiftKey, disadvantage: event.ctrlKey});
         } else {
             AttackRollDialog.build(event).then((dialog) => dialog.render(true));
         }

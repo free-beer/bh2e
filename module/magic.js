@@ -7,7 +7,6 @@ export function castMagic(event) {
 
     event.preventDefault();
     event.stopPropagation();
-    console.log(`The castMagic() function was invoked with an item id of ${element.dataset.id}.`);
     if(actor) {
         invokeMagic(element.dataset.id, actor)
             .then((result) => {
@@ -27,7 +26,6 @@ export function castMagic(event) {
                                  data: {cast:     false,
                                         prepared: false}};
 
-                console.log(`Attribute Test: Roll=${result.attributeRoll}, Level=${result.spellLevel}`);
                 if(result.successful) {
                     data.data.cast             = true;
                     data.data.prepared         = true;
@@ -51,7 +49,6 @@ export function castMagicAsRitual(event) {
 
     event.preventDefault();
     event.stopPropagation();
-    console.log(`The castMagicAsRitual() function was invoked with an item id of ${element.dataset.id}.`);
     if(actor) {
         let result    = invokeMagic(element.dataset.id, actor);
         invokeMagic(element.dataset.id, actor)
@@ -100,7 +97,11 @@ function invokeMagic(magicId, caster) {
     } else if(event.ctrlKey || magic.data.data.cast) {
         options.kind = result.rollType = "disadvantage";
     }
-    attribute     = (magic.data.data.kind === "prayer" ? "wisdom" : "intelligence");
+    if(!["", "default"].includes(magic.data.data.attribute)) {
+        attribute = magic.data.data.attribute;
+    } else {
+        attribute = (magic.data.data.kind === "prayer" ? "wisdom" : "intelligence");
+    }
     formula       = `${generateDieRollFormula(options)}+${result.spellLevel}`;
     attributeTest = new Roll(formula);
 
@@ -124,7 +125,6 @@ export function prepareMagic(event) {
 
     event.preventDefault();
     event.stopPropagation();
-    console.log(`The prepareMagic() function was invoked with an item id of ${element.dataset.id}.`);
     if(actor) {
         let item = actor.items.find((i) => i.id === element.dataset.id)
         let data = {id:   item.id,
@@ -144,7 +144,6 @@ export function unprepareMagic(event) {
 
     event.preventDefault();
     event.stopPropagation();
-    console.log(`The unprepareMagic() function was invoked with an item id of ${element.dataset.id}.`);
     if(actor) {
         let item = actor.items.find((i) => i.id === element.dataset.id);
         let data = {id:   item.id,

@@ -29,6 +29,16 @@ BH2e.hitDieTypes = {
     d20: "bh2e.dice.d20"
 };
 
+BH2e.magicAttributeList = {
+    default:      "bh2e.fields.labels.attributes.default.long",
+    strength:     "bh2e.fields.labels.attributes.strength.long",
+    dexterity:    "bh2e.fields.labels.attributes.dexterity.long",
+    constitution: "bh2e.fields.labels.attributes.constitution.long",
+    intelligence: "bh2e.fields.labels.attributes.intelligence.long",
+    wisdom:       "bh2e.fields.labels.attributes.wisdom.long",
+    charisma:     "bh2e.fields.labels.attributes.charisma.long"
+};
+
 BH2e.magicKinds = {
     prayer: "bh2e.magic.kinds.prayer",
     spell: "bh2e.magic.kinds.spell"

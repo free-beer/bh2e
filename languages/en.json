@@ -41,6 +41,10 @@
 						"long": "Constitution",
 						"short": "CON"
 					},
+					"default": {
+						"long": "Default",
+						"short": "Default"
+					},
 					"dexterity": {
 						"long": "Dexterity",
 						"short": "DEX"
@@ -75,6 +79,7 @@
 				"key": "Key",
 				"largeWeapon": "Large Weapon?",
 				"level": "Level",
+				"magicAttribute": "Casting Attribute",
 				"magicKind": "Type",
 				"magicLevel": "Level",
 				"name": "Name",

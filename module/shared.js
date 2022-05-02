@@ -76,6 +76,14 @@ export function generateDieRollFormula(options={}) {
         }
     }
 
+    if(options.modifier && Number.isInteger(options.modifier) && options.modifier !== 0) {
+        if(options.modifier > 0) {
+            formula = `${formula} + ${options.modifier}`;
+        } else {
+            formula = `${formula} - ${Math.abs(options.modifier)}`;
+        }
+    }
+
     return(formula);
 }
 
@@ -106,10 +114,8 @@ export function initializeCollapsibleWidget(element, state) {
     }
 
     if(state.exists(key))  {
-        console.log("Fetching the state.");
         setting = state.get(key);
     } else {
-        console.log("Assigning the state.");
         state.set(key, setting);
     }
 
@@ -225,7 +231,6 @@ export function toggleAttributeTestDisplay(event) {
 function initializeTabs(state) {
     let tabContainers = document.querySelectorAll(".bh2e-tabs-container");
 
-    console.log(`Found ${tabContainers.length} tab containers.`);
     for(var i = 0; i < tabContainers.length; i++) {
         let container = tabContainers[i];
         let tabs      = container.querySelectorAll(".bh2e-tab");

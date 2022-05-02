@@ -42,7 +42,6 @@
 	display: grid;
 	grid-template-columns: auto 40px;
 	grid-gap: 0 5px;
-	justify-content: center;
 	line-height: 30px;
 	margin: 10px 0;
 	vertical-align: middle;
