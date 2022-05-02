@@ -1,3 +1,4 @@
+import AttackRollDialog from '../dialogs/attack_roll_dialog.js';
 import {castMagic,
         castMagicAsRitual,
         prepareMagic,
@@ -16,9 +17,9 @@ export default class BH2eCharacterSheet extends ActorSheet {
     static get defaultOptions() {
         return(mergeObject(super.defaultOptions,
                            {classes:  ["bh2e", "sheet", "character"],
-                            height:   850,
+                            height:   825,
                             template: "systems/bh2e/templates/sheets/character-sheet.html",
-                            width:    750}));
+                            width:    800}));
     }
 
     /** @override */
@@ -112,7 +113,15 @@ export default class BH2eCharacterSheet extends ActorSheet {
                     break;
 
                 case "weapon":
-                    weapons.push(item);
+                    weapons.push({actorId:     this.actor.id,
+                                  attribute:   item.data.attribute,
+                                  description: item.data.description,
+                                  id:          item._id,
+                                  kind:        item.data.kind,
+                                  name:        item.name,
+                                  rarity:      item.data.rarity,
+                                  size:        item.data.size});
+                    //weapons.push(item);
                     break;
 
                 default:
@@ -356,7 +365,11 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let actor   = findActorFromItemId(element.dataset.id);
 
         event.preventDefault();
-        logAttackRoll(actor.id, element.dataset.id, event.shiftKey, event.ctrlKey);
+        if(!event.altKey) {
+            logAttackRoll(actor.id, element.dataset.id, event.shiftKey, event.ctrlKey);
+        } else {
+            AttackRollDialog.build(event).then((dialog) => dialog.render(true));
+        }
 
         return(false);
     }
