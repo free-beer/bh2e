@@ -79,7 +79,7 @@
 				"key": "Key",
 				"largeWeapon": "Large Weapon?",
 				"level": "Level",
-				"magicAttribute": "Casting Attribute",
+				"magicAttribute": "Attribute",
 				"magicKind": "Type",
 				"magicLevel": "Level",
 				"name": "Name",

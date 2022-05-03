@@ -417,7 +417,7 @@
 
 .bh2e-spell-sheet-body {
 	display: grid;
-	grid-template-columns: 128px auto;
+	grid-template-columns: 175px auto;
 	grid-gap: 5px 10px;
 }
 
