@@ -111,7 +111,7 @@
 
 .bh2-creature-ability-detail-column {
 	font-size: 1.1em;
-	width: 90%;
+	margin-right: 0 5px;
 }
 
 .bh2e-creature-ability-entry {
@@ -126,13 +126,21 @@
 	font-weight: bold;
 }
 
+.bh2-creature-ability-notes-container {
+	text-align: justify;
+}
+
 .bh2e-creature-attack-container {
-	margin: 5px 5px 10px 5px;
+	margin: 0 5px;
 }
 
 .bh2e-creature-attack-header {
 	font-size: 1.2em;
 	font-weight: bold;
+}
+
+.bh2e-creature-attack-notes {
+	text-align: justify;
 }
 
 .bh2e-creature-attack-targets {
