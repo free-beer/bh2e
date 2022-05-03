@@ -160,7 +160,7 @@
 .bh2e-cs-container {
 	display: grid;
 	font-size: 1.1em;
-	grid-template-columns: 15% 85%;
+	grid-template-columns: 100px auto;
 	padding: 5px;
 }
 

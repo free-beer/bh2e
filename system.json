@@ -6,7 +6,7 @@
   "authors": [],
   "url": "https://github.com/free-beer/bh2e",
   "flags": {},
-  "version": "0.4.0",
+  "version": "0.4.1",
   "minimumCoreVersion": "0.7.5",
   "compatibleCoreVersion": "9",
   "scripts": [],
@@ -28,6 +28,6 @@
   "dependencies": [],
   "socket": false,
   "manifest": "https://raw.githubusercontent.com/free-beer/bh2e/master/system.json",
-  "download": "https://github.com/free-beer/bh2e/archive/refs/tags/v0.4.0.zip",
+  "download": "https://github.com/free-beer/bh2e/archive/refs/tags/v0.4.1.zip",
   "protected": false
 }
