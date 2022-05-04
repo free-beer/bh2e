@@ -2,8 +2,9 @@
     <div class="bh2e-weapon-sheet-body">
         <section>
             <img src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+            <hr><hr>
 
-            <field class="bh2e-field">
+            <div class="bh2e-field-row bh2e-field-row-balanced">
                 <label for="data.kind" class="bh2e-label">{{localize "bh2e.fields.labels.weaponKind"}}</label>
                 <select name="data.kind" class="bh2e-input bh2e-select">
             {{#select data.kind}}
@@ -12,9 +13,9 @@
               {{/each}}
             {{/select}}
                 </select>
-            </field>
+            </div>
 
-            <field class="bh2e-field">
+            <div class="bh2e-field-row bh2e-field-row-balanced">
                 <label for="data.size" class="bh2e-label">{{localize "bh2e.fields.labels.weaponSize"}}</label>
                 <select name="data.size" class="bh2e-input bh2e-select">
             {{#select data.size}}
@@ -23,9 +24,9 @@
               {{/each}}
             {{/select}}
                 </select>
-            </field>
+            </div>
 
-            <field class="bh2e-field">
+            <div class="bh2e-field-row bh2e-field-row-balanced">
                 <label for="data.testAttribute.value" class="bh2e-label">{{localize "bh2e.fields.labels.testAttribute"}}</label>
                 <select name="data.attribute" class="bh2e-input bh2e-select">
             {{#select data.attribute}}
@@ -34,9 +35,9 @@
               {{/each}}
             {{/select}}
                 </select>
-            </field>
+            </div>
 
-            <field class="bh2e-field">
+            <div class="bh2e-field-row bh2e-field-row-balanced">
                 <label for="data.rarity" class="bh2e-label">{{localize "bh2e.fields.labels.rarity"}}</label>
                 <select name="data.rarity" class="bh2e-input bh2e-select">
             {{#select data.rarity}}
@@ -45,9 +46,10 @@
               {{/each}}
             {{/select}}
                 </select>
+            </div>
         </section>
 
-        <section>
+        <section class="bh2e-weapon-sheet-title">
             <hr>
             <input name="name" placeholder="{{localize 'bh2e.fields.placeholders.name'}}" type="text" value="{{item.name}}"/>
             <hr>

@@ -93,7 +93,7 @@
 				"size": "Size",
 				"tag": "Tag",
 				"targetQuantity": "Target Quantity",
-				"testAttribute": "Attack Attribute",
+				"testAttribute": "Attribute",
 				"totalDice": "Total Dice",
 				"type": "Type",
 				"unarmedDamage": "Unarmed Damage",
