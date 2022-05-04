@@ -128,6 +128,12 @@
 	text-align: justify;
 }
 
+.bh2e-creature-attack-body {
+	display: grid;
+	grid-template-columns: 190px auto;
+	grid-gap: 5px 10px;
+}
+
 .bh2e-creature-attack-container {
 	margin: 0 5px;
 }

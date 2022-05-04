@@ -1,45 +1,48 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <field class="bh2e-field">
-        <label class="bh2e-label" for="name">{{localize "bh2e.fields.labels.name"}}</label>
-        <input name="name" type="text" value="{{item.name}}"/>
-    </field>
+    <hr>
+    <input name="name" placeholder="{{localize 'bh2e.fields.placeholders.name'}}" type="text" value="{{item.name}}"/>
+    <hr>
 
-    <div class="bh2e-grid bh2e-grid-4-col">
-        <field class="bh2e-field">
-            <label class="bh2e-label" for="data.attribute">{{localize "bh2e.fields.labels.attribute"}}</label>
-            <select name="data.attribute" class="bh2e-select">
-          {{#select data.attribute}}
-            {{#each config.attributeList as |label value|}}
-                <option value="{{value}}">{{localize label}}</option>
-            {{/each}}
-          {{/select}}
-            </select>
-        </field>
+    <div class="bh2e-creature-attack-body">
+        <section>
+            <div class="bh2e-field-row">
+                <label class="bh2e-label" for="data.targetQuantity">{{localize "bh2e.fields.labels.targetQuantity"}}</label>
+                <input name="data.targetQuantity" type="text" value="{{data.targetQuantity}}" class="bh2e-input"/>
+            </div>
 
-        <field class="bh2e-field">
-            <label class="bh2e-label" for="data.damage">{{localize "bh2e.fields.labels.damage"}}</label>
-            <input name="data.damage" type="text" value="{{data.damage}}" class="bh2e-input"/>
-        </field>
+            <div class="bh2e-field-row">
+                <label class="bh2e-label" for="data.damage">{{localize "bh2e.fields.labels.damage"}}</label>
+                <input name="data.damage" type="text" value="{{data.damage}}" class="bh2e-input"/>
+            </div>
 
-        <field class="bh2e-field">
-            <label class="bh2e-label" for="data.range">{{localize "bh2e.fields.labels.range"}}</label>
-            <select name="data.range" class="bh2e-select">
-          {{#select data.range}}
-            {{#each config.ranges as |label value|}}
-                <option value="{{value}}">{{localize label}}</option>
-            {{/each}}
-          {{/select}}
-            </select>
-        </field>
+            <div class="bh2e-field-row bh2e-field-row-balanced">
+                <label class="bh2e-label" for="data.range">{{localize "bh2e.fields.labels.range"}}</label>
+                <select name="data.range" class="bh2e-select">
+            {{#select data.range}}
+                {{#each config.ranges as |label value|}}
+                    <option value="{{value}}">{{localize label}}</option>
+                {{/each}}
+            {{/select}}
+                </select>
+            </div>
 
-        <field class="bh2e-field">
-            <label class="bh2e-label" for="data.targetQuantity">{{localize "bh2e.fields.labels.targetQuantity"}}</label>
-            <input name="data.targetQuantity" type="text" value="{{data.targetQuantity}}" class="bh2e-input"/>
-        </field>
+            <div class="bh2e-field-row bh2e-field-row-balanced">
+                <label class="bh2e-label" for="data.attribute">{{localize "bh2e.fields.labels.attribute"}}</label>
+                <select name="data.attribute" class="bh2e-select">
+            {{#select data.attribute}}
+                {{#each config.attributeList as |label value|}}
+                    <option value="{{value}}">{{localize label}}</option>
+                {{/each}}
+            {{/select}}
+                </select>
+            </div>
+        </section>
+
+        <section>
+            <field class="bh2e-field">
+                <h2>{{localize "bh2e.fields.labels.notes"}}</h2>
+                {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
+            </field>
+        </section>
     </div>
-
-    <field class="bh2e-field">
-        <h2>{{localize "bh2e.fields.labels.notes"}}</h2>
-        {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
-    </field>
 </form>
