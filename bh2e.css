@@ -227,7 +227,7 @@
 
 .bh2e-equipment-sheet-body {
 	display: grid;
-	grid-template-columns: 128px auto;
+	grid-template-columns: 200px auto;
 	grid-gap: 5px 10px;
 }
 
