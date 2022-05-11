@@ -1,0 +1,245 @@
+{
+	"bh2e": {
+		"buttons": {
+			"roll": "Tirada"
+		},
+		"dialogs": {
+			"titles": {
+				"attackRoll": "Tirada de ataque"
+			}
+		},
+		"dice": {
+			"one": "1",
+			"d4": "1d4",
+			"d6": "1d6",
+			"d8": "1d8",
+			"d10": "1d10",
+			"d12": "1d12",
+			"d20": "1d20",
+			"special": "Otro (Consulta las Capacidades)"
+		},
+		"fields": {
+			"headers": {
+				"abilities": "Capacidades",
+				"armour": "Armadura",
+				"background": "Descripción",
+				"equipment": "Equipo",
+				"weapons": "Armas"
+			},
+			"labels": {
+				"abilities": "Capacidades",
+				"armedDamage": "Daño con armas",
+				"armourValue": "Valor de protección",
+				"attacks": "Ataques",
+				"attribute": "Características",
+				"attributes": {
+					"charisma": {
+						"long": "Carisma",
+						"short": "CAR"
+					},
+					"constitution": {
+						"long": "constitución",
+						"short": "CON"
+					},
+					"default": {
+						"long": "Predeterminado",
+						"short": "Predeterminado"
+					},
+					"dexterity": {
+						"long": "Destreza",
+						"short": "DES"
+					},
+					"intelligence": {
+						"long": "Inteligencia",
+						"short": "INT"
+					},
+					"strength": {
+						"long": "Fuerza",
+						"short": "FUE"
+					},
+					"wisdom": {
+						"long": "Sabiduría",
+						"short": "SAB"
+					}
+				},
+				"baseUsageDie": "Dado de uso",
+				"brokenDice": "Dados de rotura",
+				"className": "Clase",
+				"coinsValue": "Monedas",
+				"currentUsageDie": "Dado actual",
+				"damage": "Daño",
+				"description": "Descripción",
+				"dice": "Dados",
+				"exhausted": "Agotado",
+				"hitDice": "Dados de golpe",
+				"hitDie": "Dado de golpe",
+				"hitPoints": "Puntos de golpe",
+				"hitPointsMax": "PG máximos",
+				"hitPointsValue": "PG actuales",
+				"key": "Key",
+				"largeWeapon": "¿Arma grande?",
+				"level": "Nivel",
+				"magicAttribute": "Característica",
+				"magicKind": "Tipo",
+				"magicLevel": "Nivel",
+				"name": "Nombre",
+				"none": "Ninguno",
+				"notApplicable": "-",
+				"notes": "Notas",
+				"playerName": "Nombre del jugador",
+				"quantity": "Cantidad",
+				"range": "Alcance",
+				"rarity": "Rareza",
+				"size": "Tamaño",
+				"tag": "Etiqueta",
+				"targetQuantity": "Target Quantity",
+				"testAttribute": "Característica",
+				"totalDice": "Dados totales",
+				"type": "Tipo",
+				"unarmedDamage": "Daño desarmado",
+				"usageDie": "Dado de uso",
+				"weapon": "Arma",
+				"weaponKind": "Kind",
+				"weaponSize": "Tamaño"
+			},
+			"placeholders": {
+				"name": "Introduce un nombre"
+			},
+			"titles": {
+				"breakArmourDie": "Dado de rotura",
+				"castPrayer": "Realiza esta plegaria",
+				"castPrayerAsRitual": "Realizar esta plegaria como un ritual",
+				"castSpell": "Lanzar este conjuro",
+				"castSpellAsRitual": "Lanza este conjuro como un ritual",
+				"decreaseQuantity": "Disminuir cantidad",
+				"deleteAbility": "Eliminar capacidad",
+				"deleteArmour": "Eliminar objeto armadura",
+				"deleteAttack": "Eliminar ataque",
+				"deleteEquipment": "Eliminar Objeto",
+				"deletePrayer": "Eliminar plegaria",
+				"deleteSpell": "Eliminar conjuro",
+				"deleteWeapon": "Eliminar arma",
+				"increaseQuantity": "Aumentar cantidad",
+				"prayerAlreadyCast": "La plegaria ya se ha realizado al menos una vez",
+				"preparePrayer": "Preparar esta plegaria",
+				"prepareSpell": "Preparar este conjuro",
+				"repairAllArmourDie": "Reparar todos los objetos armadura",
+				"repairArmourDie": "Reparar un único dado de este objeto",
+				"resetAllUsageDice": "Restablecer todos los Dados de uso",
+				"resetUsageDie": "Restablecer Dado de uso",
+				"rollAttack": "Tirada de ataque",
+				"rollAttributeTest": "Tirada de prueba de característica",
+				"rollUsageDie": "Tirada de Dado de uso",
+				"spellAlreadyCast": "El conjuro ya se ha lanzado al menos una vez",
+				"unprepared": "No preparado",
+				"unpreparePrayer": "No preparar esta plegaria",
+				"unprepareSpell": "No preparar este conjuro"
+			}
+		},
+		"initiative": {
+			"roll": "Tirando DES para la iniciativa."
+		},
+		"magic": {
+			"kinds": {
+				"prayer": "Plegaria",
+				"spell": "Conjuro"
+			}
+		},
+		"messages": {
+			"attributeTestFailed": "La prueba fue un fallo.",
+			"attributeTestSuccess": "La prueba fue un éxito.",
+			"attacking": "%NAME% ataca con %WEAPON%",
+			"attackMiss": "...pero falla.",
+			"blurbs": {
+				"attacksWith": "Ataca con",
+				"casts": "Lanza el conjuro",
+				"castsRitual": "Intenta lanzarlo como un ritual",
+				"damageInflicted": "Daño infligido",
+				"spellLost": "Este conjuro ya no está preparado ni disponible para su uso.",
+				"spellMiscast": "El conjuro no se lanza y el lanzador debe tirar en la tabla de Efectos secundarios mágicos.",
+				"usageDie": "Tirando el Dado de uso para",
+				"usageDieDowngrade": "El Dado de uso desciende a:",
+				"usageDieExhausted": "El Dado de uso se ha agotado para:"
+			},
+			"criticalHit": "...y causa un impacto crítico. Tirando daño...",
+			"errors": {
+				"supplyDepleted": "No se puede restablecer el dado de uso para %ITEM% dado que el recurso se ha agotado.",
+				"usageDieExhausted": "El Dado de uso de %ITEM% ya está agotado."
+			},
+			"labels": {
+				"buttons": {
+					"rollDamage": "Tirada de daño"
+				},
+				"critical": "¡Impacto crítico!",
+				"failure": "Fracaso",
+				"hit": "¡Impacto!",
+				"miss": "Fallo",
+				"success": "Éxito"
+			},
+			"normalHit": "...e impacta. Tirando daño...",
+			"reducingUsageDie": "Dado de uso descendido a %DIE%.",
+			"rollingAttributeTest": "%NAME% está realizando una prueba de característica de %ATTRIBUTE%...",
+			"rollingUsageDie": "Tirando el Dado de uso para %NAME%.",
+			"titles": {
+				"attackRoll": "Tirada de ataque",
+				"attributeTest": "Prueba: %ATTRIBUTE%",
+				"damageRoll": "Tirada de daño",
+				"failure": "Fallo",
+				"formula": "Tirada",
+				"roll": "Resultado",
+				"success": "Éxito",
+				"test": "Prueba:",
+				"usageDie": "Dado de uso"
+			},
+			"usageDieExhausted": "El Dado de uso para tu %NAME% está agotado."
+		},
+		"ranges": {
+			"close": "Inmediato",
+			"nearby": "Cercano",
+			"faraway": "Lejano",
+			"distant": "Distante",
+			"special": "Especial"
+		},
+		"rarities": {
+			"common": "Común",
+			"exotic": "Exótico",
+			"rare": "Raro"
+		},
+		"rolls": {
+			"advantage": "Ventaja",
+			"disadvantage": "Desventaja",
+			"modifier": "Modificador de la tirada:"
+		},
+		"tabs": {
+			"labels": {
+				"background": "Trasfondo",
+				"basics": "Información básica",
+				"prayers": "Plegarias",
+				"spells": "Conjuros"
+			},
+			"titles": {
+				"level1": "Nivel 1",
+				"level2": "Nivel 2",
+				"level3": "Nivel 3",
+				"level4": "Nivel 4",
+				"level5": "Nivel 5",
+				"level6": "Nivel 6",
+				"level7": "Nivel 7",
+				"level8": "Nivel 8",
+				"level9": "Nivel 9",
+				"level10": "Nivel 10"
+			}
+		},
+		"weapons": {
+			"kinds": {
+				"melee": "Cuerpo a cuerpo",
+				"ranged": "A distancia",
+				"unarmed": "Desarmado"
+			},
+			"sizes": {
+				"large": "Grande",
+				"normal": "Normal"
+			}
+		}
+	}
+}
