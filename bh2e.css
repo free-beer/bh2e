@@ -15,14 +15,14 @@
 
 .bh2e-armour-entry {
 	display: grid;
-	grid-template-columns: 50% 15% 15% 20%;
+	grid-template-columns: 45% 20% 20% 15%;
 	margin: 3px 0;
 }
 
 .bh2e-armour-headers {
 	display: grid;
 	font-weight: bold;
-	grid-template-columns: 50% 15% 15% 20%;
+	grid-template-columns: 45% 20% 20% 15%;
 	margin: 3px 0;
 }
 
@@ -130,7 +130,7 @@
 
 .bh2e-creature-attack-body {
 	display: grid;
-	grid-template-columns: 190px auto;
+	grid-template-columns: 210px auto;
 	grid-gap: 5px 10px;
 }
 
@@ -139,8 +139,11 @@
 }
 
 .bh2e-creature-attack-header {
+	display: grid;
 	font-size: 1.2em;
 	font-weight: bold;
+	grid-template-columns: auto 25px;
+	grid-gap: 3px 0;
 }
 
 .bh2e-creature-attack-notes {
@@ -177,6 +180,7 @@
 }
 
 .bh2e-cs-main-body {
+	min-width: 600px;
 	padding: 5px;
 }
 
@@ -208,14 +212,14 @@
 
 .bh2e-equipment-entry {
 	display: grid;
-	grid-template-columns: 40% 10% 15% 35%;
+	grid-template-columns: 35% 20% 20% 25%;
 	margin: 3px 0;
 }
 
 .bh2e-equipment-headers {
 	display: grid;
 	font-weight: bold;
-	grid-template-columns: 40% 10% 15% 35%;
+	grid-template-columns: 35% 20% 20% 25%;
 	margin: 3px 0;
 }
 
@@ -423,7 +427,7 @@
 
 .bh2e-spell-sheet-body {
 	display: grid;
-	grid-template-columns: 175px auto;
+	grid-template-columns: 215px auto;
 	grid-gap: 5px 10px;
 }
 
@@ -487,14 +491,14 @@
 
 .bh2e-weapon-entry {
 	display: grid;
-	grid-template-columns: 40% 15% 15% 15% 15%;
+	grid-template-columns: 30% 20% 20% 15% 15%;
 	margin: 3px 0;
 }
 
 .bh2e-weapon-headers {
 	display: grid;
 	font-weight: bold;
-	grid-template-columns: 40% 15% 15% 15% 15%;
+	grid-template-columns: 30% 20% 20% 15% 15%;
 	margin: 3px 0;
 }
 

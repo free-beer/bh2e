@@ -210,6 +210,14 @@
 			"disadvantage": "Disadvantage",
 			"modifier": "Roll Modifier:"
 		},
+		"settings": {
+			"options": {
+				"randomizeHP": {
+					"blurb": "Indicates whether creatures added to scenes will have their HP randomly generated.",
+					"title": "Randomize Creature HP"
+				}
+			}
+		},
 		"tabs": {
 			"labels": {
 				"background": "Background",

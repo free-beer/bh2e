@@ -99,8 +99,8 @@ Hooks.once("init", function() {
 
     game.settings.register("bh2e", "randomizeCreatureHP", {config:  true,
                                                            default: false,
-                                                           hint:    "Indicates if creatures added to scenes will have their HP randomly generated.",
-                                                           name:    "Randomize Creature HP",
+                                                           hint:    game.i18n.localize("bh2e.settings.options.randomizeHP.blurb"),
+                                                           name:    game.i18n.localize("bh2e.settings.options.randomizeHP.title"),
                                                            scope:   "world",
                                                            type:    Boolean});
 
