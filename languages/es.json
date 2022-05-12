@@ -38,7 +38,7 @@
 						"short": "CAR"
 					},
 					"constitution": {
-						"long": "constitución",
+						"long": "Constitución",
 						"short": "CON"
 					},
 					"default": {
@@ -213,8 +213,8 @@
 		"settings": {
 			"options": {
 				"randomizeHP": {
-					"blurb": "Indicates whether creatures added to scenes will have their HP randomly generated.",
-					"title": "Randomize Creature HP"
+					"blurb": "Indica si las criaturas añadidas a las escenas tendrán sus PG generados aleatoriamente.",
+					"title": "Aleatorizar PG de la criatura"
 				}
 			}
 		},
