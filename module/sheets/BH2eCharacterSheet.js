@@ -1,4 +1,5 @@
 import AttackRollDialog from '../dialogs/attack_roll_dialog.js';
+import InfoDialog from '../dialogs/info_dialog.js';
 import {castMagic,
         castMagicAsRitual,
         prepareMagic,
@@ -62,6 +63,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         html.find(".bh2e-cast-magic-as-ritual-icon").click(castMagicAsRitual);
         html.find(".bh2e-prepare-magic-icon").click(prepareMagic);
         html.find(".bh2e-unprepare-magic-icon").click(unprepareMagic);
+        html.find(".bh2e-info-element").click((e) => InfoDialog.build(e.currentTarget).then((d) => d.render(true)));
     }
 
     _prepareCharacterData(context) {
