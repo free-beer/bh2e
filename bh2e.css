@@ -28,7 +28,7 @@
 
 .bh2e-armour-section-header {
 	display: grid;
-	grid-template-columns: 90% 10%;
+	grid-template-columns: auto 90px;
 	margin: 3px 0;
 }
 
@@ -321,6 +321,19 @@
 
 .bh2e-horizontal-field-text {
 	grid-template-columns: auto 125px;
+}
+
+.bh2e-info-dialog-content {
+	border: groove 3px;
+	font-size: 1.1em;
+	margin: 5px 0;
+	max-height: 500px;
+	overflow: auto;
+	padding: 5px 10px;
+	text-align: justify;
+}
+.bh2e-info-element {
+	cursor: help;
 }
 
 .bh2e-label {

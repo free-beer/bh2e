@@ -1,9 +1,14 @@
 {
 	"bh2e": {
 		"buttons": {
+			"close": "Close",
 			"roll": "Roll"
 		},
 		"dialogs": {
+			"info": {
+				"empty": "No information available.",
+				"title": "Information"
+			},
 			"titles": {
 				"attackRoll": "Attack Roll"
 			}
@@ -127,6 +132,7 @@
 				"repairArmourDie": "Repair A Single Die On This Item",
 				"resetAllUsageDice": "Reset All Usage Dice",
 				"resetUsageDie": "Reset Usage Die",
+				"rollAllBrokenArmourDice": "Roll Repair For All Broken Armour Dice",
 				"rollAttack": "Roll Attack",
 				"rollAttributeTest": "Roll Attribute Test",
 				"rollUsageDie": "Roll Usage Die",
