@@ -10,7 +10,6 @@ export default class BH2eCombat extends Combat {
             let ids = [];
 
             // Reset all initiative score.
-            console.log("Resetting initiative scores between rounds.");
             for(let combatant of this.combatants) {
                 ids.push(combatant.id);
             }
@@ -72,7 +71,6 @@ export default class BH2eCombat extends Combat {
     async startCombat() {
         let initiatives = {};
 
-        console.log("Starting a new combat.");
         await this._pushRoundInitiatives();
 
         return(super.startCombat());
@@ -95,8 +93,6 @@ export default class BH2eCombat extends Combat {
         } else {
             console.error(`Requested application of initiative scores for round number ${roundIndex + 1} but these are not in the history.`);
         }
-
-        console.log("Previous round method called.");
     }
 
     /**
@@ -177,15 +173,12 @@ export default class BH2eCombat extends Combat {
         let initiatives = {};
         let history     = (this.getFlag("bh2e", "roundHistory") || []).slice();
 
-        console.log("Adding a set of initiative scores to the initiative round history.");
         for(let combatant of this.combatants) {
             initiatives[combatant.id] = combatant.initiative;
         }
         if(roundIndex && roundIndex < history.length) {
-            console.log(`Storing history for round number ${roundIndex + 1}.`);
             history[roundIndex] = initiatives;
         } else {
-            console.log(`Storing history for round number ${history.length + 1}.`);
             history.push(initiatives);
         }
         await this.setFlag("bh2e", "roundHistory", history);
