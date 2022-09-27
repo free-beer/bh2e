@@ -22,8 +22,8 @@ export default class BH2eScene extends Scene {
 
 				tokens.forEach((token) => {
 					let actor = token.actor;
-					if(actor.type === "creature" && actor.data.data.hitDice > 0) {
-						let formula = `${actor.data.data.hitDice}d8`;
+					if(actor.type === "creature" && actor.system.hitDice > 0) {
+						let formula = `${actor.system.hitDice}d8`;
 						(new Roll(formula)).evaluate({async: true}).then((roll) => {
 							let data = {actorData: {
 								            data: {

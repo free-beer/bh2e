@@ -133,8 +133,8 @@ export default class BH2eCombat extends Combat {
         let list = combatantIds.map((id) => {
                     let combatant = this.combatants.get(id);
         
-                    if(combatant.actor.type === "character") {
-                        let dexterity = combatant.actor.data.data.attributes.dexterity;
+                    if(combatant.actor && combatant.actor.type === "character") {
+                        let dexterity = combatant.actor.system.attributes.dexterity;
                         let roll      = new Roll("1d20");
         
                         return(roll.evaluate({async: true})
@@ -161,7 +161,7 @@ export default class BH2eCombat extends Combat {
             scores[0] = 2;
         }
 
-        if(c2.actor.type === "character") {
+        if(c2.actor && c2.actor.type === "character") {
             scores[1] = Number.isNumeric(c2.initiative) ? c2.initiative : 1;
         } else {
             scores[1] = 2;

@@ -22,19 +22,22 @@ export function castMagic(event) {
                                              success: result.successful,
                                              tested: true},
                                  spellName: result.spellName};
-                let data      = {id:   item.id,
-                                 data: {cast:     false,
-                                        prepared: false}};
+                let data      = {_id:    item.id,
+                                 data:   {cast:     false,
+                                          prepared: false}};
 
                 if(result.successful) {
                     data.data.cast             = true;
                     data.data.prepared         = true;
-                    message.roll.labels.result = interpolate("bh2e.messages.labels.success");
+                    message.roll.labels.result   = interpolate("bh2e.messages.labels.success");
                 } else {
                     message.roll.labels.result = interpolate("bh2e.messages.labels.failure");
                 }
                 showMessage(actor, "systems/bh2e/templates/messages/cast-magic.hbs", message);
-                item.update(data, {diff: true});
+                item.update(data); //.then(() => {
+                //     console.log("Rendering the actor sheet!");
+                //     actor.sheet.render(false);
+                // });
             });
     } else {
         console.error(`Failed to locate an actor linked to item id ${element.dataset.id}.`)
@@ -86,31 +89,31 @@ function invokeMagic(magicId, caster) {
     let result        = {attribute:     "",
                          attributeRoll: 0,
                          rollType:      "standard",
-                         spellLevel:    parseInt(magic.data.data.level),
+                         spellLevel:    parseInt(magic.system.level),
                          spellName:     magic.name,
                          successful:    false}
 
     if(event.shiftKey) {
-        if(!magic.data.data.cast) {
+        if(!magic.system.cast) {
             options.kind = result.rollType = "advantage";
         }
-    } else if(event.ctrlKey || magic.data.data.cast) {
+    } else if(event.ctrlKey || magic.system.cast) {
         options.kind = result.rollType = "disadvantage";
     }
-    if(!["", "default"].includes(magic.data.data.attribute)) {
-        attribute = magic.data.data.attribute;
+    if(!["", "default"].includes(magic.system.attribute)) {
+        attribute = magic.system.attribute;
     } else {
-        attribute = (magic.data.data.kind === "prayer" ? "wisdom" : "intelligence");
+        attribute = (magic.system.kind === "prayer" ? "wisdom" : "intelligence");
     }
     formula       = `${generateDieRollFormula(options)}+${result.spellLevel}`;
     attributeTest = new Roll(formula);
 
-    return(attributeTest.roll()
+    return(attributeTest.roll({async: true})
             .then((roll) => {
                 result.attribute     = attribute;
                 result.attributeRoll = attributeTest.total;
                 result.formula       = attributeTest.formula;
-                result.successful    = result.attributeRoll < caster.data.data.attributes[attribute];
+                result.successful    = result.attributeRoll < caster.system.attributes[attribute];
 
                 if(game.dice3d) {
                     game.dice3d.showForRoll(roll);
@@ -127,9 +130,9 @@ export function prepareMagic(event) {
     event.stopPropagation();
     if(actor) {
         let item = actor.items.find((i) => i.id === element.dataset.id)
-        let data = {id:   item.id,
-                    data: {cast:     false,
-                           prepared: true}};
+        let data = {_id:    item.id,
+                    data:   {cast:     false,
+                             prepared: true}};
 
         item.update(data, {diff: true});
     } else {

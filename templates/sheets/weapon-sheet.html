@@ -5,9 +5,9 @@
             <hr><hr>
 
             <div class="bh2e-field-row bh2e-field-row-balanced">
-                <label for="data.kind" class="bh2e-label">{{localize "bh2e.fields.labels.weaponKind"}}</label>
-                <select name="data.kind" class="bh2e-input bh2e-select">
-            {{#select data.kind}}
+                <label for="system.kind" class="bh2e-label">{{localize "bh2e.fields.labels.weaponKind"}}</label>
+                <select name="system.kind" class="bh2e-input bh2e-select">
+            {{#select item.system.kind}}
               {{#each config.weaponKinds as |label value|}}
                     <option value="{{value}}">{{localize label}}</option>
               {{/each}}
@@ -16,9 +16,9 @@
             </div>
 
             <div class="bh2e-field-row bh2e-field-row-balanced">
-                <label for="data.size" class="bh2e-label">{{localize "bh2e.fields.labels.weaponSize"}}</label>
-                <select name="data.size" class="bh2e-input bh2e-select">
-            {{#select data.size}}
+                <label for="system.size" class="bh2e-label">{{localize "bh2e.fields.labels.weaponSize"}}</label>
+                <select name="system.size" class="bh2e-input bh2e-select">
+            {{#select item.system.size}}
               {{#each config.weaponSizes as |label value|}}
                     <option value="{{value}}">{{localize label}}</option>
               {{/each}}
@@ -27,9 +27,9 @@
             </div>
 
             <div class="bh2e-field-row bh2e-field-row-balanced">
-                <label for="data.testAttribute.value" class="bh2e-label">{{localize "bh2e.fields.labels.testAttribute"}}</label>
-                <select name="data.attribute" class="bh2e-input bh2e-select">
-            {{#select data.attribute}}
+                <label for="system.testAttribute.value" class="bh2e-label">{{localize "bh2e.fields.labels.testAttribute"}}</label>
+                <select name="system.attribute" class="bh2e-input bh2e-select">
+            {{#select item.system.attribute}}
               {{#each config.attributeList as |label value|}}
                     <option value="{{value}}">{{localize label}}</option>
               {{/each}}
@@ -38,9 +38,9 @@
             </div>
 
             <div class="bh2e-field-row bh2e-field-row-balanced">
-                <label for="data.rarity" class="bh2e-label">{{localize "bh2e.fields.labels.rarity"}}</label>
-                <select name="data.rarity" class="bh2e-input bh2e-select">
-            {{#select data.rarity}}
+                <label for="system.rarity" class="bh2e-label">{{localize "bh2e.fields.labels.rarity"}}</label>
+                <select name="system.rarity" class="bh2e-input bh2e-select">
+            {{#select item.system.rarity}}
               {{#each config.rarityTypes as |label value|}}
                     <option value="{{value}}">{{localize label}}</option>
               {{/each}}
@@ -55,8 +55,8 @@
             <hr>
 
             <field class="bh2e-editor-field">
-                <label for="data.description" class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
-                {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
+                <label for="system.description" class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
+                {{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
             </field>
         </section>
     </div>

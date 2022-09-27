@@ -6,19 +6,19 @@
     <div class="bh2e-creature-attack-body">
         <section>
             <div class="bh2e-field-row">
-                <label class="bh2e-label" for="data.targetQuantity">{{localize "bh2e.fields.labels.targetQuantity"}}</label>
-                <input name="data.targetQuantity" type="text" value="{{data.targetQuantity}}" class="bh2e-input"/>
+                <label class="bh2e-label" for="system.targetQuantity">{{localize "bh2e.fields.labels.targetQuantity"}}</label>
+                <input name="system.targetQuantity" type="text" value="{{item.system.targetQuantity}}" class="bh2e-input"/>
             </div>
 
             <div class="bh2e-field-row">
-                <label class="bh2e-label" for="data.damage">{{localize "bh2e.fields.labels.damage"}}</label>
-                <input name="data.damage" type="text" value="{{data.damage}}" class="bh2e-input"/>
+                <label class="bh2e-label" for="system.damage">{{localize "bh2e.fields.labels.damage"}}</label>
+                <input name="system.damage" type="text" value="{{item.system.damage}}" class="bh2e-input"/>
             </div>
 
             <div class="bh2e-field-row bh2e-field-row-balanced">
-                <label class="bh2e-label" for="data.range">{{localize "bh2e.fields.labels.range"}}</label>
-                <select name="data.range" class="bh2e-select">
-            {{#select data.range}}
+                <label class="bh2e-label" for="system.range">{{localize "bh2e.fields.labels.range"}}</label>
+                <select name="system.range" class="bh2e-select">
+            {{#select item.system.range}}
                 {{#each config.ranges as |label value|}}
                     <option value="{{value}}">{{localize label}}</option>
                 {{/each}}
@@ -27,9 +27,9 @@
             </div>
 
             <div class="bh2e-field-row bh2e-field-row-balanced">
-                <label class="bh2e-label" for="data.attribute">{{localize "bh2e.fields.labels.attribute"}}</label>
-                <select name="data.attribute" class="bh2e-select">
-            {{#select data.attribute}}
+                <label class="bh2e-label" for="system.attribute">{{localize "bh2e.fields.labels.attribute"}}</label>
+                <select name="system.attribute" class="bh2e-select">
+            {{#select item.system.attribute}}
                 {{#each config.attributeList as |label value|}}
                     <option value="{{value}}">{{localize label}}</option>
                 {{/each}}
@@ -41,7 +41,7 @@
         <section>
             <field class="bh2e-field">
                 <h2>{{localize "bh2e.fields.labels.notes"}}</h2>
-                {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
+                {{editor item.system.notes target="system.notes" button=true owner=owner editable=editable}}
             </field>
         </section>
     </div>

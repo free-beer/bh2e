@@ -231,20 +231,24 @@ export function toggleAttributeTestDisplay(event) {
 function initializeTabs(state) {
     let tabContainers = document.querySelectorAll(".bh2e-tabs-container");
 
+    console.log(`initializeTabs() called, found ${tabContainers.length} tab containers. Containers:`, tabContainers);
     for(var i = 0; i < tabContainers.length; i++) {
         let container = tabContainers[i];
         let tabs      = container.querySelectorAll(".bh2e-tab");
         let selected  = state.get(container.dataset.key, container.dataset.default);
 
+        console.log(`Found ${tabs.length} tab elements. Container:`, container);
         for(var j = 0; j < tabs.length; j++) {
             let tab     = tabs[j];
             let content = document.querySelector(`.${tab.dataset.tab}`);
 
             tab.dataset.key = container.dataset.key;
             if(tab.dataset.tab === selected) {
+                console.log(`Removing the hidden class from the ${tab.dataset.tab} tab.`);
                 content.classList.remove("bh2e-hidden");
                 tab.classList.add("bh2e-selected-tab");
             } else {
+                console.log(`Adding the hidden class from the ${tab.dataset.tab} tab.`);
                 content.classList.add("bh2e-hidden");
                 tab.classList.remove("bh2e-selected-tab");
             }

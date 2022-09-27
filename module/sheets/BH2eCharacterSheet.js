@@ -31,12 +31,12 @@ export default class BH2eCharacterSheet extends ActorSheet {
     /** @override */
     getData() {
         const context   = super.getData();
-        const actorData = context.actor.data;
+        const actorData = context.actor.system;
 
-        context.data  = actorData.data;
-        context.flags = actorData.flags;
+        context.system  = actorData;
+        context.flags   = context.actor.flags;
 
-        if(actorData.type === "character") {
+        if(context.actor.type === "character") {
             this._prepareCharacterData(context);
         }
 
@@ -75,6 +75,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let spells    = [[], [], [], [], [], [], [], [], [], []];
         let weapons   = [];
 
+        console.log(`BH2eCharacterSheet#_prepareCharacterData() => context =`, context);
         context.items.forEach((item) => {
             switch(item.type) {
                 case "ability":
@@ -94,10 +95,10 @@ export default class BH2eCharacterSheet extends ActorSheet {
                     break;
 
                 case "magic":
-                    let index = item.data.level - 1;
+                    let index = item.system.level - 1;
 
                     if(index >= 0 && index < spells.length) {
-                        switch(item.data.kind) {
+                        switch(item.system.kind) {
                             case "prayer":
                                 prayers[index].push(item);
                                 break;
@@ -110,20 +111,19 @@ export default class BH2eCharacterSheet extends ActorSheet {
                                 console.warn("Ignoring character item magic", item);
                         }
                     } else {
-                        console.error(`An invalid level of ${item.data.level} was specified for a spell or prayer.`, item);
+                        console.error(`An invalid level of ${item.system.level} was specified for a spell or prayer.`, item);
                     }
                     break;
 
                 case "weapon":
                     weapons.push({actorId:     this.actor.id,
-                                  attribute:   item.data.attribute,
-                                  description: item.data.description,
+                                  attribute:   item.system.attribute,
+                                  description: item.system.description,
                                   id:          item._id,
-                                  kind:        item.data.kind,
+                                  kind:        item.system.kind,
                                   name:        item.name,
-                                  rarity:      item.data.rarity,
-                                  size:        item.data.size});
-                    //weapons.push(item);
+                                  rarity:      item.system.rarity,
+                                  size:        item.system.size});
                     break;
 
                 default:
@@ -200,11 +200,11 @@ export default class BH2eCharacterSheet extends ActorSheet {
                 let item  = actor.items.find(i => i.id === element.dataset.id);
 
                 if(item) {
-                    if(item.data.data.armourValue.total > item.data.data.armourValue.broken) {
+                    if(item.armourValue.total > item.system.armourValue.broken) {
                         let data = {id: item.id,
                                     data: {
                                       armourValue: {
-                                        broken: item.data.data.armourValue.broken + 1
+                                        broken: item.system.armourValue.broken + 1
                                     }}};
 
                         item.update(data, {diff: true});
@@ -276,11 +276,11 @@ export default class BH2eCharacterSheet extends ActorSheet {
         event.preventDefault();
         if(actor) {
             console.log("Repairing all armour dice for actor id ${actor.id}.");
-            actor.data.items.forEach(function(item) {
+            actor.system.items.forEach(function(item) {
                 let data = {data: {armourValue: {broken: 0}}};
 
                 if(item.type === "armour") {
-                    if(item.data.data.armourValue.broken > 0) {
+                    if(item.system.armourValue.broken > 0) {
                       data.id = item.id;
                       item.update(data, {diff: true})
                     }
@@ -303,11 +303,11 @@ export default class BH2eCharacterSheet extends ActorSheet {
                 let item  = actor.items.find(i => i.id === element.dataset.id);
 
                 if(item) {
-                    if(item.data.data.armourValue.broken > 0) {
+                    if(item.system.armourValue.broken > 0) {
                         let data = {id: item.id,
                                     data: {
                                       armourValue: {
-                                        broken: item.data.data.armourValue.broken - 1
+                                        broken: item.system.armourValue.broken - 1
                                     }}};
 
                         item.update(data, {diff: true});
@@ -397,7 +397,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let item = actor.items.find(i => i.id === itemId);
 
         if(item && item.type === "equipment") {
-            let itemData = item.data.data;
+            let itemData = item.system;
 
             if(itemData.usageDie && itemData.usageDie.maximum !== "none") {
                 if(itemData.quantity > 0) {
@@ -423,7 +423,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let item = actor.items.find(i => i.id === itemId);
 
         if(item && item.type === "equipment") {
-            let itemData = item.data.data;
+            let itemData = item.system;
 
             if(itemData.usageDie && itemData.usageDie.maximum !== "none") {
                 let data = {id: item.id,
@@ -445,7 +445,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let item = actor.items.find(i => i.id === itemId);
 
         if(item && item.type === "equipment") {
-            let itemData = item.data.data;
+            let itemData = item.system;
 
             if(itemData.usageDie && itemData.usageDie.maximum !== "none") {
                 if(itemData.quantity > 0) {

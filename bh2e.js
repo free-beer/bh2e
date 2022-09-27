@@ -49,7 +49,7 @@ async function runMigrations() {
 async function updateCharacterCoins(actors) {
     actors.forEach((actor) => {
         if(actor.type === "character") {
-            let coins  = actor.data.data.coins;
+            let coins  = actor.system.coins;
             let update = false;
 
             console.log(`Checking if '${actor.name}' needs a coins update.`);
@@ -69,7 +69,7 @@ async function updateCharacterCoins(actors) {
 async function updateCreatureHitPoints(actors) {
     actors.forEach((actor) => {
         if(actor.type === "creature") {
-            let hitPoints = actor.data.data.hitPoints;
+            let hitPoints = actor.system.hitPoints;
 
             console.log(`Checking if '${actor.name}' needs an update.`);
             if(!hitPoints) {

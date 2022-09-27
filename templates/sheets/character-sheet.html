@@ -10,27 +10,27 @@
                 </field>
 
                 <field class="bh2e-field">
-                    <label class="bh2e-label" for="data.playerName">{{localize "bh2e.fields.labels.playerName"}}</label>
-                    <input type="text" name="data.playerName" value="{{data.playerName}}" />
+                    <label class="bh2e-label" for="system.playerName">{{localize "bh2e.fields.labels.playerName"}}</label>
+                    <input type="text" name="system.playerName" value="{{system.playerName}}" />
                 </field>
             </div>
 
             <div class="bh2e-character-details-section">
                 <div>
                     <div class="bh2e-horizontal-field bh2e-horizontal-field-text">
-                        <label class="bh2e-label" for="data.className">{{localize "bh2e.fields.labels.className"}}</label>
-                        <input type="text" name="data.className" value="{{data.className}}" />
+                        <label class="bh2e-label" for="system.className">{{localize "bh2e.fields.labels.className"}}</label>
+                        <input type="text" name="system.className" value="{{system.className}}" />
                     </div>
                     
                     <div class="bh2e-horizontal-field bh2e-horizontal-field-number">
-                        <label class="bh2e-label" for="data.level">{{localize "bh2e.fields.labels.level"}}</label>
-                        <input style="text-align: center;" type="number" name="data.level" value="{{data.level}}" />
+                        <label class="bh2e-label" for="system.level">{{localize "bh2e.fields.labels.level"}}</label>
+                        <input style="text-align: center;" type="number" name="system.level" value="{{system.level}}" />
                     </div>
 
                     <div class="bh2e-horizontal-field bh2e-horizontal-field-select-narrow">
-                        <label for="data.hitDie" class="bh2e-label">{{localize "bh2e.fields.labels.hitDie"}}</label>
-                        <select name="data.hitDie" class="bh2e-select">
-                        {{#select data.hitDie}}
+                        <label for="system.hitDie" class="bh2e-label">{{localize "bh2e.fields.labels.hitDie"}}</label>
+                        <select name="system.hitDie" class="bh2e-select">
+                        {{#select system.hitDie}}
                         {{#each config.hitDieTypes as |label value|}}
                             <option value="{{value}}">{{localize label}}</option>
                         {{/each}}
@@ -42,15 +42,15 @@
                 <div>
                     <div class="bh2e-horizontal-field bh2e-horizontal-field-hp">
                         <label class="bh2e-label">{{localize "bh2e.fields.labels.hitPoints"}}</label>
-                        <input style="text-align: center;" type="number" name="data.hitPoints.value" value="{{data.hitPoints.value}}" />
+                        <input style="text-align: center;" type="number" name="system.hitPoints.value" value="{{system.hitPoints.value}}" />
                         <div class="bh2e-text-line"><center>/</center></div>
-                        <input style="text-align: center;" type="number" name="data.hitPoints.max" value="{{data.hitPoints.max}}" />
+                        <input style="text-align: center;" type="number" name="system.hitPoints.max" value="{{system.hitPoints.max}}" />
                     </div>
 
                     <div class="bh2e-horizontal-field bh2e-horizontal-field-select-narrow">
-                        <label for="data.damageDice.armed" class="bh2e-label">{{localize "bh2e.fields.labels.armedDamage"}}</label>
-                        <select name="data.damageDice.armed" class="bh2e-select">
-                        {{#select data.damageDice.armed}}
+                        <label for="system.damageDice.armed" class="bh2e-label">{{localize "bh2e.fields.labels.armedDamage"}}</label>
+                        <select name="system.damageDice.armed" class="bh2e-select">
+                        {{#select system.damageDice.armed}}
                         {{#each config.damageDieTypes as |label value|}}
                             <option value="{{value}}">{{localize label}}</option>
                         {{/each}}
@@ -59,9 +59,9 @@
                     </div>
     
                     <div class="bh2e-horizontal-field bh2e-horizontal-field-select-narrow">
-                        <label for="data.damageDice.unarmed" class="bh2e-label">{{localize "bh2e.fields.labels.unarmedDamage"}}</label>
-                        <select name="data.damageDice.unarmed" class="bh2e-select">
-                        {{#select data.damageDice.unarmed}}
+                        <label for="system.damageDice.unarmed" class="bh2e-label">{{localize "bh2e.fields.labels.unarmedDamage"}}</label>
+                        <select name="system.damageDice.unarmed" class="bh2e-select">
+                        {{#select system.damageDice.unarmed}}
                         {{#each config.damageDieTypes as |label value|}}
                             <option value="{{value}}">{{localize label}}</option>
                         {{/each}}
@@ -72,8 +72,8 @@
 
                 <div>
                     <div class="bh2e-horizontal-field bh2e-horizontal-field-number-wide">
-                        <label class="bh2e-label" for="data.coins">{{localize "bh2e.fields.labels.coinsValue"}}</label>
-                        <input style="text-align: center;" type="number" name="data.coins" value="{{data.coins}}" />
+                        <label class="bh2e-label" for="system.coins">{{localize "bh2e.fields.labels.coinsValue"}}</label>
+                        <input style="text-align: center;" type="number" name="system.coins" value="{{system.coins}}" />
                     </div>
                 </div>
             </div>

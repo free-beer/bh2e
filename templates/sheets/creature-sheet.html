@@ -5,13 +5,13 @@
             <hr><hr>
 
             <div class="bh2e-field-row">
-                <label class="bh2e-label" for="data.hitDice">{{localize "bh2e.fields.labels.hitDice"}}</label>
-                <input type="number" name="data.hitDice" value="{{data.data.hitDice}}" class="bh2e-input" />                
+                <label class="bh2e-label" for="system.hitDice">{{localize "bh2e.fields.labels.hitDice"}}</label>
+                <input type="number" name="system.hitDice" value="{{actor.system.hitDice}}" class="bh2e-input" />                
             </div>
 
             <div class="bh2e-field-row">
-                <label class="bh2e-label" for="data.hitPoints.value">{{localize "bh2e.fields.labels.hitPoints"}}</label>
-                <input type="number" name="data.hitPoints.value" value="{{data.data.hitPoints.value}}" class="bh2e-input" />
+                <label class="bh2e-label" for="system.hitPoints.value">{{localize "bh2e.fields.labels.hitPoints"}}</label>
+                <input type="number" name="system.hitPoints.value" value="{{actor.system.hitPoints.value}}" class="bh2e-input" />
             </div>
         </section>
 
@@ -38,8 +38,8 @@
             <br><hr>
 
             <field class="bh2e-field">
-                <label for="data.description" class="bh2e-label">{{localize "bh2e.fields.labels.notes"}}</label>
-                {{editor content=data.data.notes target="data.notes" button=true owner=owner editable=editable}}
+                <label for="system.notes" class="bh2e-label">{{localize "bh2e.fields.labels.notes"}}</label>
+                {{editor actor.system.notes target="system.notes" button=true owner=owner editable=editable}}
             </field>            
         </section>
     </div>

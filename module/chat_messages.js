@@ -32,7 +32,7 @@ export function logAttackRoll(actorId, weaponId, options={}) {
                             weaponId: weapon.id};
             let settings = {};
 
-            if(weapon.data.data.size === "large") {
+            if(weapon.system.size === "large") {
                 extraDie = "+1d4";
             }
 
@@ -55,7 +55,7 @@ export function logAttackRoll(actorId, weaponId, options={}) {
                                  result:  roll.total,
                                  tested:  true};
 
-                    data.roll.success = (actor.data.data.attributes[weapon.data.data.attribute] > data.roll.result);
+                    data.roll.success = (actor.system.attributes[weapon.system.attribute] > data.roll.result);
 
                     if(!critical) {
                         data.roll.labels.result = interpolate(data.roll.success ? "bh2e.messages.labels.hit" : "bh2e.messages.labels.miss");
@@ -66,10 +66,10 @@ export function logAttackRoll(actorId, weaponId, options={}) {
                     if(data.roll.success) {
                         let damageDie = null;
 
-                        if(weapon.data.data.kind != "unarmed") {
-                            damageDie = actor.data.data.damageDice.armed;
+                        if(weapon.system.kind != "unarmed") {
+                            damageDie = actor.system.damageDice.armed;
                         } else {
-                            damageDie = actor.data.data.damageDice.unarmed;
+                            damageDie = actor.system.damageDice.unarmed;
                         }
 
                         if(damageDie !== "special") {
@@ -117,7 +117,7 @@ export function logAttributeTest(actorId, attribute, shiftKey=false, ctrlKey=fal
                              result:  roll.total,
                              tested:  true};
 
-                data.roll.success = (actor.data.data.attributes[attribute] > data.roll.result);
+                data.roll.success = (actor.system.attributes[attribute] > data.roll.result);
                 data.roll.labels.result = interpolate(data.roll.success ? "bh2e.messages.labels.success" : "bh2e.messages.labels.failure");
                 if(game.dice3d) {
                     game.dice3d.showForRoll(roll);
@@ -169,7 +169,7 @@ export function logUsageDieRoll(itemId) {
         let item = actor.items.find(i => i.id === itemId);
 
         if(item) {
-            let usageDie = item.data.data.usageDie;
+            let usageDie = item.system.usageDie;
             let message  = {actor:   actor.name,
                             actorId: actor.id,
                             item:    item.name,
@@ -206,7 +206,7 @@ export function logUsageDieRoll(itemId) {
                             if(oldDie === "d4") {
                                 message.exhausted          = true;
                                 data.data.usageDie.current = "exhausted";
-                                data.data.quantity         = item.data.data.quantity - 1;
+                                data.data.quantity         = item.system.quantity - 1;
                                 if(data.data.quantity < 0) {
                                     data.data.quantity = 0;
                                 }
@@ -262,7 +262,7 @@ export function showMessage(actor, templateKey, data) {
             let message = {speaker: ChatMessage.getSpeaker(),
                            user:    game.user};
 
-            console.log("Template Data:", data);
+            // console.log("Template Data:", data);
             message.content = template(data);
             ChatMessage.create(message);
         });

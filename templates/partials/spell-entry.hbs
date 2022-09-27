@@ -1,19 +1,20 @@
+{{log .}}
 <div class="bh2e-spell-entry">
     <h3>
         <div class="bh2e-float-right">
-        {{#data.prepared}}
+        {{#system.prepared}}
             <a class="bh2e-action-link bh2e-unprepare-magic-icon" data-id="{{_id}}" href="#" title="{{localize "bh2e.fields.titles.unprepareSpell"}}">
                 <i class="fas fa-ban"></i>
             </a>
             <a class="bh2e-action-link bh2e-cast-magic-icon" data-id="{{_id}}" href="#" title="{{localize "bh2e.fields.titles.castSpell"}}">
                 <i class="fas fa-hand-sparkles"></i>
             </a>
-        {{/data.prepared}}
-        {{^data.prepared}}
+        {{/system.prepared}}
+        {{^system.prepared}}
             <a class="bh2e-action-link bh2e-prepare-magic-icon" data-id="{{_id}}" href="#" title="{{localize "bh2e.fields.titles.prepareSpell"}}">
                 <i class="far fa-eye"></i>
             </a>
-        {{/data.prepared}}
+        {{/system.prepared}}
             <a class="bh2e-action-link bh2e-cast-magic-as-ritual-icon" data-id="{{_id}}" href="#" title="{{localize "bh2e.fields.titles.castSpellAsRitual"}}">
                 <i class="fas fa-book-reader"></i>
             </a>
@@ -22,21 +23,21 @@
             </a>
         </div>
 
-    {{#data.prepared}}
+    {{#system.prepared}}
         <span class="bh2e-magic-name" title="{{name}}">
             {{name}}
-        {{#data.cast}}
+        {{#system.cast}}
             <i class="fas fa-exclamation bh2e-alert-icon" title="{{localize "bh2e.fields.titles.spellAlreadyCast"}}"></i>
-        {{/data.cast}}
+        {{/system.cast}}
         </span>
-    {{/data.prepared}}
-    {{^data.prepared}}
+    {{/system.prepared}}
+    {{^system.prepared}}
         <span class="bh2e-magic-name-unprepared" title="{{name}} ({{localize "bh2e.fields.titles.unprepared"}})">
             {{name}}
         </span>
-    {{/data.prepared}}
+    {{/system.prepared}}
     </h3>
     <div>
-        {{{data.description}}}
+        {{{system.description}}}
     </div>
 </div>

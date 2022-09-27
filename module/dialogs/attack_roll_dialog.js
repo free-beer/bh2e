@@ -82,7 +82,7 @@ export default class AttackRollDialog extends Dialog {
                               disadvantage:  (event.ctrlKey && !event.shiftKey),
                               modifier:      0,
                               weaponId:      weaponId,
-                              weaponKind:    (weapon ? weapon.data.data.kind : "melee"),
+                              weaponKind:    (weapon ? weapon.system.kind : "melee"),
                               weaponName:    (weapon ? weapon.name : ""),
                               weaponUsed:    (weapon ? true : false)};
 

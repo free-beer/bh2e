@@ -1,7 +1,7 @@
 <section class="bh2e-creature-attack-container">
     <div class="bh2e-creature-attack-header">
         <div>
-            {{name}} - {{shortAttributeName data.attribute}} (<em>{{data.targetQuantity}} {{rangeName data.range}}</em>) {{data.damage}} Dmg
+            {{name}} - {{shortAttributeName system.attribute}} (<em>{{system.targetQuantity}} {{rangeName system.range}}</em>) {{system.damage}} Dmg
         </div>
 
         <span>
@@ -12,6 +12,6 @@
     </div>
 
     <div class="bh2e-creature-attack-notes">
-        {{{data.notes}}}
+        {{{system.notes}}}
     </div>
 </section>
