@@ -34,10 +34,7 @@ export function castMagic(event) {
                     message.roll.labels.result = interpolate("bh2e.messages.labels.failure");
                 }
                 showMessage(actor, "systems/bh2e/templates/messages/cast-magic.hbs", message);
-                item.update(data); //.then(() => {
-                //     console.log("Rendering the actor sheet!");
-                //     actor.sheet.render(false);
-                // });
+                item.update(data);
             });
     } else {
         console.error(`Failed to locate an actor linked to item id ${element.dataset.id}.`)

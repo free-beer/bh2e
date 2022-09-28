@@ -75,7 +75,6 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let spells    = [[], [], [], [], [], [], [], [], [], []];
         let weapons   = [];
 
-        console.log(`BH2eCharacterSheet#_prepareCharacterData() => context =`, context);
         context.items.forEach((item) => {
             switch(item.type) {
                 case "ability":
