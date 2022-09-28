@@ -33,6 +33,6 @@
   "dependencies": [],
   "socket": false,
   "manifest": "https://raw.githubusercontent.com/free-beer/bh2e/master/system.json",
-  "download": "https://github.com/free-beer/bh2e/archive/refs/tags/v0.4.5.zip",
+  "download": "https://github.com/free-beer/bh2e/archive/refs/tags/v0.5.0.zip",
   "protected": false
 }
