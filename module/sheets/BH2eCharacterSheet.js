@@ -199,7 +199,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
                 let item  = actor.items.find(i => i.id === element.dataset.id);
 
                 if(item) {
-                    if(item.armourValue.total > item.system.armourValue.broken) {
+                    if(item.system.armourValue.total > item.system.armourValue.broken) {
                         let data = {id: item.id,
                                     data: {
                                       armourValue: {
@@ -275,7 +275,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         event.preventDefault();
         if(actor) {
             console.log("Repairing all armour dice for actor id ${actor.id}.");
-            actor.system.items.forEach(function(item) {
+            actor.items.forEach(function(item) {
                 let data = {data: {armourValue: {broken: 0}}};
 
                 if(item.type === "armour") {
