@@ -226,7 +226,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
         event.preventDefault();
         if(element.dataset.id) {
-            deleteOwnedItem(element.dataset.id);
+            this.actor.deleteEmbeddedDocuments("Item", [element.dataset.id]);
         } else {
             console.error("Delete item called for but item id is not present on the element.");
         }
