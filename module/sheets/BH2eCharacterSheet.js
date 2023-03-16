@@ -233,7 +233,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         return(false);
     }
 
-    _onDecreaseEquipmentQuantityClicked(evemt) {
+    _onDecreaseEquipmentQuantityClicked(event) {
         let element = event.currentTarget;
 
         event.preventDefault();
@@ -251,7 +251,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         return(false);
     }
 
-    _onIncreaseEquipmentQuantityClicked(evemt) {
+    _onIncreaseEquipmentQuantityClicked(event) {
         let element = event.currentTarget;
 
         event.preventDefault();
