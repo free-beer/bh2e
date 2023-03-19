@@ -1,5 +1,3 @@
-import {deleteOwnedItem} from '../shared.js';
-
 export default class BH2eCreatureSheet extends ActorSheet {
     static get defaultOptions() {
         return(mergeObject(super.defaultOptions,

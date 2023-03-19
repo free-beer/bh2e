@@ -1,4 +1,4 @@
-import {findActorFromItemId, generateDieRollFormula, interpolate} from './shared.js';
+import {generateDieRollFormula, interpolate} from './shared.js';
 
 function isRollCritical(roll, options={}) {
     let outcome = false;
@@ -162,9 +162,7 @@ export function logDamageRoll(event) {
     return(false);
 }
 
-export function logUsageDieRoll(itemId) {
-    let actor = findActorFromItemId(itemId);
-
+export function logUsageDieRoll(actor, itemId) {
     if(actor) {
         let item = actor.items.find(i => i.id === itemId);
 

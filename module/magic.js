@@ -1,9 +1,8 @@
-import {findActorFromItemId, generateDieRollFormula, interpolate} from './shared.js';
+import {generateDieRollFormula, interpolate} from './shared.js';
 import {showMessage} from './chat_messages.js';
 
-export function castMagic(event) {
+export function castMagic(event, actor) {
     let element = event.currentTarget;
-    let actor   = findActorFromItemId(element.dataset.id);
 
     event.preventDefault();
     event.stopPropagation();
@@ -43,9 +42,8 @@ export function castMagic(event) {
     return(false);
 }
 
-export function castMagicAsRitual(event) {
+export function castMagicAsRitual(event, actor) {
     let element = event.currentTarget;
-    let actor   = findActorFromItemId(element.dataset.id);
 
     event.preventDefault();
     event.stopPropagation();
@@ -119,9 +117,8 @@ function invokeMagic(magicId, caster) {
             }));
 }
 
-export function prepareMagic(event) {
+export function prepareMagic(event, actor) {
     let element = event.currentTarget;
-    let actor   = findActorFromItemId(element.dataset.id);
 
     event.preventDefault();
     event.stopPropagation();
@@ -138,9 +135,8 @@ export function prepareMagic(event) {
 }
 
 
-export function unprepareMagic(event) {
+export function unprepareMagic(event, actor) {
     let element = event.currentTarget;
-    let actor   = findActorFromItemId(element.dataset.id);
 
     event.preventDefault();
     event.stopPropagation();

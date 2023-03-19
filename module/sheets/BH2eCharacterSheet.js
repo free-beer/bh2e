@@ -4,9 +4,7 @@ import {castMagic,
         castMagicAsRitual,
         prepareMagic,
         unprepareMagic} from '../magic.js';
-import {deleteOwnedItem,
-        findActorFromItemId,
-        generateDieRollFormula,
+import {generateDieRollFormula,
         initializeCharacterSheetUI,
         interpolate,
         onTabSelected} from '../shared.js';
@@ -59,10 +57,10 @@ export default class BH2eCharacterSheet extends ActorSheet {
         html.find(".bh2e-reset-usage-die-icon").click(this._onResetUsageDieClicked.bind(this));
         html.find(".bh2e-increase-quantity-icon").click(this._onIncreaseEquipmentQuantityClicked.bind(this));
         html.find(".bh2e-decrease-quantity-icon").click(this._onDecreaseEquipmentQuantityClicked.bind(this));
-        html.find(".bh2e-cast-magic-icon").click(castMagic);
-        html.find(".bh2e-cast-magic-as-ritual-icon").click(castMagicAsRitual);
-        html.find(".bh2e-prepare-magic-icon").click(prepareMagic);
-        html.find(".bh2e-unprepare-magic-icon").click(unprepareMagic);
+        html.find(".bh2e-cast-magic-icon").click((e) => castMagic(e, this.actor));
+        html.find(".bh2e-cast-magic-as-ritual-icon").click((e) => castMagicAsRitual(e, this.actor));
+        html.find(".bh2e-prepare-magic-icon").click((e) => prepareMagic(e, this.actor));
+        html.find(".bh2e-unprepare-magic-icon").click((e) => unprepareMagic(e, this.actor));
         html.find(".bh2e-info-element").click((e) => InfoDialog.build(e.currentTarget).then((d) => d.render(true)));
     }
 
@@ -194,7 +192,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         event.preventDefault();
         if(element.dataset.id) {
             console.log(`Breakage of armour die on armour item id ${element.dataset.id}.`);
-            let actor = findActorFromItemId(element.dataset.id);
+            let actor = this.actor;
             if(actor) {
                 let item  = actor.items.find(i => i.id === element.dataset.id);
 
@@ -238,7 +236,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
         event.preventDefault();
         if(element.dataset.id) {
-            let actor = findActorFromItemId(element.dataset.id);
+            let actor = this.actor;
 
             if(actor) {
                 this.decrementEquipmentQuantity(actor, element.dataset.id)
@@ -256,7 +254,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
         event.preventDefault();
         if(element.dataset.id) {
-            let actor = findActorFromItemId(element.dataset.id);
+            let actor = this.actor;
             if(actor) {
                 this.incrementEquipmentQuantity(actor, element.dataset.id)
             } else {
@@ -297,7 +295,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         event.preventDefault();
         if(element.dataset.id) {
             console.log(`Repairing of armour die on armour item id ${element.dataset.id}.`);
-            let actor = findActorFromItemId(element.dataset.id);
+            let actor = this.actor;
             if(actor) {
                 let item  = actor.items.find(i => i.id === element.dataset.id);
 
@@ -348,7 +346,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
         event.preventDefault();
         if(itemId) {
-            let actor = findActorFromItemId(itemId);
+            let actor = this.actor;
 
             if(actor) {
                 this.resetUsageDie(actor, itemId);
@@ -363,7 +361,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
     _onRollAttackClicked(event) {
         let element = event.currentTarget;
-        let actor   = findActorFromItemId(element.dataset.id);
+        let actor   = this.actor;
 
         event.preventDefault();
         if(!event.altKey) {
@@ -388,7 +386,8 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let element = event.currentTarget;
 
         event.preventDefault();
-        logUsageDieRoll(element.dataset.id);
+        let actor = this.actor
+        logUsageDieRoll(actor, element.dataset.id);
         return(false);
     }
 
