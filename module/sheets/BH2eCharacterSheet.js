@@ -62,6 +62,13 @@ export default class BH2eCharacterSheet extends ActorSheet {
         html.find(".bh2e-prepare-magic-icon").click((e) => prepareMagic(e, this.actor));
         html.find(".bh2e-unprepare-magic-icon").click((e) => unprepareMagic(e, this.actor));
         html.find(".bh2e-info-element").click((e) => InfoDialog.build(e.currentTarget).then((d) => d.render(true)));
+
+        // Bit of a kludge to avoid underlying anchors being clicked where icons
+        // have been set with click event handlers (issue #35).
+        html.find(".bh2e-action-link").click((e) => {
+            e.preventDefault();
+            return(false);
+        });
     }
 
     _prepareCharacterData(context) {
