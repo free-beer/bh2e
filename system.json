@@ -15,7 +15,7 @@
   "version": "0.5.5",
   "compatibility": {
     "minimum": 10,
-    "verified": "10.286"
+    "verified": "10.291"
   },
   "scripts": [],
   "esmodules": [
