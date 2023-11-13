@@ -1,33 +1,33 @@
 <div class="bh2e-equipment-entry">
-    <div>
-    {{#if (eq data.usageDie.current "exhausted")}}
+    <div class="bh2e-info-element" data-description="{{system.description}}">
+    {{#if (eq system.usageDie.current "exhausted")}}
         <s>{{name}}</s>
     {{else}}
         <span>{{name}}</span>
     {{/if}}
     </div>
     <div>
-        <center>{{data.quantity}}</center>
+        <center>{{system.quantity}}</center>
     </div>
     <div>
         <center>
-        {{#if (eq data.usageDie.maximum "none")}}
+        {{#if (eq system.usageDie.maximum "none")}}
             {{localize "bh2e.fields.labels.notApplicable"}}
         {{else}}
-          {{#if (eq data.usageDie.current "none")}}
-              1{{data.usageDie.maximum}}
+          {{#if (eq system.usageDie.current "none")}}
+              1{{system.usageDie.maximum}}
           {{else}}
-            {{#if (eq data.usageDie.current "exhausted")}}
+            {{#if (eq system.usageDie.current "exhausted")}}
                 {{localize "bh2e.fields.labels.exhausted"}}
             {{else}}
-                1{{data.usageDie.current}}
+                1{{system.usageDie.current}}
             {{/if}}
           {{/if}}
         {{/if}}
         </center>
     </div>
     <div>
-    {{#unless  (eq data.usageDie.maximum "none")}}
+    {{#unless  (eq system.usageDie.maximum "none")}}
         <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.rollUsageDie"}}">
             <i class="fas fa-dice-two bh2e-roll-usage-die-icon" data-id="{{_id}}"></i>
         </a>

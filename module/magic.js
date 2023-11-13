@@ -7,35 +7,35 @@ export function castMagic(event) {
 
     event.preventDefault();
     event.stopPropagation();
-    console.log(`The castMagic() function was invoked with an item id of ${element.dataset.id}.`);
     if(actor) {
-        let result    = invokeMagic(element.dataset.id, actor);
-        let attribute = interpolate(`bh2e.fields.labels.attributes.${result.attribute}.long`);
-        let message   = {lost:      !result.successful,
-                         miscast:   false,
-                         ritual:    false,
-                         roll:      {formula: result.formula,
-                                     labels: {result: "",
-                                              title:  interpolate("bh2e.messages.titles.attributeTest", {attribute: attribute})},
-                                     result:  result.attributeRoll,
-                                     success: result.successful,
-                                     tested: true},
-                         spellName: result.spellName};
-        let data      = {_id:  element.dataset.id,
-                         data: {cast:     false,
-                                prepared: false}};
-        let total     = result.attributeRoll + result.spellLevel;
+        invokeMagic(element.dataset.id, actor)
+            .then((result) => {
+                let attribute = interpolate(`bh2e.fields.labels.attributes.${result.attribute}.long`);
+                let item      = actor.items.find((i) => i.id === element.dataset.id);
+                let message   = {lost:      !result.successful,
+                                 miscast:   false,
+                                 ritual:    false,
+                                 roll:      {formula: result.formula,
+                                             labels: {result: "",
+                                                      title:  interpolate("bh2e.messages.titles.attributeTest", {attribute: attribute})},
+                                             result:  result.attributeRoll,
+                                             success: result.successful,
+                                             tested: true},
+                                 spellName: result.spellName};
+                let data      = {_id:    item.id,
+                                 data:   {cast:     false,
+                                          prepared: false}};
 
-        console.log(`Attribute Test: Roll=${result.attributeRoll}, Level=${result.spellLevel}, Total=${result.attributeRoll + result.spellLevel}`);
-        if(result.successful) {
-            data.data.cast             = true;
-            data.data.prepared         = true;
-            message.roll.labels.result = interpolate("bh2e.messages.labels.success");
-        } else {
-            message.roll.labels.result = interpolate("bh2e.messages.labels.failure");
-        }
-        showMessage(actor, "systems/bh2e/templates/messages/cast-magic.hbs", message);
-        actor.updateOwnedItem(data, {diff: true});
+                if(result.successful) {
+                    data.data.cast             = true;
+                    data.data.prepared         = true;
+                    message.roll.labels.result   = interpolate("bh2e.messages.labels.success");
+                } else {
+                    message.roll.labels.result = interpolate("bh2e.messages.labels.failure");
+                }
+                showMessage(actor, "systems/bh2e/templates/messages/cast-magic.hbs", message);
+                item.update(data);
+            });
     } else {
         console.error(`Failed to locate an actor linked to item id ${element.dataset.id}.`)
     }
@@ -49,29 +49,29 @@ export function castMagicAsRitual(event) {
 
     event.preventDefault();
     event.stopPropagation();
-    console.log(`The castMagicAsRitual() function was invoked with an item id of ${element.dataset.id}.`);
     if(actor) {
         let result    = invokeMagic(element.dataset.id, actor);
-        let attribute = interpolate(`bh2e.fields.labels.attributes.${result.attribute}.long`);
-        let message   = {lost:      false,
-                         miscast:   !result.successful,
-                         ritual:    true,
-                         roll:      {formula: result.formula,
-                                     labels: {result: "",
-                                              title:  interpolate("bh2e.messages.titles.attributeTest", {attribute: attribute})},
-                                     result:  result.attributeRoll,
-                                     success: result.successful,
-                                     tested: true},
-                         spellName: result.spellName};
+        invokeMagic(element.dataset.id, actor)
+            .then((result) => {
+                let attribute = interpolate(`bh2e.fields.labels.attributes.${result.attribute}.long`);
+                let message   = {lost:      false,
+                                 miscast:   !result.successful,
+                                 ritual:    true,
+                                 roll:      {formula: result.formula,
+                                             labels: {result: "",
+                                                      title:  interpolate("bh2e.messages.titles.attributeTest", {attribute: attribute})},
+                                             result:  result.attributeRoll,
+                                             success: result.successful,
+                                             tested: true},
+                                 spellName: result.spellName};
 
-        let total     = result.attributeRoll + result.spellLevel;
-
-        if(result.successful) {
-            message.roll.labels.result = interpolate("bh2e.messages.labels.success");
-        } else {
-            message.roll.labels.result = interpolate("bh2e.messages.labels.failure");
-        }
-        showMessage(actor, "systems/bh2e/templates/messages/cast-magic.hbs", message);
+                if(result.successful) {
+                    message.roll.labels.result = interpolate("bh2e.messages.labels.success");
+                } else {
+                    message.roll.labels.result = interpolate("bh2e.messages.labels.failure");
+                }
+                showMessage(actor, "systems/bh2e/templates/messages/cast-magic.hbs", message);
+            });
     } else {
         console.error(`Failed to locate an actor linked to item id ${element.dataset.id}.`)
     }
@@ -86,28 +86,37 @@ function invokeMagic(magicId, caster) {
     let result        = {attribute:     "",
                          attributeRoll: 0,
                          rollType:      "standard",
-                         spellLevel:    parseInt(magic.data.data.level),
+                         spellLevel:    parseInt(magic.system.level),
                          spellName:     magic.name,
                          successful:    false}
-    let total         = 0;
 
     if(event.shiftKey) {
-        if(!magic.data.data.cast) {
+        if(!magic.system.cast) {
             options.kind = result.rollType = "advantage";
         }
-    } else if(event.ctrlKey || magic.data.data.cast) {
+    } else if(event.ctrlKey || magic.system.cast) {
         options.kind = result.rollType = "disadvantage";
     }
-    attribute     = (magic.data.data.kind === "prayer" ? "wisdom" : "intelligence");
+    if(!["", "default"].includes(magic.system.attribute)) {
+        attribute = magic.system.attribute;
+    } else {
+        attribute = (magic.system.kind === "prayer" ? "wisdom" : "intelligence");
+    }
     formula       = `${generateDieRollFormula(options)}+${result.spellLevel}`;
     attributeTest = new Roll(formula);
-    attributeTest.roll();
-    result.attribute     = attribute;
-    result.attributeRoll = attributeTest.total;
-    result.formula       = attributeTest.formula;
-    result.successful    = result.attributeRoll < caster.data.data.attributes[attribute];
 
-    return(result);
+    return(attributeTest.roll({async: true})
+            .then((roll) => {
+                result.attribute     = attribute;
+                result.attributeRoll = attributeTest.total;
+                result.formula       = attributeTest.formula;
+                result.successful    = result.attributeRoll < caster.system.attributes[attribute];
+
+                if(game.dice3d) {
+                    game.dice3d.showForRoll(roll);
+                }
+                return(result);
+            }));
 }
 
 export function prepareMagic(event) {
@@ -116,13 +125,13 @@ export function prepareMagic(event) {
 
     event.preventDefault();
     event.stopPropagation();
-    console.log(`The prepareMagic() function was invoked with an item id of ${element.dataset.id}.`);
     if(actor) {
-        let data = {_id:  element.dataset.id,
-                    data: {cast:     false,
-                           prepared: true}};
+        let item = actor.items.find((i) => i.id === element.dataset.id)
+        let data = {_id:    item.id,
+                    data:   {cast:     false,
+                             prepared: true}};
 
-        actor.updateOwnedItem(data, {diff: true});
+        item.update(data, {diff: true});
     } else {
         console.error(`Failed to locate an actor linked to item id ${element.dataset.id}.`)
     }
@@ -135,13 +144,13 @@ export function unprepareMagic(event) {
 
     event.preventDefault();
     event.stopPropagation();
-    console.log(`The unprepareMagic() function was invoked with an item id of ${element.dataset.id}.`);
     if(actor) {
-        let data = {_id:  element.dataset.id,
+        let item = actor.items.find((i) => i.id === element.dataset.id);
+        let data = {id:   item.id,
                     data: {cast:     false,
                            prepared: false}};
 
-        actor.updateOwnedItem(data, {diff: true});
+        item.update(data, {diff: true});
     } else {
         console.error(`Failed to locate an actor linked to item id ${element.dataset.id}.`)
     }

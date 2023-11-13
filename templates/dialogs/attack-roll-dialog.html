@@ -1,0 +1,38 @@
+<div class="bh2e-dialog">
+	<section class="bh2e-dialog-header">
+	    {{weaponName}}
+	</section>
+
+	<section class="bh2e-dialog-body">
+		<div class="bh2e-grid-2-col bh2e-grid-wider-column-separation">
+			<div class="bh2e-attack-roll-modifier-field">
+				<label class="bh2e-text-bold">{{localize "bh2e.rolls.modifier"}}</label>
+				<input class="bh2e-roll-modifier-field" name="modifier" type="number" value="{{modifier}}">
+			</div>
+
+			<div>
+				<div class="bh2e-checkbox-row">
+					<div>
+					{{#if advantage}}
+						<input checked name="advantage" type="checkbox">
+					{{else}}
+					    <input name="advantage" type="checkbox">
+					{{/if}}
+				    </div>
+				    <div>{{localize "bh2e.rolls.advantage"}}</div>
+				</div>
+
+				<div class="bh2e-checkbox-row">
+					<div>
+					{{#if disadvantage}}
+						<input checked name="disadvantage" type="checkbox">
+					{{else}}
+					    <input name="disadvantage" type="checkbox">
+					{{/if}}
+				    </div>
+				    <div>{{localize "bh2e.rolls.disadvantage"}}</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

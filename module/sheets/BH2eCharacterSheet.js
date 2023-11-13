@@ -1,3 +1,5 @@
+import AttackRollDialog from '../dialogs/attack_roll_dialog.js';
+import InfoDialog from '../dialogs/info_dialog.js';
 import {castMagic,
         castMagicAsRitual,
         prepareMagic,
@@ -16,9 +18,9 @@ export default class BH2eCharacterSheet extends ActorSheet {
     static get defaultOptions() {
         return(mergeObject(super.defaultOptions,
                            {classes:  ["bh2e", "sheet", "character"],
-                            height:   850,
+                            height:   825,
                             template: "systems/bh2e/templates/sheets/character-sheet.html",
-                            width:    750}));
+                            width:    800}));
     }
 
     /** @override */
@@ -29,12 +31,12 @@ export default class BH2eCharacterSheet extends ActorSheet {
     /** @override */
     getData() {
         const context   = super.getData();
-        const actorData = context.actor.data;
+        const actorData = context.actor.system;
 
-        context.data  = actorData.data;
-        context.flags = actorData.flags;
+        context.system  = actorData;
+        context.flags   = context.actor.flags;
 
-        if(actorData.type === "character") {
+        if(context.actor.type === "character") {
             this._prepareCharacterData(context);
         }
 
@@ -61,6 +63,14 @@ export default class BH2eCharacterSheet extends ActorSheet {
         html.find(".bh2e-cast-magic-as-ritual-icon").click(castMagicAsRitual);
         html.find(".bh2e-prepare-magic-icon").click(prepareMagic);
         html.find(".bh2e-unprepare-magic-icon").click(unprepareMagic);
+        html.find(".bh2e-info-element").click((e) => InfoDialog.build(e.currentTarget).then((d) => d.render(true)));
+
+        // Bit of a kludge to avoid underlying anchors being clicked where icons
+        // have been set with click event handlers (issue #35).
+        html.find(".bh2e-action-link").click((e) => {
+            e.preventDefault();
+            return(false);
+        });
     }
 
     _prepareCharacterData(context) {
@@ -91,10 +101,10 @@ export default class BH2eCharacterSheet extends ActorSheet {
                     break;
 
                 case "magic":
-                    let index = item.data.level - 1;
+                    let index = item.system.level - 1;
 
                     if(index >= 0 && index < spells.length) {
-                        switch(item.data.kind) {
+                        switch(item.system.kind) {
                             case "prayer":
                                 prayers[index].push(item);
                                 break;
@@ -107,12 +117,19 @@ export default class BH2eCharacterSheet extends ActorSheet {
                                 console.warn("Ignoring character item magic", item);
                         }
                     } else {
-                        console.error(`An invalid level of ${item.data.level} was specified for a spell or prayer.`, item);
+                        console.error(`An invalid level of ${item.system.level} was specified for a spell or prayer.`, item);
                     }
                     break;
 
                 case "weapon":
-                    weapons.push(item);
+                    weapons.push({actorId:     this.actor.id,
+                                  attribute:   item.system.attribute,
+                                  description: item.system.description,
+                                  id:          item._id,
+                                  kind:        item.system.kind,
+                                  name:        item.name,
+                                  rarity:      item.system.rarity,
+                                  size:        item.system.size});
                     break;
 
                 default:
@@ -189,14 +206,14 @@ export default class BH2eCharacterSheet extends ActorSheet {
                 let item  = actor.items.find(i => i.id === element.dataset.id);
 
                 if(item) {
-                    if(item.data.data.armourValue.total > item.data.data.armourValue.broken) {
-                        let data = {_id: item.id,
+                    if(item.system.armourValue.total > item.system.armourValue.broken) {
+                        let data = {id: item.id,
                                     data: {
                                       armourValue: {
-                                        broken: item.data.data.armourValue.broken + 1
+                                        broken: item.system.armourValue.broken + 1
                                     }}};
 
-                        actor.updateOwnedItem(data, {diff: true});
+                        item.update(data, {diff: true});
                     }
                 } else {
                     console.error(`Failed to find item id ${element.dataset.id}.`);
@@ -265,13 +282,13 @@ export default class BH2eCharacterSheet extends ActorSheet {
         event.preventDefault();
         if(actor) {
             console.log("Repairing all armour dice for actor id ${actor.id}.");
-            actor.data.items.forEach(function(item) {
+            actor.items.forEach(function(item) {
                 let data = {data: {armourValue: {broken: 0}}};
 
                 if(item.type === "armour") {
-                    if(item.data.armourValue.broken > 0) {
+                    if(item.system.armourValue.broken > 0) {
                       data.id = item.id;
-                      actor.updateOwnedItem(data, {diff: true});
+                      item.update(data, {diff: true})
                     }
                 }
             });
@@ -292,14 +309,14 @@ export default class BH2eCharacterSheet extends ActorSheet {
                 let item  = actor.items.find(i => i.id === element.dataset.id);
 
                 if(item) {
-                    if(item.data.data.armourValue.broken > 0) {
-                        let data = {_id: item.id,
+                    if(item.system.armourValue.broken > 0) {
+                        let data = {id: item.id,
                                     data: {
                                       armourValue: {
-                                        broken: item.data.data.armourValue.broken - 1
+                                        broken: item.system.armourValue.broken - 1
                                     }}};
 
-                        actor.updateOwnedItem(data, {diff: true});
+                        item.update(data, {diff: true});
                     }
                 } else {
                     console.error(`Failed to find item id ${element.dataset.id}.`);
@@ -356,7 +373,11 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let actor   = findActorFromItemId(element.dataset.id);
 
         event.preventDefault();
-        logAttackRoll(actor.id, element.dataset.id, event.shiftKey, event.ctrlKey);
+        if(!event.altKey) {
+            logAttackRoll(actor.id, element.dataset.id, {advantage: event.shiftKey, disadvantage: event.ctrlKey});
+        } else {
+            AttackRollDialog.build(event).then((dialog) => dialog.render(true));
+        }
 
         return(false);
     }
@@ -382,15 +403,15 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let item = actor.items.find(i => i.id === itemId);
 
         if(item && item.type === "equipment") {
-            let itemData = item.data.data;
+            let itemData = item.system;
 
             if(itemData.usageDie && itemData.usageDie.maximum !== "none") {
                 if(itemData.quantity > 0) {
-                    let data = {_id: item.id,
+                    let data = {id: item.id,
                                 data: {
                                   quantity: itemData.quantity - 1
                                 }};
-                    actor.updateOwnedItem(data, {diff: true});
+                    item.update(data, {diff: true});
                 } else {
                     console.warn(`Unable to decrease quantity for the ${item.name} item (id: ${item.id}) as it's already at zero.`);
                 }
@@ -408,14 +429,14 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let item = actor.items.find(i => i.id === itemId);
 
         if(item && item.type === "equipment") {
-            let itemData = item.data.data;
+            let itemData = item.system;
 
             if(itemData.usageDie && itemData.usageDie.maximum !== "none") {
-                let data = {_id: item.id,
+                let data = {id: item.id,
                             data: {
                               quantity: itemData.quantity + 1
                             }};
-                actor.updateOwnedItem(data, {diff: true});
+                item.update(data, {diff: true});
             } else {
                 console.warn(`Unable to increase quantity for item id ${item.name} (${item.id}) as it does not have a usage die.`);
             }
@@ -430,7 +451,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
         let item = actor.items.find(i => i.id === itemId);
 
         if(item && item.type === "equipment") {
-            let itemData = item.data.data;
+            let itemData = item.system;
 
             if(itemData.usageDie && itemData.usageDie.maximum !== "none") {
                 if(itemData.quantity > 0) {
@@ -443,7 +464,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
                               }
                             }
                         };
-                        actor.updateOwnedItem(data, {diff: true});
+                        item.update(data, {diff: true});
                     } else {
                       console.warn(`Unable to reset the usage die for item ${item.name} (id ${item.id}) as it's at it's maximum usage die.`);
                     }

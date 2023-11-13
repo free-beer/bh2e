@@ -3,24 +3,24 @@ export default class BH2eItemSheet  extends ItemSheet {
     static get defaultOptions() {
         return(mergeObject(super.defaultOptions,
                            {classes: ["bh2e", "sheet", "item"],
-                            height:  520,
-                            width:   480}));
+                            height:  500,
+                            width:   700}));
     }
 
     /** @override */
     get template() {
-        return(`systems/bh2e/templates/sheets/${this.item.data.type}-sheet.html`);
+        return(`systems/bh2e/templates/sheets/${this.item.type}-sheet.html`);
     }
 
     /** @override */
     getData() {
         const context  = super.getData();
-        const itemData = context.item.data;
+        const itemData = context.item.system;
 
         context.bh2e   = CONFIG.BH2E;
         context.config = CONFIG.BH2E.configuration;
-        context.data = itemData.data;
-        context.flags = itemData.flags;
+        context.data   = itemData.data;
+        context.flags  = itemData.flags;
 
         return(context);
     }

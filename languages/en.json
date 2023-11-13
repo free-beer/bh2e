@@ -1,5 +1,18 @@
 {
 	"bh2e": {
+		"buttons": {
+			"close": "Close",
+			"roll": "Roll"
+		},
+		"dialogs": {
+			"info": {
+				"empty": "No information available.",
+				"title": "Information"
+			},
+			"titles": {
+				"attackRoll": "Attack Roll"
+			}
+		},
 		"dice": {
 			"one": "1",
 			"d4": "1d4",
@@ -20,7 +33,7 @@
 			},
 			"labels": {
 				"abilities": "Abilities",
-				"armedDamage": "Damage Die (Armed)",
+				"armedDamage": "Armed Damage",
 				"armourValue": "Armour Value",
 				"attacks": "Attacks",
 				"attribute": "Attribute",
@@ -32,6 +45,10 @@
 					"constitution": {
 						"long": "Constitution",
 						"short": "CON"
+					},
+					"default": {
+						"long": "Default",
+						"short": "Default"
 					},
 					"dexterity": {
 						"long": "Dexterity",
@@ -53,6 +70,7 @@
 				"baseUsageDie": "Usage Die",
 				"brokenDice": "Broken Dice",
 				"className": "Class",
+				"coinsValue": "Coins",
 				"currentUsageDie": "Current Die",
 				"damage": "Damage",
 				"description": "Description",
@@ -66,6 +84,7 @@
 				"key": "Key",
 				"largeWeapon": "Large Weapon?",
 				"level": "Level",
+				"magicAttribute": "Attribute",
 				"magicKind": "Type",
 				"magicLevel": "Level",
 				"name": "Name",
@@ -79,14 +98,17 @@
 				"size": "Size",
 				"tag": "Tag",
 				"targetQuantity": "Target Quantity",
-				"testAttribute": "Test Attribute (for Attacks)",
+				"testAttribute": "Attribute",
 				"totalDice": "Total Dice",
 				"type": "Type",
-				"unarmedDamage": "Damage Die (Unarmed)",
+				"unarmedDamage": "Unarmed Damage",
 				"usageDie": "Usage Die",
 				"weapon": "Weapon",
 				"weaponKind": "Kind",
 				"weaponSize": "Size"
+			},
+			"placeholders": {
+				"name": "Enter a name"
 			},
 			"titles": {
 				"breakArmourDie": "Break Die",
@@ -110,6 +132,7 @@
 				"repairArmourDie": "Repair A Single Die On This Item",
 				"resetAllUsageDice": "Reset All Usage Dice",
 				"resetUsageDie": "Reset Usage Die",
+				"rollAllBrokenArmourDice": "Roll Repair For All Broken Armour Dice",
 				"rollAttack": "Roll Attack",
 				"rollAttributeTest": "Roll Attribute Test",
 				"rollUsageDie": "Roll Usage Die",
@@ -118,6 +141,9 @@
 				"unpreparePrayer": "Unprepare This Prayer",
 				"unprepareSpell": "Unprepare This Spell"
 			}
+		},
+		"initiative": {
+			"roll": "Rolling DEX test for initiative."
 		},
 		"magic": {
 			"kinds": {
@@ -184,6 +210,19 @@
 			"common": "Common",
 			"exotic": "Exotic",
 			"rare": "Rare"
+		},
+		"rolls": {
+			"advantage": "Advantage",
+			"disadvantage": "Disadvantage",
+			"modifier": "Roll Modifier:"
+		},
+		"settings": {
+			"options": {
+				"randomizeHP": {
+					"blurb": "Indicates whether creatures added to scenes will have their HP randomly generated.",
+					"title": "Randomize Creature HP"
+				}
+			}
 		},
 		"tabs": {
 			"labels": {

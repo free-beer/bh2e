@@ -5,9 +5,12 @@ import {BH2e} from './module/config.js';
 import {BH2eState} from './module/bh2e_state.js';
 import BH2eItemSheet from './module/sheets/BH2eItemSheet.js';
 import BH2eCharacterSheet from './module/sheets/BH2eCharacterSheet.js';
+import BH2eCombat from './module/bh2e_combat.js';
 import BH2eCreatureSheet from './module/sheets/BH2eCreatureSheet.js';
 import {logDamageRoll} from './module/chat_messages.js';
 import {toggleAttributeTestDisplay} from './module/shared.js';
+
+import BH2eScene from './module/bh2e_scene.js';
 
 async function preloadHandlebarsTemplates() {
     const paths = ["systems/bh2e/templates/partials/ability-details.hbs",
@@ -37,6 +40,50 @@ async function preloadHandlebarsTemplates() {
     return(loadTemplates(paths))
 }
 
+async function runMigrations() {
+    console.log("Running migrations...");
+    updateCreatureHitPoints(game.actors);
+    updateCharacterCoins(game.actors);
+}
+
+async function updateCharacterCoins(actors) {
+    actors.forEach((actor) => {
+        if(actor.type === "character") {
+            let coins  = actor.system.coins;
+            let update = false;
+
+            console.log(`Checking if '${actor.name}' needs a coins update.`);
+            if(!coins || !Number.isNumeric(coins)) {
+                coins  = (coins ? parseInt(coins) : 0);
+                update = true;
+            }
+
+            if(update) {
+                console.log(`Updating coins for '${actor.name}'.`);
+                actor.update({data: {coins: coins}});
+            }
+        }
+    });
+}
+
+async function updateCreatureHitPoints(actors) {
+    actors.forEach((actor) => {
+        if(actor.type === "creature") {
+            let hitPoints = actor.system.hitPoints;
+
+            console.log(`Checking if '${actor.name}' needs an update.`);
+            if(!hitPoints) {
+                hitPoints = 5;
+            }
+
+            if(Number.isNumeric(hitPoints)) {
+                console.log(`Updating hit points for '${actor.name}'.`);
+                actor.update({data: {hitPoints: {max: hitPoints, value: hitPoints}}});
+            }
+        }
+    });
+}
+
 Hooks.once("init", function() {
     let state = new BH2eState();
 
@@ -44,9 +91,19 @@ Hooks.once("init", function() {
 
     game.bh2e = {BH2eActor, BH2eItem};
 
-    CONFIG.BH2E = {configuration: BH2e, state: state};
-    CONFIG.Actor.documentClass = BH2eActor;
-    CONFIG.Item.documentClass  = BH2eItem;
+    CONFIG.BH2E                 = {configuration: BH2e, state: state};
+    CONFIG.Actor.documentClass  = BH2eActor;
+    CONFIG.Combat.documentClass = BH2eCombat;
+    CONFIG.Item.documentClass   = BH2eItem;
+    CONFIG.Scene.documentClass  = BH2eScene;
+
+    game.settings.register("bh2e", "randomizeCreatureHP", {config:  true,
+                                                           default: false,
+                                                           hint:    game.i18n.localize("bh2e.settings.options.randomizeHP.blurb"),
+                                                           name:    game.i18n.localize("bh2e.settings.options.randomizeHP.title"),
+                                                           scope:   "world",
+                                                           type:    Boolean});
+
 
     window.bh2e  = {configuration: BH2e, state: state};
 
@@ -89,4 +146,8 @@ Hooks.once("init", function() {
             }
         }, 250);
     });
+});
+
+Hooks.once("ready", function() {
+    setTimeout(runMigrations, 500);
 });

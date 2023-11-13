@@ -1,19 +1,19 @@
 <div class="bh2e-prayer-entry">
     <h3>
         <div class="bh2e-float-right">
-        {{#data.prepared}}
+        {{#system.prepared}}
             <a class="bh2e-action-link bh2e-unprepare-magic-icon" data-id="{{_id}}" href="#" title="{{localize "bh2e.fields.titles.unpreparePrayer"}}">
                 <i class="fas fa-ban"></i>
             </a>
             <a class="bh2e-action-link bh2e-cast-magic-icon" data-id="{{_id}}" href="#" title="{{localize "bh2e.fields.titles.castPrayer"}}">
                 <i class="fas fa-praying-hands"></i>
             </a>
-        {{/data.prepared}}
-        {{^data.prepared}}
+        {{/system.prepared}}
+        {{^system.prepared}}
             <a class="bh2e-action-link bh2e-prepare-magic-icon" data-id="{{_id}}" href="#" title="{{localize "bh2e.fields.titles.preparePrayer"}}">
                 <i class="far fa-eye"></i>
             </a>
-        {{/data.prepared}}
+        {{/system.prepared}}
             <a class="bh2e-action-link bh2e-cast-magic-as-ritual-icon" data-id="{{_id}}" href="#" title="{{localize "bh2e.fields.titles.castPrayerAsRitual"}}">
                 <i class="fas fa-book-reader"></i>
             </a>
@@ -22,21 +22,21 @@
             </a>
         </div>
 
-    {{#data.prepared}}
+    {{#system.prepared}}
         <span class="bh2e-magic-name" title="{{name}}">
             {{name}}
-        {{#data.cast}}
+        {{#system.cast}}
             <i class="fas fa-exclamation bh2e-alert-icon" title="{{localize "bh2e.fields.titles.prayerAlreadyCast"}}"></i>
-        {{/data.cast}}
+        {{/system.cast}}
         </span>
-    {{/data.prepared}}
-    {{^data.prepared}}
+    {{/system.prepared}}
+    {{^system.prepared}}
         <span class="bh2e-magic-name-unprepared" title="{{name}} ({{localize "bh2e.fields.titles.unprepared"}})">
             {{name}}
         </span>
-    {{/data.prepared}}
+    {{/system.prepared}}
     </h3>
     <div>
-        {{{data.description}}}
+        {{{system.description}}}
     </div>
 </div>

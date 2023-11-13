@@ -1,15 +1,39 @@
 {
-  "name": "bh2e",
+  "id": "bh2e",
   "title": "The Black Hack 2e",
   "description": "System support for second edition of The Black Hack RPG.",
-  "author": "Peter Wood",
-  "version": "0.2.7",
-  "minimumCoreVersion": "0.7.5",
-  "compatibleCoreVersion": "0.8.8",
-  "esmodules": ["bh2e.js"],
-  "styles": ["bh2e.css"],
+  "authors": [
+        {
+            "name": "Peter Wood",
+            "url": "https://ko-fi.com/peterwood",
+            "ko-fi": "peterwood"
+        }
+    ],
+  "authors": [],
+  "flags": {},
+  "version": "0.5.7",
+  "compatibility": {
+    "minimum": 10,
+    "verified": "10.291"
+  },
+  "scripts": [],
+  "esmodules": [
+    "bh2e.js"
+  ],
+  "styles": [
+    "bh2e.css"
+  ],
   "languages": [
-  	{"lang": "en", "name": "English", "path": "languages/en.json"}
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    },
+    {
+      "lang": "es",
+      "name": "Spanish",
+      "path": "languages/es.json"
+    }
   ],
   "packs": [
     {
@@ -56,6 +80,10 @@
     }
   ],
   "url": "https://github.com/free-beer/bh2e",
+  "system": [],
+  "dependencies": [],
+  "socket": false,
   "manifest": "https://raw.githubusercontent.com/free-beer/bh2e/master/system.json",
-  "download": "https://github.com/free-beer/bh2e/archive/refs/tags/v0.2.7.zip"
+  "download": "https://github.com/free-beer/bh2e/archive/refs/tags/v0.5.7.zip",
+  "protected": false
 }

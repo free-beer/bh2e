@@ -1,3 +1,9 @@
+.bh2e-ability-sheet-body {
+	display: grid;
+	grid-template-columns: 128px auto;
+	grid-gap: 5px 10px;
+}
+
 .bh2e-action-link {
 	margin-left: 10px;
 	text-decoration: none;
@@ -9,21 +15,36 @@
 
 .bh2e-armour-entry {
 	display: grid;
-	grid-template-columns: 50% 15% 15% 20%;
+	grid-template-columns: 45% 20% 20% 15%;
 	margin: 3px 0;
 }
 
 .bh2e-armour-headers {
 	display: grid;
 	font-weight: bold;
-	grid-template-columns: 50% 15% 15% 20%;
+	grid-template-columns: 45% 20% 20% 15%;
 	margin: 3px 0;
 }
 
 .bh2e-armour-section-header {
 	display: grid;
-	grid-template-columns: 90% 10%;
+	grid-template-columns: auto 90px;
 	margin: 3px 0;
+}
+
+.bh2e-armour-sheet-body {
+	display: grid;
+	grid-template-columns: 175px auto;
+	grid-gap: 5px 10px;
+}
+
+.bh2e-attack-roll-modifier-field {
+	display: grid;
+	grid-template-columns: auto 40px;
+	grid-gap: 0 5px;
+	line-height: 30px;
+	margin: 10px 0;
+	vertical-align: middle;
 }
 
 .bh2e-attribute-cell {
@@ -54,6 +75,26 @@
 	font-size: 1.2em;
 }
 
+.bh2e-attribute-value-container input {
+	font-size: 1.3em;
+	height:  50px;
+	width: 60px;
+}
+
+.bh2e-character-details-section {
+	display: grid;
+	grid-template-columns: 2fr 2fr 1fr;
+	grid-gap: 5px 15px;
+	margin-bottom: 15px;
+}
+
+.bh2e-checkbox-row {
+	display: grid;
+	grid-template-columns: 30px auto;
+	line-height: 30px;
+	vertical-align: middle;
+}
+
 .bh2e-clear-both {
 	clear: both;
 }
@@ -64,9 +105,12 @@
 	margin-right: 15px;
 }
 
+.bh2e-creature-ability-container {
+	margin: 5px 5px 10px 5px;
+}
+
 .bh2-creature-ability-detail-column {
-	font-size: 1.1em;
-	width: 90%;
+	margin-right: 0 5px;
 }
 
 .bh2e-creature-ability-entry {
@@ -77,21 +121,33 @@
 
 .bh2-creature-ability-name {
 	font-size: 1.2em;
-	font-style: italic;
 	font-weight: bold;
 }
 
-.bh2-create-ability-notes-container {
-	margin-left: 15px;
+.bh2-creature-ability-notes-container {
+	text-align: justify;
+}
+
+.bh2e-creature-attack-body {
+	display: grid;
+	grid-template-columns: 210px auto;
+	grid-gap: 5px 10px;
 }
 
 .bh2e-creature-attack-container {
-	margin: 5px 5px 10px 5px;
+	margin: 0 5px;
 }
 
 .bh2e-creature-attack-header {
+	display: grid;
 	font-size: 1.2em;
 	font-weight: bold;
+	grid-template-columns: auto 25px;
+	grid-gap: 3px 0;
+}
+
+.bh2e-creature-attack-notes {
+	text-align: justify;
 }
 
 .bh2e-creature-attack-targets {
@@ -104,19 +160,27 @@
 	grid-template-columns: 96px auto;
 }
 
+.bh2e-creature-sheet-body {
+	display: grid;
+	grid-template-columns: 175px auto;
+	grid-gap: 5px 10px;
+}
+
 .bh2e-cs-attributes-section {
 	border: solid 1px #777;
 	padding: 5px;
+	width: 100px;
 }
 
 .bh2e-cs-container {
 	display: grid;
 	font-size: 1.1em;
-	grid-template-columns: 15% 85%;
+	grid-template-columns: 100px auto;
 	padding: 5px;
 }
 
 .bh2e-cs-main-body {
+	min-width: 600px;
 	padding: 5px;
 }
 
@@ -130,6 +194,16 @@
 	text-align: center;
 }
 
+.bh2e-dialog-header {
+	border-bottom: solid 1px #555;
+	border-top: solid 1px #555;
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 10px;
+	padding: 5px 0;
+	text-align: center;
+}
+
 .bh2e-editor-field {
 	display: block;
 	min-height: 200px;
@@ -138,14 +212,14 @@
 
 .bh2e-equipment-entry {
 	display: grid;
-	grid-template-columns: 40% 10% 15% 35%;
+	grid-template-columns: 35% 20% 20% 25%;
 	margin: 3px 0;
 }
 
 .bh2e-equipment-headers {
 	display: grid;
 	font-weight: bold;
-	grid-template-columns: 40% 10% 15% 35%;
+	grid-template-columns: 35% 20% 20% 25%;
 	margin: 3px 0;
 }
 
@@ -155,10 +229,28 @@
 	margin: 3px 0;
 }
 
+.bh2e-equipment-sheet-body {
+	display: grid;
+	grid-template-columns: 200px auto;
+	grid-gap: 5px 10px;
+}
+
 .bh2e-field {
 	display: block;
 	margin-bottom: 10px;
-	width: 95%;
+}
+
+.bh2e-field-row {
+	display: grid;
+	grid-template-columns: 3fr 1fr !important;
+	grid-gap: 5px;
+	line-height: 25px;
+	margin: 3px 10px;
+	vertical-align: middle;
+}
+
+.bh2e-field-row-balanced {
+	grid-template-columns: 1fr 1fr !important;
 }
 
 .bh2e-float-left {
@@ -171,27 +263,77 @@
 
 .bh2e-grid {
 	display: grid;
-	width: 95%;
 }
 
 .bh2e-grid-2-col {
-	grid-template-columns: 50% 50%;
+	display:  grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 5px;
 }
 
 .bh2e-grid-3-col {
-	grid-template-columns: 33% 33% 33%;
+	display:  grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 10px;
 }
 
 .bh2e-grid-4-col {
-	grid-template-columns: 25% 25% 25% 25%;
+	display:  grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-gap: 5px;
 }
 
 .bh2e-grid-5-col {
-	grid-template-columns: 20% 20% 20% 20% 20%;
+	display:  grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-gap: 5px;
+}
+
+.bh2e-grid-wider-column-separation {
+	grid-gap: 5px 15px;
 }
 
 .bh2e-hidden {
 	display: none;
+}
+
+.bh2e-horizontal-field {
+	display: grid;
+	grid-gap: 5px;
+	margin: 2px 0;
+}
+
+.bh2e-horizontal-field-hp {
+	grid-template-columns: auto 45px 20px 45px;
+}
+
+.bh2e-horizontal-field-number {
+	grid-template-columns: auto 45px;
+}
+
+.bh2e-horizontal-field-number-wide {
+	grid-template-columns: auto 70px;
+}
+
+.bh2e-horizontal-field-select-narrow {
+	grid-template-columns: auto 70px;
+}
+
+.bh2e-horizontal-field-text {
+	grid-template-columns: auto 125px;
+}
+
+.bh2e-info-dialog-content {
+	border: groove 3px;
+	font-size: 1.1em;
+	margin: 5px 0;
+	max-height: 500px;
+	overflow: auto;
+	padding: 5px 10px;
+	text-align: justify;
+}
+.bh2e-info-element {
+	cursor: help;
 }
 
 .bh2e-label {
@@ -296,6 +438,12 @@
 	text-align: center;
 }
 
+.bh2e-spell-sheet-body {
+	display: grid;
+	grid-template-columns: 215px auto;
+	grid-gap: 5px 10px;
+}
+
 .bh2e-tab {
 	border-left: solid 1px #aaa;
 	border-right: solid 1px #aaa;
@@ -320,6 +468,27 @@
 	font-weight: bold;
 }
 
+.bh2e-text-bold {
+	font-weight: bold;
+}
+
+.bh2e-text-center {
+	text-align: center;
+}
+
+.bh2e-text-left {
+	text-align: left;
+}
+
+.bh2e-text-line {
+	line-height: 25px;
+	vertical-align: bottom;
+}
+
+.bh2e-text-right {
+	text-align: right;
+}
+
 .bh2e-text-input {
 }
 
@@ -335,14 +504,14 @@
 
 .bh2e-weapon-entry {
 	display: grid;
-	grid-template-columns: 40% 15% 15% 15% 15%;
+	grid-template-columns: 30% 20% 20% 15% 15%;
 	margin: 3px 0;
 }
 
 .bh2e-weapon-headers {
 	display: grid;
 	font-weight: bold;
-	grid-template-columns: 40% 15% 15% 15% 15%;
+	grid-template-columns: 30% 20% 20% 15% 15%;
 	margin: 3px 0;
 }
 
@@ -350,10 +519,25 @@
 	transition: opacity 1s;
 }
 
+.bh2e-weapon-sheet-body {
+	display: grid;
+	grid-template-columns: 200px auto;
+	grid-gap: 5px 10px;
+}
+
 .editor {
 	height: 200px;
 }
 
 .editor-content {
-	height: 200px;
+	height: 190px;
+	padding-right: 10px;
+}
+
+input,select {
+	background-color: #fff !important;
+}
+
+input[type=number] {
+	text-align: center;
 }

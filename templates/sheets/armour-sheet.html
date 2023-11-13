@@ -1,28 +1,35 @@
 <form class="{{cssClass}}" autocomplete="off">
-    <header class="sheet-header">
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
-        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
-    </header>
-    <div>
-        <field class="bh2e-field">
-            <label for="data.armourValue.total" class="bh2e-label">{{localize "bh2e.fields.labels.armourValue"}}</label>
-            <input type="number" name="data.armourValue.total" value="{{data.armourValue.total}}" class="bh2e-input" />
-        </field>
+    <div class="bh2e-armour-sheet-body">
+        <section>
+            <img src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+            <hr><hr>
 
-      <field class="bh2e-field">
-          <label for="data.rarity" class="bh2e-label">{{localize "bh2e.fields.labels.rarity"}}</label>
-          <select name="data.rarity" class="bh2e-input bh2e-select">
-      {{#select data.rarity}}
-        {{#each config.rarityTypes as |label value|}}
-            <option value="{{value}}">{{localize label}}</option>
-        {{/each}}
-      {{/select}}
-          </select>
-      </field>
+            <div class="bh2e-field-row">
+                <label for="system.armourValue.total" class="bh2e-label">{{localize "bh2e.fields.labels.armourValue"}}</label>
+                <input type="number" name="system.armourValue.total" value="{{item.system.armourValue.total}}" class="bh2e-input" />
+            </div>
 
-      <field class="bh2e-field">
-          <label for="data.description" class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
-          {{editor content=data.description target="data.description" button=true owner=owner editable=editable}}
-      </field>
+            <div class="bh2e-field-row bh2e-field-row-balanced">
+                <label for="system.rarity" class="bh2e-label">{{localize "bh2e.fields.labels.rarity"}}</label>
+                <select name="system.rarity" class="bh2e-input">
+            {{#select item.system.rarity}}
+                {{#each config.rarityTypes as |label value|}}
+                <option value="{{value}}">{{localize label}}</option>
+                {{/each}}
+            {{/select}}
+                </select>
+            </div>
+        </section>
+
+        <section>
+            <hr>
+            <input name="name" placeholder="{{localize 'bh2e.fields.placeholders.name'}}" type="text" value="{{item.name}}"/>
+            <hr>
+
+            <field class="bh2e-field">
+              <label for="system.description" class="bh2e-label">{{localize "bh2e.fields.labels.description"}}</label>
+              {{editor item.system.description target="system.description" button=true owner=owner editable=editable}}
+            </field>
+        </section>
     </div>
 </form>

@@ -76,6 +76,14 @@ export function generateDieRollFormula(options={}) {
         }
     }
 
+    if(options.modifier && Number.isInteger(options.modifier) && options.modifier !== 0) {
+        if(options.modifier > 0) {
+            formula = `${formula} + ${options.modifier}`;
+        } else {
+            formula = `${formula} - ${Math.abs(options.modifier)}`;
+        }
+    }
+
     return(formula);
 }
 
@@ -106,10 +114,8 @@ export function initializeCollapsibleWidget(element, state) {
     }
 
     if(state.exists(key))  {
-        console.log("Fetching the state.");
         setting = state.get(key);
     } else {
-        console.log("Assigning the state.");
         state.set(key, setting);
     }
 
@@ -148,26 +154,29 @@ export function interpolate(key, context={}) {
 }
 
 export function onTabSelected(event, state, key) {
-    let selected    = event.currentTarget;
-    let tabs        = document.querySelectorAll(".bh2e-tab");
-    let tabContents = document.querySelectorAll(".bh2e-tab-content");
-    let className   = selected.dataset.tab;
+    let selected = event.currentTarget;
+    let sheet    = selected.closest(".bh2e-cs-container");
 
     event.preventDefault();
+    if(sheet) {
+        let tabs        = sheet.querySelectorAll(".bh2e-tab");
+        let tabContents = sheet.querySelectorAll(".bh2e-tab-content");
+        let className   = selected.dataset.tab;
 
-    for(var t = 0; t < tabs.length; t++) {
-        tabs[t].classList.remove("bh2e-selected-tab");
-    }
-
-    for(var i = 0; i < tabContents.length; i++) {
-        if(tabContents[i].classList.contains(className)) {
-            tabContents[i].classList.remove("bh2e-hidden");
-        } else {
-            tabContents[i].classList.add("bh2e-hidden");
+        for(var t = 0; t < tabs.length; t++) {
+            tabs[t].classList.remove("bh2e-selected-tab");
         }
+
+        for(var i = 0; i < tabContents.length; i++) {
+            if(tabContents[i].classList.contains(className)) {
+                tabContents[i].classList.remove("bh2e-hidden");
+            } else {
+                tabContents[i].classList.add("bh2e-hidden");
+            }
+        }
+        state.set(key, className);
+        selected.classList.add("bh2e-selected-tab");
     }
-    state.set(key, className);
-    selected.classList.add("bh2e-selected-tab");
 }
 
 function toggleCollapsibleWidget(widget, state) {
@@ -225,12 +234,12 @@ export function toggleAttributeTestDisplay(event) {
 function initializeTabs(state) {
     let tabContainers = document.querySelectorAll(".bh2e-tabs-container");
 
-    console.log(`Found ${tabContainers.length} tab containers.`);
     for(var i = 0; i < tabContainers.length; i++) {
         let container = tabContainers[i];
         let tabs      = container.querySelectorAll(".bh2e-tab");
         let selected  = state.get(container.dataset.key, container.dataset.default);
 
+        console.log(`Found ${tabs.length} tab elements. Container:`, container);
         for(var j = 0; j < tabs.length; j++) {
             let tab     = tabs[j];
             let content = document.querySelector(`.${tab.dataset.tab}`);

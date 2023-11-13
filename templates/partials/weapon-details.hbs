@@ -12,8 +12,8 @@
     <div class="bh2e-grid bh2e-grid-4-col">
     {{#each weapons as |weapon id|}}
         <div>{{weapon.name}}</div>
-        <div>{{attackKind weapon.data.kind}}</div>
-        <div>{{longAttributeName weapon.data.attribute}}</div>
+        <div>{{attackKind weapon.system.kind}}</div>
+        <div>{{longAttributeName weapon.system.attribute}}</div>
         <div></div>
     {{/each}}
     </div>

@@ -1,16 +1,16 @@
 <div class="bh2e-armour-entry">
-    <div>
-    {{#if (eq data.armourValue.total data.armourValue.broken)}}
+    <div class="bh2e-info-element" data-description="{{system.description}}">
+    {{#if (eq system.armourValue.total system.armourValue.broken)}}
         <s class="armour-name-broken">{{name}}</s>
     {{else}}
         <span class="armour-name-unbroken">{{name}}</span>
     {{/if}}
     </div>
     <div>
-        <center>{{data.armourValue.total}}</center>
+        <center>{{system.armourValue.total}}</center>
     </div>
     <div>
-        <center>{{data.armourValue.broken}}</center>
+        <center>{{system.armourValue.broken}}</center>
     </div>
     <div>
         <a class="bh2e-action-link" href="#" title="{{localize "bh2e.fields.titles.breakArmourDie"}}">
