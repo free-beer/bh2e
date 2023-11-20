@@ -1,40 +1,4 @@
 /**
- * Deletes an owned item from an actor using just the item id to locate the
- * owning actor and the item itself.
- */
-export function deleteOwnedItem(itemId) {
-    console.log(`Delete of item id ${itemId} requested.`);
-    let actor = findActorFromItemId(itemId);
-
-    if(actor) {
-        actor.deleteEmbeddedDocuments("Item", [itemId]);
-    } else {
-        console.error(`Delete of item id ${itemId} requested but unable to locate the actor that owns it.`);
-    }
-}
-
-/**
- * Searches the game actor list to locate the actor that owns an item with a
- * specified itemId.
- */
-export function findActorFromItemId(itemId) {
-  return(game.actors.find((a) => {
-        if(a.items.find(i => i.id === itemId)) {
-          return(true);
-        } else {
-          return(false);
-        }
-      }));
-}
-
-/**
- * Searches the game item list to a specific item.
- */
-export function findItemFromId(itemId) {
-    return(game.items.find((item) => item.id === itemId));
-}
-
-/**
  * Generates a string containing the formula for a single die based on the set
  * of options passed in. Recognised options include dieType, which defaults to
  * d20 if not set, and kind which should be one of 'standard', 'advantage' or
