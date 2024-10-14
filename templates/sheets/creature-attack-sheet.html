@@ -18,22 +18,14 @@
             <div class="bh2e-field-row bh2e-field-row-balanced">
                 <label class="bh2e-label" for="system.range">{{localize "bh2e.fields.labels.range"}}</label>
                 <select name="system.range" class="bh2e-select">
-            {{#select item.system.range}}
-                {{#each config.ranges as |label value|}}
-                    <option value="{{value}}">{{localize label}}</option>
-                {{/each}}
-            {{/select}}
+                    {{selectOptions config.ranges localize=true selected=item.system.range}}
                 </select>
             </div>
 
             <div class="bh2e-field-row bh2e-field-row-balanced">
                 <label class="bh2e-label" for="system.attribute">{{localize "bh2e.fields.labels.attribute"}}</label>
                 <select name="system.attribute" class="bh2e-select">
-            {{#select item.system.attribute}}
-                {{#each config.attributeList as |label value|}}
-                    <option value="{{value}}">{{localize label}}</option>
-                {{/each}}
-            {{/select}}
+                    {{selectOptions config.attributeList localize=true selected=item.system.attribute}}
                 </select>
             </div>
         </section>

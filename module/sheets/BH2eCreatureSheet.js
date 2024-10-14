@@ -2,11 +2,11 @@ import {deleteOwnedItem} from '../shared.js';
 
 export default class BH2eCreatureSheet extends ActorSheet {
     static get defaultOptions() {
-        return(mergeObject(super.defaultOptions,
-                           {classes: ["bh2e", "sheet", "creature"],
-                            height: 520,
-                            template: "systems/bh2e/templates/sheets/creature-sheet.html",
-                            width: 900}));
+        return(foundry.utils.mergeObject(super.defaultOptions,
+                                         {classes: ["bh2e", "sheet", "creature"],
+                                          height: 520,
+                                          template: "systems/bh2e/templates/sheets/creature-sheet.html",
+                                          width: 900}));
     }
 
     getData() {

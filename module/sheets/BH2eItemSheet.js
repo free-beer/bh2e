@@ -1,10 +1,10 @@
 export default class BH2eItemSheet  extends ItemSheet {
     /** @override */
     static get defaultOptions() {
-        return(mergeObject(super.defaultOptions,
-                           {classes: ["bh2e", "sheet", "item"],
-                            height:  500,
-                            width:   700}));
+        return(foundry.utils.mergeObject(super.defaultOptions,
+                                         {classes: ["bh2e", "sheet", "item"],
+                                          height:  500,
+                                          width:   700}));
     }
 
     /** @override */

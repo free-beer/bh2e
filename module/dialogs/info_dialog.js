@@ -1,7 +1,7 @@
 export default class InfoDialog extends Dialog {
     static get defaultOptions() {
-        return(mergeObject(super.defaultOptions,
-                           {width: 450}));
+        return(foundry.utils.mergeObject(super.defaultOptions,
+                                         {width: 450}));
     }
 
 	constructor(settings) {

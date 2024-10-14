@@ -133,7 +133,7 @@ export default class BH2eCombat extends Combat {
                         let dexterity = combatant.actor.system.attributes.dexterity;
                         let roll      = new Roll("1d20");
         
-                        return(roll.evaluate({async: true})
+                        return(roll.evaluate()
                                    .then(() => {
                                        return({combatant: combatant, id: id, initiative: (roll.total < dexterity ? 1 : 3), roll: roll});
                                    }));

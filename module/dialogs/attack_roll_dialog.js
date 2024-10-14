@@ -5,8 +5,8 @@ import {logAttackRoll} from "../chat_messages.js";
  */
 export default class AttackRollDialog extends Dialog {
     static get defaultOptions() {
-        return(mergeObject(super.defaultOptions,
-                           {width: 325}));
+        return(foundry.utils.mergeObject(super.defaultOptions,
+                                         {width: 325}));
     }
 
 	constructor(settings) {

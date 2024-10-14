@@ -22,19 +22,18 @@ export function castMagic(event) {
                                              success: result.successful,
                                              tested: true},
                                  spellName: result.spellName};
-                let data      = {_id:    item.id,
-                                 data:   {cast:     false,
-                                          prepared: false}};
+                let data      = {cast:     false,
+                                 prepared: false};
 
                 if(result.successful) {
-                    data.data.cast             = true;
-                    data.data.prepared         = true;
-                    message.roll.labels.result   = interpolate("bh2e.messages.labels.success");
+                    data.cast                  = true;
+                    data.prepared              = true;
+                    message.roll.labels.result = interpolate("bh2e.messages.labels.success");
                 } else {
                     message.roll.labels.result = interpolate("bh2e.messages.labels.failure");
                 }
                 showMessage(actor, "systems/bh2e/templates/messages/cast-magic.hbs", message);
-                item.update(data);
+                item.update({system: data});
             });
     } else {
         console.error(`Failed to locate an actor linked to item id ${element.dataset.id}.`)
@@ -105,7 +104,7 @@ function invokeMagic(magicId, caster) {
     formula       = `${generateDieRollFormula(options)}+${result.spellLevel}`;
     attributeTest = new Roll(formula);
 
-    return(attributeTest.roll({async: true})
+    return(attributeTest.roll()
             .then((roll) => {
                 result.attribute     = attribute;
                 result.attributeRoll = attributeTest.total;
@@ -127,11 +126,7 @@ export function prepareMagic(event) {
     event.stopPropagation();
     if(actor) {
         let item = actor.items.find((i) => i.id === element.dataset.id)
-        let data = {_id:    item.id,
-                    data:   {cast:     false,
-                             prepared: true}};
-
-        item.update(data, {diff: true});
+        item.update({system: {cast: false, prepared: true}}, {diff: true});
     } else {
         console.error(`Failed to locate an actor linked to item id ${element.dataset.id}.`)
     }
@@ -146,11 +141,7 @@ export function unprepareMagic(event) {
     event.stopPropagation();
     if(actor) {
         let item = actor.items.find((i) => i.id === element.dataset.id);
-        let data = {id:   item.id,
-                    data: {cast:     false,
-                           prepared: false}};
-
-        item.update(data, {diff: true});
+        item.update({system: {cast: false, prepared: false}}, {diff: true});
     } else {
         console.error(`Failed to locate an actor linked to item id ${element.dataset.id}.`)
     }

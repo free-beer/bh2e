@@ -47,7 +47,7 @@ export function logAttackRoll(actorId, weaponId, options={}) {
             }
 
             roll = new Roll(`${generateDieRollFormula(settings)}${extraDie}`);
-            roll.evaluate({async: true})
+            roll.evaluate()
                 .then(() => {
                     critical  = isRollCritical(roll, options);
                     data.roll = {formula: roll.formula,
@@ -110,7 +110,7 @@ export function logAttributeTest(actorId, attribute, shiftKey=false, ctrlKey=fal
         } else {
             roll = new Roll(generateDieRollFormula());
         }
-        roll.evaluate({async: true})
+        roll.evaluate()
             .then((roll) => {
                 data.roll = {formula: roll.formula,
                              labels:  {title: interpolate("bh2e.messages.titles.attributeTest", {attribute: data.attribute})},
@@ -147,7 +147,7 @@ export function logDamageRoll(event) {
         data.roll.formula = formula;
 
         roll = new Roll(formula)
-        roll.evaluate({async: true})
+        roll.evaluate()
             .then(() => {
                 data.roll.result = roll.total;
                 if(game.dice3d) {
@@ -182,7 +182,7 @@ export function logUsageDieRoll(itemId) {
                 let die  = (usageDie.current === "none" ? usageDie.maximum : usageDie.current)
                 let roll = new Roll(generateDieRollFormula({dieType: die}));
 
-                roll.evaluate({async: true})
+                roll.evaluate()
                     .then(() => {
                         if(game.dice3d) {
                             game.dice3d.showForRoll(roll);
@@ -192,57 +192,55 @@ export function logUsageDieRoll(itemId) {
                         message.roll.result  = roll.total;
 
                         if(roll.total < 3) {
-                            let data     = {id: item.id,
-                                            data: {
-                                              usageDie: {
-                                                current: ""
-                                              }
-                                            }};
+                            let data     = {usageDie: {current: ""},
+                                            quantity: 0};
                             let oldDie  = (usageDie.current  === "none" ? usageDie.maximum : usageDie.current);
 
                             message.roll.success       = false;
                             message.roll.labels.result = interpolate("bh2e.messages.labels.failure");
 
                             if(oldDie === "d4") {
-                                message.exhausted          = true;
-                                data.data.usageDie.current = "exhausted";
-                                data.data.quantity         = item.system.quantity - 1;
-                                if(data.data.quantity < 0) {
-                                    data.data.quantity = 0;
+                                message.exhausted     = true;
+                                data.usageDie.current = "exhausted";
+                                data.quantity         = item.system.quantity - 1;
+                                if(data.quantity < 0) {
+                                    data.quantity = 0;
                                 }
                             } else {
                                 switch(oldDie) {
                                     case "d6":
-                                        data.data.usageDie.current = "d4";
+                                        data.usageDie.current = "d4";
                                         break;
                                     case "d8":
-                                        data.data.usageDie.current = "d6";
+                                        data.usageDie.current = "d6";
                                         break;
                                     case "d10":
-                                        data.data.usageDie.current = "d8";
+                                        data.usageDie.current = "d8";
                                         break;
                                     case "d12":
-                                        data.data.usageDie.current = "d10";
+                                        data.usageDie.current = "d10";
                                         break;
                                     case "d20":
-                                        data.data.usageDie.current = "d12";
+                                        data.usageDie.current = "d12";
                                         break;
                                 }
-                                message.die = data.data.usageDie.current;
+                                message.die = data.usageDie.current;
                             }
-                            if(data.data.usageDie.current === "exhausted") {
+                            if(data.usageDie.current === "exhausted") {
                                 message.exhausted = true;
                             } else {
                                 message.downgraded = true;
                             }
-                            item.update(data, {diff: true});
+                            item.update({system: data}, {diff: true})
+                                .then((args) => showMessage(actor, "systems/bh2e/templates/messages/usage-die.hbs", message));
                         } else {
                             message.roll.success       = true;
                             message.die                = die;
                             message.roll.labels.result = interpolate("bh2e.messages.labels.success");
+                            showMessage(actor, "systems/bh2e/templates/messages/usage-die.hbs", message);
                         }
 
-                        showMessage(actor, "systems/bh2e/templates/messages/usage-die.hbs", message);
+                        //showMessage(actor, "systems/bh2e/templates/messages/usage-die.hbs", message);
                     });
             } else {
                 console.error(`The usage die for the '${item.name}' item is already exhausted.`);

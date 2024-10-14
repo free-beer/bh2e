@@ -18,13 +18,25 @@ export function deleteOwnedItem(itemId) {
  * specified itemId.
  */
 export function findActorFromItemId(itemId) {
-  return(game.actors.find((a) => {
+  let actor = (game.actors.find((a) => {
         if(a.items.find(i => i.id === itemId)) {
           return(true);
         } else {
           return(false);
         }
       }));
+
+  if(!actor) {
+    actor = Object.values(game.actors.tokens).find((a) => {
+        if(a.items.find((i) => i.id === itemId)) {
+            return(true);
+        } else {
+            return(false);
+        }
+    });
+  }
+
+  return(actor);
 }
 
 /**

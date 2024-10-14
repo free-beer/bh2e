@@ -12,11 +12,7 @@
             <div class="bh2e-field-row bh2e-field-row-balanced">
                 <label for="system.rarity" class="bh2e-label">{{localize "bh2e.fields.labels.rarity"}}</label>
                 <select name="system.rarity" class="bh2e-input">
-            {{#select item.system.rarity}}
-                {{#each config.rarityTypes as |label value|}}
-                <option value="{{value}}">{{localize label}}</option>
-                {{/each}}
-            {{/select}}
+                    {{selectOptions config.rarityTypes localize=true selected=item.system.rarity}}
                 </select>
             </div>
         </section>

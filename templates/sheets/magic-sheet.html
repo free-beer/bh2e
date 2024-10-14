@@ -12,22 +12,14 @@
             <div class="bh2e-field-row bh2e-field-row-balanced">
                 <label for="system.kind" class="bh2e-label">{{localize "bh2e.fields.labels.magicKind"}}</label>
                 <select name="system.kind" class="bh2e-input bh2e-select">
-            {{#select item.system.kind}}
-              {{#each config.magicKinds as |label value|}}
-                    <option value="{{value}}">{{localize label}}</option>
-              {{/each}}
-            {{/select}}
+                    {{selectOptions config.magicKinds localize=true selected=item.system.kind}}
                 </select>
             </div>
 
             <div class="bh2e-field-row bh2e-field-row-balanced">
                 <label for="system.attribute" class="bh2e-label">{{localize "bh2e.fields.labels.magicAttribute"}}</label>
                 <select name="system.attribute" class="bh2e-input bh2e-select">
-            {{#select item.system.attribute}}
-              {{#each config.magicAttributeList as |label value|}}
-                    <option value="{{value}}">{{localize label}}</option>
-              {{/each}}
-            {{/select}}
+                    {{selectOptions config.magicAttributeList localize=true selected=item.system.attribute}}
                 </select>
             </div>
         </section>

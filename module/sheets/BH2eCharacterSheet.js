@@ -16,11 +16,11 @@ import {logAttackRoll,
 
 export default class BH2eCharacterSheet extends ActorSheet {
     static get defaultOptions() {
-        return(mergeObject(super.defaultOptions,
-                           {classes:  ["bh2e", "sheet", "character"],
-                            height:   825,
-                            template: "systems/bh2e/templates/sheets/character-sheet.html",
-                            width:    800}));
+        return(foundry.utils.mergeObject(super.defaultOptions,
+                                         {classes:  ["bh2e", "sheet", "character"],
+                                          height:   825,
+                                          template: "systems/bh2e/templates/sheets/character-sheet.html",
+                                          width:    800}));
     }
 
     /** @override */
@@ -207,12 +207,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
                 if(item) {
                     if(item.system.armourValue.total > item.system.armourValue.broken) {
-                        let data = {id: item.id,
-                                    data: {
-                                      armourValue: {
-                                        broken: item.system.armourValue.broken + 1
-                                    }}};
-
+                        let data = {system: {armourValue: {broken: item.system.armourValue.broken + 1}}};
                         item.update(data, {diff: true});
                     }
                 } else {
@@ -283,11 +278,10 @@ export default class BH2eCharacterSheet extends ActorSheet {
         if(actor) {
             console.log("Repairing all armour dice for actor id ${actor.id}.");
             actor.items.forEach(function(item) {
-                let data = {data: {armourValue: {broken: 0}}};
+                let data = {system: {armourValue: {broken: 0}}};
 
                 if(item.type === "armour") {
                     if(item.system.armourValue.broken > 0) {
-                      data.id = item.id;
                       item.update(data, {diff: true})
                     }
                 }
@@ -310,12 +304,7 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
                 if(item) {
                     if(item.system.armourValue.broken > 0) {
-                        let data = {id: item.id,
-                                    data: {
-                                      armourValue: {
-                                        broken: item.system.armourValue.broken - 1
-                                    }}};
-
+                        let data = {system: {armourValue: {broken: item.system.armourValue.broken - 1}}};
                         item.update(data, {diff: true});
                     }
                 } else {
@@ -407,11 +396,8 @@ export default class BH2eCharacterSheet extends ActorSheet {
 
             if(itemData.usageDie && itemData.usageDie.maximum !== "none") {
                 if(itemData.quantity > 0) {
-                    let data = {id: item.id,
-                                data: {
-                                  quantity: itemData.quantity - 1
-                                }};
-                    item.update(data, {diff: true});
+                    let data = {quantity: itemData.quantity - 1};
+                    item.update({system: data}, {diff: true});
                 } else {
                     console.warn(`Unable to decrease quantity for the ${item.name} item (id: ${item.id}) as it's already at zero.`);
                 }
@@ -432,11 +418,8 @@ export default class BH2eCharacterSheet extends ActorSheet {
             let itemData = item.system;
 
             if(itemData.usageDie && itemData.usageDie.maximum !== "none") {
-                let data = {id: item.id,
-                            data: {
-                              quantity: itemData.quantity + 1
-                            }};
-                item.update(data, {diff: true});
+                let data = {quantity: itemData.quantity + 1};
+                item.update({system: data}, {diff: true});
             } else {
                 console.warn(`Unable to increase quantity for item id ${item.name} (${item.id}) as it does not have a usage die.`);
             }
@@ -456,15 +439,8 @@ export default class BH2eCharacterSheet extends ActorSheet {
             if(itemData.usageDie && itemData.usageDie.maximum !== "none") {
                 if(itemData.quantity > 0) {
                     if(itemData.usageDie.current !== itemData.usageDie.maximum) {
-                        let data = {
-                          _id: item.id,
-                            data: {
-                              usageDie: {
-                                current: itemData.usageDie.maximum
-                              }
-                            }
-                        };
-                        item.update(data, {diff: true});
+                        let data = {usageDie: {current: itemData.usageDie.maximum}};
+                        item.update({system: data}, {diff: true});
                     } else {
                       console.warn(`Unable to reset the usage die for item ${item.name} (id ${item.id}) as it's at it's maximum usage die.`);
                     }

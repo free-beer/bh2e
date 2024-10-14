@@ -30,11 +30,7 @@
                     <div class="bh2e-horizontal-field bh2e-horizontal-field-select-narrow">
                         <label for="system.hitDie" class="bh2e-label">{{localize "bh2e.fields.labels.hitDie"}}</label>
                         <select name="system.hitDie" class="bh2e-select">
-                        {{#select system.hitDie}}
-                        {{#each config.hitDieTypes as |label value|}}
-                            <option value="{{value}}">{{localize label}}</option>
-                        {{/each}}
-                        {{/select}}
+                            {{selectOptions config.hitDieTypes localize=true selected=actor.system.hitDie}}
                         </select>
                     </div>
                 </div>
@@ -50,22 +46,14 @@
                     <div class="bh2e-horizontal-field bh2e-horizontal-field-select-narrow">
                         <label for="system.damageDice.armed" class="bh2e-label">{{localize "bh2e.fields.labels.armedDamage"}}</label>
                         <select name="system.damageDice.armed" class="bh2e-select">
-                        {{#select system.damageDice.armed}}
-                        {{#each config.damageDieTypes as |label value|}}
-                            <option value="{{value}}">{{localize label}}</option>
-                        {{/each}}
-                        {{/select}}
+                            {{selectOptions config.damageDieTypes localize=true selected=actor.system.damageDice.armed}}
                         </select>
                     </div>
     
                     <div class="bh2e-horizontal-field bh2e-horizontal-field-select-narrow">
                         <label for="system.damageDice.unarmed" class="bh2e-label">{{localize "bh2e.fields.labels.unarmedDamage"}}</label>
                         <select name="system.damageDice.unarmed" class="bh2e-select">
-                        {{#select system.damageDice.unarmed}}
-                        {{#each config.damageDieTypes as |label value|}}
-                            <option value="{{value}}">{{localize label}}</option>
-                        {{/each}}
-                        {{/select}}
+                            {{selectOptions config.damageDieTypes localize=true selected=actor.system.damageDice.unarmed}}
                         </select>
                     </div>
                 </div>

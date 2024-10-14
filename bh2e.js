@@ -60,7 +60,7 @@ async function updateCharacterCoins(actors) {
 
             if(update) {
                 console.log(`Updating coins for '${actor.name}'.`);
-                actor.update({data: {coins: coins}});
+                actor.update({system: {coins: coins}});
             }
         }
     });
@@ -78,7 +78,7 @@ async function updateCreatureHitPoints(actors) {
 
             if(Number.isNumeric(hitPoints)) {
                 console.log(`Updating hit points for '${actor.name}'.`);
-                actor.update({data: {hitPoints: {max: hitPoints, value: hitPoints}}});
+                actor.update({system: {hitPoints: {max: hitPoints, value: hitPoints}}});
             }
         }
     });

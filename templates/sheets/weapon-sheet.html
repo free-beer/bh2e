@@ -7,44 +7,28 @@
             <div class="bh2e-field-row bh2e-field-row-balanced">
                 <label for="system.kind" class="bh2e-label">{{localize "bh2e.fields.labels.weaponKind"}}</label>
                 <select name="system.kind" class="bh2e-input bh2e-select">
-            {{#select item.system.kind}}
-              {{#each config.weaponKinds as |label value|}}
-                    <option value="{{value}}">{{localize label}}</option>
-              {{/each}}
-            {{/select}}
+                    {{selectOptions config.weaponKinds localize=true selected=item.system.kind}}
                 </select>
             </div>
 
             <div class="bh2e-field-row bh2e-field-row-balanced">
                 <label for="system.size" class="bh2e-label">{{localize "bh2e.fields.labels.weaponSize"}}</label>
                 <select name="system.size" class="bh2e-input bh2e-select">
-            {{#select item.system.size}}
-              {{#each config.weaponSizes as |label value|}}
-                    <option value="{{value}}">{{localize label}}</option>
-              {{/each}}
-            {{/select}}
+                    {{selectOptions config.weaponSizes localize=true selected=item.system.size}}
                 </select>
             </div>
 
             <div class="bh2e-field-row bh2e-field-row-balanced">
                 <label for="system.testAttribute.value" class="bh2e-label">{{localize "bh2e.fields.labels.testAttribute"}}</label>
                 <select name="system.attribute" class="bh2e-input bh2e-select">
-            {{#select item.system.attribute}}
-              {{#each config.attributeList as |label value|}}
-                    <option value="{{value}}">{{localize label}}</option>
-              {{/each}}
-            {{/select}}
+                    {{selectOptions config.attributeList localize=true selected=item.system.attribute}}
                 </select>
             </div>
 
             <div class="bh2e-field-row bh2e-field-row-balanced">
                 <label for="system.rarity" class="bh2e-label">{{localize "bh2e.fields.labels.rarity"}}</label>
                 <select name="system.rarity" class="bh2e-input bh2e-select">
-            {{#select item.system.rarity}}
-              {{#each config.rarityTypes as |label value|}}
-                    <option value="{{value}}">{{localize label}}</option>
-              {{/each}}
-            {{/select}}
+                    {{selectOptions config.rarityTypes localize=true selected=item.system.rarity}}
                 </select>
             </div>
         </section>
